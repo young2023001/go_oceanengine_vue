@@ -30,165 +30,103 @@ const productLines: ProductLine[] = [
     name: '概览',
     color: 'blue',
     icon: 'home',
-    sections: [
-      {
-        title: '',
-        items: [
-          { name: '工作台', path: '/', icon: 'home' }
-        ]
-      }
-    ]
+    sections: [{ title: '', items: [
+      { name: '工作台', path: '/', icon: 'home' }
+    ]}]
   },
-  // {
-  //   id: 'qianchuan',
-  //   name: '巨量千川',
-  //   color: 'orange',
-  //   icon: 'shop',
-  //   sections: [
-  //     {
-  //       title: '推广管理',
-  //       items: [
-  //         { name: '千川工作台', path: '/qianchuan', icon: 'shop' },
-  //         { name: '广告计划', path: '/qianchuan/campaign', icon: 'campaign' },
-  //         { name: '广告管理', path: '/qianchuan/ad', icon: 'ad' }
-  //       ]
-  //     },
-  //     {
-  //       title: '电商资产',
-  //       items: [
-  //         { name: '商品管理', path: '/qianchuan/product', icon: 'list' },
-  //         { name: '全域推广', path: '/qianchuan/uni', icon: 'globe' },
-  //         { name: '随心推', path: '/qianchuan/aweme-order', icon: 'heart' }
-  //       ]
-  //     }
-  //   ]
-  // },
   {
     id: 'local',
     name: '本地推',
     color: 'green',
     icon: 'location',
     sections: [
-      {
-        title: '推广管理',
-        items: [
-          { name: '本地推工作台', path: '/local', icon: 'location' },
-          { name: '项目管理', path: '/local/project', icon: 'list' },
-          { name: '推广管理', path: '/local/promotion', icon: 'campaign' }
-        ]
-      },
-      {
-        title: '线索转化',
-        items: [
-          { name: '线索管理', path: '/local/clue', icon: 'audience' }
-        ]
-      }
+      { title: '投放管理', items: [
+        { name: '项目列表', path: '/local/project', icon: 'list' },
+        { name: '创建项目', path: '/local/project/create', icon: 'campaign' },
+        { name: '单元列表', path: '/local/promotion', icon: 'ad' },
+        { name: '创建单元', path: '/local/promotion/create', icon: 'creative' },
+      ]},
+      { title: '批量操作', items: [
+        { name: '批量创建', path: '/local/batch/create', icon: 'list' },
+        { name: '任务记录', path: '/local/batch/tasks', icon: 'chart' },
+      ]},
+      { title: '模板管理', items: [
+        { name: '项目模板', path: '/local/template/project', icon: 'list' },
+        { name: '单元模板', path: '/local/template/promotion', icon: 'list' },
+      ]},
+      { title: '账户管理', items: [
+        { name: '账户列表', path: '/local/account', icon: 'building' },
+        { name: '分组管理', path: '/local/group', icon: 'audience' },
+        { name: '门店列表', path: '/local/store', icon: 'location' },
+      ]},
+      { title: '数据分析', items: [
+        { name: '投放看板', path: '/local/analytics', icon: 'chart' },
+        { name: '多维分析', path: '/local/analytics/multi', icon: 'chart' },
+        { name: '报表导出', path: '/local/analytics/export', icon: 'list' },
+      ]},
+      { title: '线索管理', items: [
+        { name: '线索列表', path: '/local/clue', icon: 'audience' },
+      ]},
     ]
   },
-  {
-    id: 'enterprise',
-    name: '企业号',
-    color: 'purple',
-    icon: 'building',
-    sections: [
-      {
-        title: '内容运营',
-        items: [
-          { name: '企业号工作台', path: '/enterprise', icon: 'building' },
-          { name: '评论管理', path: '/enterprise/comment', icon: 'chat' },
-          { name: '视频列表', path: '/enterprise/item', icon: 'media' }
-        ]
-      },
-      {
-        title: '数据分析',
-        items: [
-          { name: '数据概览', path: '/enterprise/overview', icon: 'chart' }
-        ]
-      }
-    ]
-  },
-  // {
-  //   id: 'star',
-  //   name: '巨量星图',
-  //   color: 'yellow',
-  //   icon: 'star',
-  //   sections: [
-  //     {
-  //       title: '达人营销',
-  //       items: [
-  //         { name: '星图工作台', path: '/star', icon: 'star' },
-  //         { name: '任务管理', path: '/star/task', icon: 'list' },
-  //         { name: '需求管理', path: '/star/demand', icon: 'campaign' }
-  //       ]
-  //     },
-  //     {
-  //       title: '财务数据',
-  //       items: [
-  //         { name: '资金管理', path: '/star/fund', icon: 'wallet' },
-  //         { name: '数据报表', path: '/star/report', icon: 'chart' }
-  //       ]
-  //     }
-  //   ]
-  // },
   {
     id: 'tools',
     name: '工具与服务',
     color: 'gray',
     icon: 'tools',
     sections: [
-      {
-        title: '代理商管理',
-        items: [
-          { name: '代理商总览', path: '/agent', icon: 'agent' },
-          { name: '广告主管理', path: '/agent/advertisers', icon: 'building' },
-          { name: '充值管理', path: '/agent/recharge', icon: 'wallet' },
-          { name: '转账记录', path: '/agent/transfer', icon: 'transfer' }
-        ]
-      },
-      {
-        title: '财务管理',
-        items: [
-          { name: '日流水统计', path: '/wallet', icon: 'chart' },
-          { name: '流水明细', path: '/wallet/transactions', icon: 'list' },
-          { name: '钱包转账', path: '/wallet/transfer', icon: 'transfer' }
-        ]
-      },
-      {
-        title: '广告资产',
-        items: [
-          { name: '广告主', path: '/advertisers', icon: 'building' },
-          { name: '广告计划', path: '/campaigns', icon: 'campaign' },
-          { name: '广告', path: '/ads', icon: 'ad' }
-        ]
-      },
-      {
-        title: '素材资产',
-        items: [
-          { name: '创意', path: '/creatives', icon: 'creative' },
-          { name: '媒体库', path: '/media', icon: 'media' }
-        ]
-      },
-      {
-        title: '基础工具',
-        items: [
-          { name: '地域定向', path: '/tools/region', icon: 'location' },
-          { name: '行业分类', path: '/tools/industry', icon: 'category' },
-          { name: '接口配额', path: '/tools/quota', icon: 'quota' },
-          { name: '人群包', path: '/audiences', icon: 'audience' }
-        ]
-      },
-      {
-        title: '数据分析',
-        items: [
-          { name: '数据报表', path: '/reports', icon: 'chart' }
-        ]
-      }
+      { title: '代理商管理', items: [
+        { name: '代理商总览', path: '/agent', icon: 'agent' },
+        { name: '广告主管理', path: '/agent/advertisers', icon: 'building' },
+        { name: '充值管理', path: '/agent/recharge', icon: 'wallet' },
+        { name: '转账记录', path: '/agent/transfer', icon: 'transfer' },
+      ]},
+      { title: '财务管理', items: [
+        { name: '日流水统计', path: '/wallet', icon: 'chart' },
+        { name: '流水明细', path: '/wallet/transactions', icon: 'list' },
+        { name: '钱包转账', path: '/wallet/transfer', icon: 'transfer' },
+      ]},
+      { title: '广告资产', items: [
+        { name: '广告主', path: '/advertisers', icon: 'building' },
+        { name: '广告计划', path: '/campaigns', icon: 'campaign' },
+        { name: '广告', path: '/ads', icon: 'ad' },
+      ]},
+      { title: '素材资产', items: [
+        { name: '创意', path: '/creatives', icon: 'creative' },
+        { name: '媒体库', path: '/media', icon: 'media' },
+      ]},
+      { title: '基础工具', items: [
+        { name: '地域定向', path: '/tools/region', icon: 'location' },
+        { name: '行业分类', path: '/tools/industry', icon: 'category' },
+        { name: '接口配额', path: '/tools/quota', icon: 'quota' },
+        { name: '人群包', path: '/audiences', icon: 'audience' },
+      ]},
+      { title: '数据分析', items: [
+        { name: '数据报表', path: '/reports', icon: 'chart' },
+      ]},
+    ]
+  },
+  {
+    id: 'system',
+    name: '系统设置',
+    color: 'purple',
+    icon: 'building',
+    sections: [
+      { title: '平台管理', items: [
+        { name: '租户管理', path: '/system/tenant', icon: 'building' },
+        { name: '投手权限', path: '/system/scope', icon: 'audience' },
+      ]},
+      { title: '系统管理', items: [
+        { name: '用户管理', path: '/system/user', icon: 'audience' },
+        { name: '角色管理', path: '/system/role', icon: 'list' },
+        { name: '操作日志', path: '/system/log', icon: 'list' },
+      ]},
     ]
   }
 ]
 
 // 展开/折叠状态
-const expandedProducts = ref<Set<string>>(new Set(['overview', 'local', 'enterprise', 'tools']))
+const expandedProducts = ref<Set<string>>(new Set(['overview', 'local', 'tools', 'system']))
 
 const toggleProduct = (id: string) => {
   if (expandedProducts.value.has(id)) {
