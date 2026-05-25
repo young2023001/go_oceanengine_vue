@@ -131,9 +131,16 @@ func (r *Router) Setup(mode string) *gin.Engine {
 
 // healthCheck 健康检查
 func (r *Router) healthCheck(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"status": "ok",
-	})
+	sqlDB, err := r.db.DB()
+	if err != nil {
+		c.JSON(http.StatusServiceUnavailable, gin.H{"status": "unhealthy", "mysql": "error", "detail": err.Error()})
+		return
+	}
+	if err := sqlDB.Ping(); err != nil {
+		c.JSON(http.StatusServiceUnavailable, gin.H{"status": "unhealthy", "mysql": "down", "detail": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "mysql": "up"})
 }
 
 // registerPublicRoutes 注册公开路由
