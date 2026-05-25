@@ -30,6 +30,23 @@
     <!-- 步骤 1: 选择操作类型 -->
     <div v-if="currentStep === 0" class="space-y-4">
       <h2 class="text-lg font-semibold mb-4">选择操作类型</h2>
+
+      <!-- 从模板创建 -->
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        <label class="block text-sm font-medium text-gray-700 mb-2">从模板创建（可选）</label>
+        <select
+          v-model="selectedTemplateId"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          @change="handleTemplateSelect"
+        >
+          <option :value="null">不使用模板</option>
+          <option v-for="tpl in templates" :key="tpl.id" :value="tpl.id">
+            {{ tpl.name }}（已使用 {{ tpl.use_count }} 次）
+          </option>
+        </select>
+        <p class="text-xs text-gray-400 mt-1">选择模板后将自动填充配置参数</p>
+      </div>
+
       <div class="grid grid-cols-2 gap-4">
         <label
           v-for="option in taskTypeOptions"
@@ -192,6 +209,10 @@
           <span class="text-gray-500 w-24">配置参数:</span>
           <span class="font-medium">{{ getConfigSummary() }}</span>
         </div>
+        <div v-if="selectedTemplateId" class="flex">
+          <span class="text-gray-500 w-24">使用模板:</span>
+          <span class="font-medium">{{ getSelectedTemplateName() }}</span>
+        </div>
       </div>
     </div>
 
@@ -227,17 +248,21 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { batchApi, type CreateBatchTaskParams } from '@/api/batch'
 import { accountApi, type Account } from '@/api/account'
+import { templateApi, type ProjectTemplate } from '@/api/template'
 
 const router = useRouter()
+const route = useRoute()
 
 const steps = ['选择操作类型', '选择目标账户', '配置参数', '确认提交']
 const currentStep = ref(0)
 const submitting = ref(false)
 const accountsLoading = ref(false)
 const accounts = ref<Account[]>([])
+const templates = ref<ProjectTemplate[]>([])
+const selectedTemplateId = ref<number | null>(null)
 
 interface TaskTypeOption {
   value: string
@@ -259,6 +284,7 @@ interface FormConfig {
   budgetAmount: number | null
   bidValue: number | null
   targetStatus: string
+  [key: string]: unknown
 }
 
 interface FormState {
@@ -349,6 +375,30 @@ function getAdjustModeLabel(mode: string): string {
   return labels[mode] ?? mode
 }
 
+function getSelectedTemplateName(): string {
+  const tpl = templates.value.find((t) => t.id === selectedTemplateId.value)
+  return tpl?.name ?? ''
+}
+
+function handleTemplateSelect(): void {
+  if (!selectedTemplateId.value) return
+
+  const tpl = templates.value.find((t) => t.id === selectedTemplateId.value)
+  if (tpl?.config) {
+    const config = tpl.config as Record<string, unknown>
+    Object.keys(config).forEach((key) => {
+      if (key in formState.config) {
+        ;(formState.config as Record<string, unknown>)[key] = config[key]
+      }
+    })
+
+    // 如果模板中有 taskType，也自动选中
+    if (config.taskType && typeof config.taskType === 'string') {
+      formState.taskType = config.taskType
+    }
+  }
+}
+
 function nextStep(): void {
   if (currentStep.value < steps.length - 1) {
     currentStep.value++
@@ -405,7 +455,28 @@ async function fetchAccounts(): Promise<void> {
   }
 }
 
-onMounted(() => {
-  fetchAccounts()
+async function fetchTemplates(): Promise<void> {
+  try {
+    const res = await templateApi.listProjects()
+    templates.value = (res as unknown as ProjectTemplate[]) ?? []
+  } catch {
+    // 模板加载失败不阻塞主流程
+  }
+}
+
+function applyUrlTemplate(): void {
+  const templateId = route.query.template_id
+  if (templateId) {
+    const id = Number(templateId)
+    if (!isNaN(id)) {
+      selectedTemplateId.value = id
+      handleTemplateSelect()
+    }
+  }
+}
+
+onMounted(async () => {
+  await Promise.all([fetchAccounts(), fetchTemplates()])
+  applyUrlTemplate()
 })
 </script>
