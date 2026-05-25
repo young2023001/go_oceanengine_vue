@@ -18,6 +18,7 @@ import (
 	groupModel "oceanengine-backend/internal/app/group/model"
 	projectModel "oceanengine-backend/internal/app/project/model"
 	scopeModel "oceanengine-backend/internal/app/scope/model"
+	analyticsModel "oceanengine-backend/internal/app/analytics/model"
 	templateModel "oceanengine-backend/internal/app/template/model"
 	tenantModel "oceanengine-backend/internal/app/tenant/model"
 	tenantRepository "oceanengine-backend/internal/app/tenant/repository"
@@ -71,6 +72,8 @@ func main() {
 		&batchModel.BatchTaskItem{},
 		&templateModel.ProjectTemplate{},
 		&templateModel.PromotionTemplate{},
+		&analyticsModel.ReportDaily{},
+		&analyticsModel.ExportTask{},
 	); err != nil {
 		log.Fatal(fmt.Sprintf("auto migrate failed: %v", err))
 	}
