@@ -13,11 +13,9 @@ const passwordForm = ref({
 
 const handleChangePassword = () => {
   if (passwordForm.value.newPassword !== passwordForm.value.confirmPassword) {
-    alert('两次输入的密码不一致')
     return
   }
   // TODO: 调用API修改密码
-  alert('密码修改成功')
   showPasswordModal.value = false
   passwordForm.value = { oldPassword: '', newPassword: '', confirmPassword: '' }
 }

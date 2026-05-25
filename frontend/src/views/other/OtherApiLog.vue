@@ -20,11 +20,11 @@ const handlePageChange = (page: number) => {
 }
 
 const handleFilter = () => {
-  alert('筛选日志')
+  // TODO: implement
 }
 
-const handleViewLogDetail = (log: typeof logs.value[0]) => {
-  alert(`查看日志详情: ${log.endpoint}`)
+const handleViewLogDetail = (_log: typeof logs.value[0]) => {
+  // TODO: implement
 }
 </script>
 

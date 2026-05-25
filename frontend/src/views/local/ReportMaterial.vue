@@ -109,15 +109,15 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
 
 const handleSearch = () => {
-  alert('查询素材报表')
+  // TODO: implement
 }
 
 const handleExport = () => {
-  alert('导出报表')
+  // TODO: implement
 }
 
-const handleMaterialDetail = (item: typeof materials.value[0]) => {
-  alert(`素材详情: ${item.name}`)
+const handleMaterialDetail = (_item: typeof materials.value[0]) => {
+  // TODO: implement
 }
 
 const filters = ref({

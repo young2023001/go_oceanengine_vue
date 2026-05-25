@@ -24,11 +24,11 @@ const layouts = [
 ]
 
 const handleCancel = () => {
-  alert('取消')
+  // TODO: implement
 }
 
 const handleCreateTemplate = () => {
-  alert('创建模板')
+  // TODO: implement
 }
 </script>
 

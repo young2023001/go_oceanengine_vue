@@ -89,7 +89,6 @@ function handleEditType(row: DictType) {
 
 async function handleSaveType() {
   if (!typeForm.name || !typeForm.type) {
-    alert('请填写必填字段')
     return
   }
   try {
@@ -101,7 +100,6 @@ async function handleSaveType() {
         status: typeForm.status,
         remark: typeForm.remark
       })
-      alert('更新成功')
     } else {
       await systemApi.createDictType({
         name: typeForm.name,
@@ -109,13 +107,11 @@ async function handleSaveType() {
         status: typeForm.status,
         remark: typeForm.remark
       })
-      alert('创建成功')
     }
     showTypeDialog.value = false
     loadDictTypes()
   } catch (error) {
     console.error('保存失败:', error)
-    alert('保存失败')
   }
 }
 
@@ -123,7 +119,6 @@ async function handleDeleteType(row: DictType) {
   if (!confirm(`确定删除字典类型 ${row.name}?`)) return
   try {
     await systemApi.deleteDictType(row.id)
-    alert('删除成功')
     if (currentType.value?.id === row.id) {
       currentType.value = null
       dataList.value = []
@@ -131,7 +126,6 @@ async function handleDeleteType(row: DictType) {
     loadDictTypes()
   } catch (error) {
     console.error('删除失败:', error)
-    alert('删除失败')
   }
 }
 
@@ -206,7 +200,6 @@ function resetDataForm() {
 
 function handleAddData() {
   if (!currentType.value) {
-    alert('请先选择字典类型')
     return
   }
   dataFormMode.value = 'add'
@@ -230,7 +223,6 @@ function handleEditData(row: DictData) {
 
 async function handleSaveData() {
   if (!currentType.value || !dataForm.label || !dataForm.value) {
-    alert('请填写必填字段')
     return
   }
   try {
@@ -246,7 +238,6 @@ async function handleSaveData() {
         list_class: dataForm.list_class,
         remark: dataForm.remark
       })
-      alert('更新成功')
     } else {
       await systemApi.createDictData({
         dict_type: currentType.value.type,
@@ -259,13 +250,11 @@ async function handleSaveData() {
         list_class: dataForm.list_class,
         remark: dataForm.remark
       })
-      alert('创建成功')
     }
     showDataDialog.value = false
     loadDictData()
   } catch (error) {
     console.error('保存失败:', error)
-    alert('保存失败')
   }
 }
 
@@ -273,11 +262,9 @@ async function handleDeleteData(row: DictData) {
   if (!confirm(`确定删除字典数据 ${row.label}?`)) return
   try {
     await systemApi.deleteDictData(row.id)
-    alert('删除成功')
     loadDictData()
   } catch (error) {
     console.error('删除失败:', error)
-    alert('删除失败')
   }
 }
 

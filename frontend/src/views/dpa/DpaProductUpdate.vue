@@ -18,7 +18,6 @@ const form = reactive({
 })
 
 const handleSubmit = () => {
-  console.log('Update product:', form)
   router.push('/dpa/products')
 }
 </script>

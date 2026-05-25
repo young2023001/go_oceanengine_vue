@@ -67,10 +67,18 @@ func (s *GroupService) Delete(ctx context.Context, tenantID, id uint64) error {
 	return s.repo.Delete(ctx, tenantID, id)
 }
 
-func (s *GroupService) AddMembers(ctx context.Context, groupID uint64, req *MembersRequest) error {
+func (s *GroupService) AddMembers(ctx context.Context, tenantID, groupID uint64, req *MembersRequest) error {
+	// Verify group belongs to tenant
+	if _, err := s.repo.GetByID(ctx, tenantID, groupID); err != nil {
+		return err
+	}
 	return s.repo.AddMembers(ctx, groupID, req.AccountIDs)
 }
 
-func (s *GroupService) RemoveMembers(ctx context.Context, groupID uint64, req *MembersRequest) error {
+func (s *GroupService) RemoveMembers(ctx context.Context, tenantID, groupID uint64, req *MembersRequest) error {
+	// Verify group belongs to tenant
+	if _, err := s.repo.GetByID(ctx, tenantID, groupID); err != nil {
+		return err
+	}
 	return s.repo.RemoveMembers(ctx, groupID, req.AccountIDs)
 }

@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleBatchDiagnose = () => {
-  alert('批量诊断广告')
+  // TODO: implement
 }
 
-const handleDetail = (ad: typeof ads.value[0]) => {
-  alert(`诊断详情: ${ad.name}`)
+const handleDetail = (_ad: typeof ads.value[0]) => {
+  // TODO: implement
 }
 
-const handleOptimize = (ad: typeof ads.value[0]) => {
-  alert(`一键优化: ${ad.name}`)
+const handleOptimize = (_ad: typeof ads.value[0]) => {
+  // TODO: implement
 }
 </script>
 

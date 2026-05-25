@@ -75,10 +75,10 @@ const transactions = ref([
 ])
 
 const handleQuery = () => {
-  alert('查询交易明细')
+  // TODO: implement
 }
 
 const handleExport = () => {
-  alert('导出交易明细')
+  // TODO: implement
 }
 </script>

@@ -76,19 +76,19 @@ onMounted(() => {
 })
 
 const handleCreateCreative = () => {
-  alert('创建创意')
+  // TODO: implement
 }
 
-const handleEditCreative = (creative: any) => {
-  alert(`编辑创意: ${creative.name}`)
+const handleEditCreative = (_creative: any) => {
+  // TODO: implement
 }
 
-const handleCopyCreative = (creative: any) => {
-  alert(`复制创意: ${creative.name}`)
+const handleCopyCreative = (_creative: any) => {
+  // TODO: implement
 }
 
-const handleMoreActions = (creative: any) => {
-  alert(`更多操作: ${creative.name}`)
+const handleMoreActions = (_creative: any) => {
+  // TODO: implement
 }
 </script>
 

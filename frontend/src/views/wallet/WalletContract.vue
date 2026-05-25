@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateContract = () => {
-  alert('新建合同')
+  // TODO: implement
 }
 
-const handleViewContract = (contract: any) => {
-  alert(`查看合同: ${contract.name}`)
+const handleViewContract = (_contract: any) => {
+  // TODO: implement
 }
 
-const handleDownloadContract = (contract: any) => {
-  alert(`下载合同: ${contract.name}`)
+const handleDownloadContract = (_contract: any) => {
+  // TODO: implement
 }
 </script>
 

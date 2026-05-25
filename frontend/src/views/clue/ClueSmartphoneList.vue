@@ -30,12 +30,12 @@ const handleApply = () => {
   router.push('/clue/smartphone/create')
 }
 
-const handleConfig = (phone: typeof phones.value[0]) => {
-  alert(`配置智能电话: ${phone.name}`)
+const handleConfig = (_phone: typeof phones.value[0]) => {
+  // TODO: implement
 }
 
-const handleCallRecords = (phone: typeof phones.value[0]) => {
-  alert(`查看「${phone.name}」的通话记录`)
+const handleCallRecords = (_phone: typeof phones.value[0]) => {
+  // TODO: implement
 }
 </script>
 

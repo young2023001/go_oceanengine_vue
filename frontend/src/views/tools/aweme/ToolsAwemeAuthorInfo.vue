@@ -28,7 +28,7 @@ const formatNumber = (num: number) => {
 }
 
 const handleAddTarget = () => {
-  alert(`添加定向: ${authorInfo.value.name}`)
+  // TODO: implement
 }
 </script>
 

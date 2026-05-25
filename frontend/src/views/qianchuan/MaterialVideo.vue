@@ -109,22 +109,22 @@ const videos = ref([
 ])
 
 const handleUpload = () => {
-  alert('上传视频')
+  // TODO: 调用后端 API
 }
 
 const handleSearch = () => {
-  alert('搜索视频')
+  // TODO: 调用后端 API
 }
 
-const handlePreview = (video: typeof videos.value[0]) => {
-  alert(`预览视频: ${video.name}`)
+const handlePreview = (_video: typeof videos.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleUse = (video: typeof videos.value[0]) => {
-  alert(`使用视频: ${video.name}`)
+const handleUse = (_video: typeof videos.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleDelete = (video: typeof videos.value[0]) => {
-  alert(`删除视频: ${video.name}`)
+const handleDelete = (_video: typeof videos.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

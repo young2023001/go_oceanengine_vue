@@ -14,15 +14,14 @@ import (
 )
 
 type TenantHandler struct {
-	svc   *service.TenantService
-	oauth service.OAuthClient
+	svc         *service.TenantService
+	oauth       service.OAuthClient
+	stateSecret string
 }
 
-func NewTenantHandler(svc *service.TenantService, oauth service.OAuthClient) *TenantHandler {
-	return &TenantHandler{svc: svc, oauth: oauth}
+func NewTenantHandler(svc *service.TenantService, oauth service.OAuthClient, stateSecret string) *TenantHandler {
+	return &TenantHandler{svc: svc, oauth: oauth, stateSecret: stateSecret}
 }
-
-const oauthStateSecret = "oauth-state-secret"
 
 func signState(tenantID uint64, secret string) string {
 	msg := fmt.Sprintf("%d", tenantID)
@@ -42,7 +41,7 @@ func verifyState(state, secret string) (uint64, bool) {
 		return 0, false
 	}
 	expected := signState(tenantID, secret)
-	return tenantID, state == expected
+	return tenantID, hmac.Equal([]byte(state), []byte(expected))
 }
 
 func (h *TenantHandler) Create(c *gin.Context) {
@@ -94,11 +93,11 @@ func (h *TenantHandler) GetOAuthURL(c *gin.Context) {
 		return
 	}
 	scheme := "https"
-	if proto := c.GetHeader("X-Forwarded-Proto"); proto != "" {
+	if proto := c.GetHeader("X-Forwarded-Proto"); proto == "http" || proto == "https" {
 		scheme = proto
 	}
 	redirectURI := fmt.Sprintf("%s://%s/api/v1/tenants/oauth/callback", scheme, c.Request.Host)
-	state := signState(tenant.ID, oauthStateSecret)
+	state := signState(tenant.ID, h.stateSecret)
 	authURL := h.oauth.GetAuthURL(tenant.OAuthAppID, redirectURI, state)
 	response.OKWithData(c, gin.H{"auth_url": authURL})
 }
@@ -111,7 +110,7 @@ func (h *TenantHandler) OAuthCallback(c *gin.Context) {
 		return
 	}
 
-	tenantID, valid := verifyState(state, oauthStateSecret)
+	tenantID, valid := verifyState(state, h.stateSecret)
 	if !valid {
 		response.BadRequest(c, "invalid state signature")
 		return

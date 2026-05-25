@@ -165,39 +165,36 @@ const getStatusText = (status: string) => {
 }
 
 const handleSearch = () => {
-  console.log('搜索:', filters.value)
-  alert('查询完成')
+  // TODO: implement
 }
 
 const handleReset = () => {
   filters.value = { keyword: '', auditStatus: '', startDate: '', endDate: '' }
 }
 
-const handlePreview = (video: typeof videos.value[0]) => {
-  alert(`预览视频: ${video.name}`)
+const handlePreview = (_video: typeof videos.value[0]) => {
+  // TODO: implement
 }
 
-const handleUse = (video: typeof videos.value[0]) => {
-  alert(`已选择使用视频: ${video.name}`)
+const handleUse = (_video: typeof videos.value[0]) => {
+  // TODO: implement
 }
 
 const handleDelete = (video: typeof videos.value[0]) => {
   if (confirm(`确定删除视频「${video.name}」吗？`)) {
     const idx = videos.value.findIndex(v => v.id === video.id)
     if (idx > -1) videos.value.splice(idx, 1)
-    alert('删除成功')
   }
 }
 
 const handleSelectFile = () => {
-  alert('选择视频文件')
+  // TODO: implement
 }
 
 const handleUpload = async () => {
   uploading.value = true
   try {
     await new Promise(r => setTimeout(r, 1000))
-    alert('视频上传成功')
     showUploadModal.value = false
     uploadForm.value = { name: '', file: null }
   } finally {

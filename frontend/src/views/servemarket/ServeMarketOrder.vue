@@ -68,16 +68,15 @@ import Pagination from '@/components/common/Pagination.vue'
 const filters = ref({ keyword: '', status: '' })
 
 const handleSearch = () => {
-  alert('查询订单')
+  // TODO: implement
 }
 
-const handleOrderDetail = (order: typeof orders.value[0]) => {
-  alert(`订单详情: ${order.name}`)
+const handleOrderDetail = (_order: typeof orders.value[0]) => {
+  // TODO: implement
 }
 
 const handleCancelOrder = (order: typeof orders.value[0]) => {
   if (confirm(`确定取消订单 ${order.name} 吗？`)) {
-    alert(`已取消: ${order.name}`)
   }
 }
 

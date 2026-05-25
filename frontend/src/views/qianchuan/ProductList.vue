@@ -110,23 +110,21 @@ const products = ref([
 ])
 
 const handleSync = () => {
-  alert('正在同步商品...')
+  // TODO: 调用后端 API
 }
 
 const handleSearch = () => {
-  console.log('搜索:', filters.value)
-  alert('查询完成')
+  // TODO: 调用后端 API
 }
 
 const handlePromote = (product: typeof products.value[0]) => {
   if (product.status === 'offline') {
-    alert('下架商品无法投放')
     return
   }
-  alert(`创建商品推广: ${product.name}`)
+  // TODO: 调用后端 API
 }
 
-const handleAnalyze = (product: typeof products.value[0]) => {
-  alert(`查看商品分析: ${product.name}\nROI: ${product.roi}\n销量: ${product.sales}`)
+const handleAnalyze = (_product: typeof products.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

@@ -16,19 +16,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateLandingPage = () => {
-  alert('创建落地页')
+  // TODO: implement
 }
 
-const handleEditPage = (page: typeof pages.value[0]) => {
-  alert(`编辑: ${page.name}`)
+const handleEditPage = (_page: typeof pages.value[0]) => {
+  // TODO: implement
 }
 
-const handlePreviewPage = (page: typeof pages.value[0]) => {
-  alert(`预览: ${page.name}`)
+const handlePreviewPage = (_page: typeof pages.value[0]) => {
+  // TODO: implement
 }
 
-const handleViewPageData = (page: typeof pages.value[0]) => {
-  alert(`查看数据: ${page.name}`)
+const handleViewPageData = (_page: typeof pages.value[0]) => {
+  // TODO: implement
 }
 </script>
 

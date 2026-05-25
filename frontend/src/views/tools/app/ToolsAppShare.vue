@@ -21,20 +21,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建分享链接')
+  // TODO: implement
 }
 
 const handleCopy = (url: string) => {
   navigator.clipboard.writeText(url)
-  alert('链接已复制')
 }
 
-const handleDetail = (link: typeof shareLinks.value[0]) => {
-  alert(`查看详情: ${link.appName}`)
+const handleDetail = (_link: typeof shareLinks.value[0]) => {
+  // TODO: implement
 }
 
-const handleQrcode = (link: typeof shareLinks.value[0]) => {
-  alert(`生成二维码: ${link.shortUrl}`)
+const handleQrcode = (_link: typeof shareLinks.value[0]) => {
+  // TODO: implement
 }
 </script>
 

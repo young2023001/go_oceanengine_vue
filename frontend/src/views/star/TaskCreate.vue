@@ -26,23 +26,18 @@ const taskTypes = [
 
 const handleSubmit = async () => {
   if (!form.name) {
-    alert('请输入任务名称')
     return
   }
   if (!form.budget || form.budget <= 0) {
-    alert('请输入有效预算')
     return
   }
   if (!form.startDate || !form.endDate) {
-    alert('请选择任务时间')
     return
   }
   
   submitting.value = true
   await new Promise(resolve => setTimeout(resolve, 800))
   submitting.value = false
-  
-  alert('任务创建成功')
   router.push('/star/tasks')
 }
 

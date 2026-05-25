@@ -16,18 +16,17 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddRule = () => {
-  alert('创建新分配规则')
+  // TODO: implement
 }
 
-const handleEditRule = (rule: typeof rules.value[0]) => {
-  alert(`编辑规则: ${rule.name}`)
+const handleEditRule = (_rule: typeof rules.value[0]) => {
+  // TODO: implement
 }
 
 const handleToggleRule = (rule: typeof rules.value[0]) => {
   const action = rule.status === 'active' ? '禁用' : '启用'
   if (confirm(`确定${action}规则「${rule.name}」吗？`)) {
     rule.status = rule.status === 'active' ? 'inactive' : 'active'
-    alert(`规则已${action}`)
   }
 }
 </script>

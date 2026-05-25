@@ -21,19 +21,19 @@ const componentList = ref([
 ])
 
 const handlePreview = () => {
-  alert('预览页面')
+  // TODO: implement
 }
 
 const handleSave = () => {
-  alert('保存成功')
+  // TODO: implement
 }
 
 const handlePublish = () => {
-  alert('发布成功')
+  // TODO: implement
 }
 
-const handleEditComponent = (compId: string) => {
-  alert(`编辑组件: ${compId}`)
+const handleEditComponent = (_compId: string) => {
+  // TODO: implement
 }
 
 const handleDeleteComponent = (compId: string) => {

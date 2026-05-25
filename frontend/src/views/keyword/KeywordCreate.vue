@@ -17,11 +17,11 @@ const parseKeywords = () => {
 }
 
 const handleSubmit = () => {
-  console.log('Submit keywords:', form, keywordList.value)
+  // TODO: implement
 }
 
 const handleCancel = () => {
-  alert('取消创建')
+  // TODO: implement
 }
 </script>
 

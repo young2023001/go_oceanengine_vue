@@ -19,15 +19,15 @@ const formatNumber = (num: number) => {
 }
 
 const handleSearch = () => {
-  alert(`搜索: ${searchKeyword.value}`)
+  // TODO: implement
 }
 
-const handleViewDetail = (author: typeof similarAuthors.value[0]) => {
-  alert(`查看详情: ${author.name}`)
+const handleViewDetail = (_author: typeof similarAuthors.value[0]) => {
+  // TODO: implement
 }
 
-const handleAddTarget = (author: typeof similarAuthors.value[0]) => {
-  alert(`添加定向: ${author.name}`)
+const handleAddTarget = (_author: typeof similarAuthors.value[0]) => {
+  // TODO: implement
 }
 </script>
 

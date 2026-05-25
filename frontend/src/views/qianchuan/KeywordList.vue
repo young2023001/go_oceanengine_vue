@@ -109,24 +109,22 @@ const keywords = ref([
 ])
 
 const handleAddKeyword = () => {
-  alert('添加关键词')
+  // TODO: 调用后端 API
 }
 
 const handleSearch = () => {
-  alert('搜索关键词')
+  // TODO: 调用后端 API
 }
 
-const handleEdit = (kw: typeof keywords.value[0]) => {
-  alert(`编辑关键词: ${kw.word}`)
+const handleEdit = (_kw: typeof keywords.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handlePause = (kw: typeof keywords.value[0]) => {
   kw.status = 'disable'
-  alert(`已暂停: ${kw.word}`)
 }
 
 const handleEnable = (kw: typeof keywords.value[0]) => {
   kw.status = 'enable'
-  alert(`已启用: ${kw.word}`)
 }
 </script>

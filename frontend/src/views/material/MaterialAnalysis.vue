@@ -24,8 +24,8 @@ const formatNumber = (num: number) => {
   return num.toLocaleString()
 }
 
-const handleViewDetail = (item: typeof topMaterials.value[0]) => {
-  alert(`查看详情: ${item.name}`)
+const handleViewDetail = (_item: typeof topMaterials.value[0]) => {
+  // TODO: implement
 }
 </script>
 

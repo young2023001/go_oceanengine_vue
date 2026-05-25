@@ -14,7 +14,7 @@ const form = reactive({
 })
 
 const handleSubmit = () => {
-  console.log('Submit product:', form)
+  // TODO: implement
 }
 </script>
 

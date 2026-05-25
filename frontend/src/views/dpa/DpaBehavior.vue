@@ -23,15 +23,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddBehavior = () => {
-  alert('添加行为')
+  // TODO: implement
 }
 
-const handleEditBehavior = (behavior: typeof behaviors.value[0]) => {
-  alert(`编辑行为: ${behavior.name}`)
+const handleEditBehavior = (_behavior: typeof behaviors.value[0]) => {
+  // TODO: implement
 }
 
-const handleViewBehaviorData = (behavior: typeof behaviors.value[0]) => {
-  alert(`查看数据: ${behavior.name}`)
+const handleViewBehaviorData = (_behavior: typeof behaviors.value[0]) => {
+  // TODO: implement
 }
 </script>
 

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 68 })
 
@@ -17,15 +20,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateForm = () => {
-  alert('创建表单')
+  router.push('/site/form/create')
 }
 
-const handleEditForm = (form: typeof forms.value[0]) => {
-  alert(`编辑表单: ${form.name}`)
+const handleEditForm = (_form: typeof forms.value[0]) => {
+  // TODO: implement
 }
 
-const handleViewFormData = (form: typeof forms.value[0]) => {
-  alert(`查看表单数据: ${form.name}`)
+const handleViewFormData = (_form: typeof forms.value[0]) => {
+  // TODO: implement
 }
 </script>
 

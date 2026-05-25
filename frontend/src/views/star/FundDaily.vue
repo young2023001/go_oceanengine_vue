@@ -84,10 +84,10 @@ const dailyData = ref([
 ])
 
 const handleQuery = () => {
-  alert('查询资金日流水')
+  // TODO: implement
 }
 
 const handleExport = () => {
-  alert('导出资金日流水')
+  // TODO: implement
 }
 </script>

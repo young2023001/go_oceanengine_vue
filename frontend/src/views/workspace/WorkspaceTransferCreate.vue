@@ -15,7 +15,7 @@ const form = reactive({
 const walletBalance = 5680000
 
 const handleSubmit = () => {
-  console.log('Submit transfer:', form)
+  // TODO: implement
 }
 </script>
 

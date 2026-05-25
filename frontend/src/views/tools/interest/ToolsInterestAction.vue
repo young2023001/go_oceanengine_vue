@@ -19,15 +19,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleSearch = () => {
-  alert('搜索行为标签')
+  // TODO: implement
 }
 
-const handleApply = (action: typeof actions.value[0]) => {
-  alert(`应用行为: ${action.name}`)
+const handleApply = (_action: typeof actions.value[0]) => {
+  // TODO: implement
 }
 
-const handleDetail = (action: typeof actions.value[0]) => {
-  alert(`查看详情: ${action.name}`)
+const handleDetail = (_action: typeof actions.value[0]) => {
+  // TODO: implement
 }
 </script>
 

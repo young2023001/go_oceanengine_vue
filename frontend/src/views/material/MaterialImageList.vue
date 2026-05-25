@@ -45,7 +45,6 @@ const handlePageChange = (page: number) => {
 
 const handleBatchDelete = () => {
   if (confirm(`确定删除选中的 ${selectedImages.value.length} 张图片?`)) {
-    alert('删除成功')
     selectedImages.value = []
   }
 }

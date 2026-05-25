@@ -16,15 +16,15 @@ const idTypes = [
 ]
 
 const handleSelectFile = () => {
-  alert('选择文件')
+  // TODO: implement
 }
 
 const handleCancel = () => {
-  alert('取消')
+  // TODO: implement
 }
 
 const handleCreate = () => {
-  alert(`创建人群包: ${formData.value.name}`)
+  // TODO: implement
 }
 </script>
 

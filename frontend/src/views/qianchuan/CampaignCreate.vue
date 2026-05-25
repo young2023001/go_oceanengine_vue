@@ -184,17 +184,15 @@ const validateForm = () => {
 // 保存草稿
 const saveDraft = async () => {
   if (!form.value.name.trim()) {
-    alert('请先输入计划名称')
     return
   }
-  
+
   loading.value = true
   try {
-    // TODO: 调用API保存草稿
+    // TODO: 调用后端 API
     await new Promise(resolve => setTimeout(resolve, 500))
-    alert('草稿保存成功')
-  } catch (error) {
-    alert('保存失败，请重试')
+  } catch (_error) {
+    // TODO: 调用后端 API
   } finally {
     loading.value = false
   }
@@ -203,22 +201,16 @@ const saveDraft = async () => {
 // 下一步
 const handleNext = async () => {
   if (!validateForm()) {
-    // 显示验证错误
-    const firstError = Object.values(errors.value)[0]
-    if (firstError) {
-      alert(firstError)
-    }
     return
   }
-  
+
   loading.value = true
   try {
-    // TODO: 调用API创建计划
+    // TODO: 调用后端 API
     await new Promise(resolve => setTimeout(resolve, 500))
-    alert('广告计划创建成功！')
     router.push('/qianchuan/campaign')
-  } catch (error) {
-    alert('创建失败，请重试')
+  } catch (_error) {
+    // TODO: 调用后端 API
   } finally {
     loading.value = false
   }

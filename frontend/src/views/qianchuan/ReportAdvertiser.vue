@@ -146,10 +146,10 @@ const reportData = ref([
 ])
 
 const handleExport = () => {
-  alert('导出广告主报表')
+  // TODO: 调用后端 API
 }
 
 const handleQuery = () => {
-  alert('查询广告主报表')
+  // TODO: 调用后端 API
 }
 </script>

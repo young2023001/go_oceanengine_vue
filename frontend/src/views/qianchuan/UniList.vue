@@ -151,25 +151,20 @@ const getStatusText = (status: string) => {
 }
 
 const handleSearch = () => {
-  console.log('搜索:', filters.value)
-  alert('查询完成')
+  // TODO: 调用后端 API
 }
 
-const handleEdit = (item: typeof promotions.value[0]) => {
-  alert(`编辑推广: ${item.name}`)
+const handleEdit = (_item: typeof promotions.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handlePause = (item: typeof promotions.value[0]) => {
   item.status = 'pause'
-  alert(`推广「${item.name}」已暂停`)
 }
 
 const handleStart = (item: typeof promotions.value[0]) => {
   if (item.status !== 'end') {
     item.status = 'running'
-    alert(`推广「${item.name}」已启动`)
-  } else {
-    alert('已结束的推广无法重新启动')
   }
 }
 </script>

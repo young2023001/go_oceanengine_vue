@@ -16,23 +16,22 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateTask = () => {
-  alert('创建新的批量任务')
+  // TODO: 调用后端 API
 }
 
-const handleViewDetail = (task: typeof batchTasks.value[0]) => {
-  alert(`查看任务详情: ${task.name}\n进度: ${task.progress}%`)
+const handleViewDetail = (_task: typeof batchTasks.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handleCancelTask = (task: typeof batchTasks.value[0]) => {
   if (confirm(`确定取消任务「${task.name}」吗？`)) {
     const idx = batchTasks.value.findIndex(t => t.id === task.id)
     if (idx > -1) batchTasks.value.splice(idx, 1)
-    alert('任务已取消')
   }
 }
 
-const handleBatchAction = (action: string) => {
-  alert(`执行批量操作: ${action}`)
+const handleBatchAction = (_action: string) => {
+  // TODO: 调用后端 API
 }
 </script>
 

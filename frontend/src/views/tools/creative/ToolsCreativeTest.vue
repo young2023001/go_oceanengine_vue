@@ -16,19 +16,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建A/B测试')
+  // TODO: implement
 }
 
-const handleDetail = (test: typeof tests.value[0]) => {
-  alert(`查看测试详情: ${test.name}`)
+const handleDetail = (_test: typeof tests.value[0]) => {
+  // TODO: implement
 }
 
-const handleStart = (test: typeof tests.value[0]) => {
-  alert(`启动测试: ${test.name}`)
+const handleStart = (_test: typeof tests.value[0]) => {
+  // TODO: implement
 }
 
-const handleStop = (test: typeof tests.value[0]) => {
-  alert(`停止测试: ${test.name}`)
+const handleStop = (_test: typeof tests.value[0]) => {
+  // TODO: implement
 }
 </script>
 

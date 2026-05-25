@@ -69,11 +69,11 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 const balance = ref({ available: 12500, monthUsed: 3500, totalUsed: 85600 })
 
 const handleRecharge = () => {
-  alert('功能点充值')
+  // TODO: implement
 }
 
-const handleBuyPackage = (pkg: typeof packages.value[0]) => {
-  alert(`购买套餐: ${pkg.name} - ¥${pkg.price}`)
+const handleBuyPackage = (_pkg: typeof packages.value[0]) => {
+  // TODO: implement
 }
 
 const packages = ref([

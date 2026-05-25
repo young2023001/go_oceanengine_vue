@@ -62,14 +62,14 @@ const audiences = ref([
 ])
 
 const handleCreate = () => {
-  alert('创建DMP人群')
+  // TODO: 调用后端 API
 }
 
-const handleDetail = (item: typeof audiences.value[0]) => {
-  alert(`查看详情: ${item.name}`)
+const handleDetail = (_item: typeof audiences.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handlePush = (item: typeof audiences.value[0]) => {
-  alert(`推送人群: ${item.name}`)
+const handlePush = (_item: typeof audiences.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

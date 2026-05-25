@@ -83,10 +83,10 @@ const getTypeText = (type: string) => {
 }
 
 const handleQuery = () => {
-  alert('查询流水明细')
+  // TODO: 调用后端 API
 }
 
 const handleExport = () => {
-  alert('导出流水明细')
+  // TODO: 调用后端 API
 }
 </script>

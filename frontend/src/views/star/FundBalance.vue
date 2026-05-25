@@ -122,10 +122,10 @@ const getTypeText = (type: string) => {
 }
 
 const handleRecharge = () => {
-  alert('账户充值')
+  // TODO: implement
 }
 
 const handleWithdraw = () => {
-  alert('账户提现')
+  // TODO: implement
 }
 </script>

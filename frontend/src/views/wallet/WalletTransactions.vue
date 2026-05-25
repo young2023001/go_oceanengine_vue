@@ -22,11 +22,11 @@ const handlePageChange = (page: number) => {
 }
 
 const handleSearch = () => {
-  alert('搜索流水记录')
+  // TODO: implement
 }
 
 const handleExport = () => {
-  alert('导出流水记录')
+  // TODO: implement
 }
 </script>
 

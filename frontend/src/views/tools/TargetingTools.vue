@@ -71,11 +71,11 @@ const toggleDevice = (type: 'os' | 'network' | 'brand', value: string) => {
 }
 
 const handleUpload = () => {
-  alert('上传人群包')
+  // TODO: 调用后端 API
 }
 
 const handleCreateRule = () => {
-  alert('创建规则')
+  // TODO: 调用后端 API
 }
 
 const handleReset = () => {
@@ -84,11 +84,10 @@ const handleReset = () => {
   selectedDevice.os = ['iOS', 'Android']
   selectedDevice.network = ['WiFi', '4G', '5G']
   selectedDevice.brand = []
-  alert('已重置所有定向')
 }
 
 const handleSave = () => {
-  alert('保存定向配置')
+  // TODO: 调用后端 API
 }
 </script>
 

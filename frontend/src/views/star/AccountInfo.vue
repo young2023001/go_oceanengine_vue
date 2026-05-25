@@ -108,18 +108,18 @@ const account = ref({
 })
 
 const handleRecharge = () => {
-  alert('账户充值')
+  // TODO: implement
 }
 
 const handleEditInfo = () => {
-  alert('修改信息')
+  // TODO: implement
 }
 
 const handleFundFlow = () => {
-  alert('查看资金流水')
+  // TODO: implement
 }
 
 const handleInvoice = () => {
-  alert('发票管理')
+  // TODO: implement
 }
 </script>

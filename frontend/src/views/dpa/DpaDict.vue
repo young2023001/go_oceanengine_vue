@@ -20,20 +20,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddField = () => {
-  alert('添加字段')
+  // TODO: implement
 }
 
 const handleSearch = () => {
-  alert('搜索字段')
+  // TODO: implement
 }
 
-const handleEditField = (item: typeof dictItems.value[0]) => {
-  alert(`编辑字段: ${item.field}`)
+const handleEditField = (_item: typeof dictItems.value[0]) => {
+  // TODO: implement
 }
 
 const handleDeleteField = (item: typeof dictItems.value[0]) => {
   if (confirm(`确定删除字段 ${item.field}?`)) {
-    alert('删除成功')
   }
 }
 </script>

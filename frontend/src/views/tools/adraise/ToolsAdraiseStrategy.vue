@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 22 })
 
@@ -16,21 +19,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateStrategy = () => {
-  alert('创建策略')
+  router.push('/tools/adraise/create')
 }
 
-const handleStrategyDetail = (strategy: typeof strategies.value[0]) => {
-  alert(`查看详情: ${strategy.name}`)
+const handleStrategyDetail = (_strategy: typeof strategies.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handlePause = (strategy: typeof strategies.value[0]) => {
   strategy.status = 'paused'
-  alert(`已暂停: ${strategy.name}`)
 }
 
 const handleResume = (strategy: typeof strategies.value[0]) => {
   strategy.status = 'active'
-  alert(`已恢复: ${strategy.name}`)
 }
 </script>
 

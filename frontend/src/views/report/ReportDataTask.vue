@@ -35,19 +35,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建数据任务')
+  // TODO: implement
 }
 
-const handleDownload = (task: typeof tasks.value[0]) => {
-  alert(`下载任务: ${task.name}`)
+const handleDownload = (_task: typeof tasks.value[0]) => {
+  // TODO: implement
 }
 
-const handleRetry = (task: typeof tasks.value[0]) => {
-  alert(`重试任务: ${task.name}`)
+const handleRetry = (_task: typeof tasks.value[0]) => {
+  // TODO: implement
 }
 
-const handleDetail = (task: typeof tasks.value[0]) => {
-  alert(`查看详情: ${task.name}`)
+const handleDetail = (_task: typeof tasks.value[0]) => {
+  // TODO: implement
 }
 </script>
 

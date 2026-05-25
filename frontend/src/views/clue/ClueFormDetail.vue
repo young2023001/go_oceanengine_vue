@@ -33,7 +33,7 @@ const handleEdit = () => {
 }
 
 const handleExport = () => {
-  alert(`正在导出表单「${formInfo.value.name}」的 ${formInfo.value.totalClues} 条线索...`)
+  // TODO: implement
 }
 </script>
 

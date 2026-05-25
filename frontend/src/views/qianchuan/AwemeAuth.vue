@@ -160,22 +160,22 @@ const getStatusText = (status: string) => {
 }
 
 const handleAddAuth = () => {
-  alert('添加达人授权')
+  // TODO: 调用后端 API
 }
 
 const handleSearch = () => {
-  alert('搜索达人')
+  // TODO: 调用后端 API
 }
 
-const handleEditPermission = (aweme: typeof awemeList.value[0]) => {
-  alert(`编辑权限: ${aweme.nickname}`)
+const handleEditPermission = (_aweme: typeof awemeList.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleRenew = (aweme: typeof awemeList.value[0]) => {
-  alert(`续期授权: ${aweme.nickname}`)
+const handleRenew = (_aweme: typeof awemeList.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleRevoke = (aweme: typeof awemeList.value[0]) => {
-  alert(`取消授权: ${aweme.nickname}`)
+const handleRevoke = (_aweme: typeof awemeList.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

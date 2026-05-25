@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleApplyInvoice = () => {
-  alert('申请发票')
+  // TODO: implement
 }
 
-const handleDownloadInvoice = (invoice: any) => {
-  alert(`下载发票: ${invoice.id}`)
+const handleDownloadInvoice = (_invoice: any) => {
+  // TODO: implement
 }
 
-const handleViewInvoice = (invoice: any) => {
-  alert(`查看发票详情: ${invoice.id}`)
+const handleViewInvoice = (_invoice: any) => {
+  // TODO: implement
 }
 </script>
 

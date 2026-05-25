@@ -79,11 +79,11 @@ import Pagination from '@/components/common/Pagination.vue'
 const filters = ref({ startDate: '', endDate: '' })
 
 const handleSearch = () => {
-  alert('查询项目报表')
+  // TODO: implement
 }
 
 const handleExport = () => {
-  alert('导出报表')
+  // TODO: implement
 }
 
 const summary = ref({ cost: 125680, clues: 2856, clueCost: 44.0, validRate: 68.5 })

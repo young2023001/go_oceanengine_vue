@@ -24,12 +24,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleEdit = (item: typeof rtaList.value[0]) => {
-  alert(`编辑策略: ${item.name}`)
+const handleEdit = (_item: typeof rtaList.value[0]) => {
+  // TODO: implement
 }
 
-const handleMonitor = (item: typeof rtaList.value[0]) => {
-  alert(`查看监控: ${item.name}`)
+const handleMonitor = (_item: typeof rtaList.value[0]) => {
+  // TODO: implement
 }
 </script>
 

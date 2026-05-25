@@ -99,22 +99,21 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 
 const currentTab = ref('active')
 
-const handleRenew = (sub: typeof activeSubscriptions.value[0]) => {
-  alert(`续费: ${sub.name}`)
+const handleRenew = (_sub: typeof activeSubscriptions.value[0]) => {
+  // TODO: implement
 }
 
 const handleCancelSub = (sub: typeof activeSubscriptions.value[0]) => {
   if (confirm(`确定取消订阅 ${sub.name} 吗？`)) {
-    alert(`已取消: ${sub.name}`)
   }
 }
 
-const handleResubscribe = (sub: typeof expiredSubscriptions.value[0]) => {
-  alert(`重新订阅: ${sub.name}`)
+const handleResubscribe = (_sub: typeof expiredSubscriptions.value[0]) => {
+  // TODO: implement
 }
 
-const handleTableAction = (sub: any) => {
-  alert(`${sub.status === 'active' ? '续费' : '订阅'}: ${sub.name}`)
+const handleTableAction = (_sub: any) => {
+  // TODO: implement
 }
 const tabs = [
   { key: 'active', label: '使用中' },

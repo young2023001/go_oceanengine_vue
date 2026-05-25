@@ -23,15 +23,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCustomText = () => {
-  alert('自定义文案')
+  // TODO: 调用后端 API
 }
 
-const handleUseText = (item: typeof actionTexts.value[0]) => {
-  alert(`使用文案: ${item.text}`)
+const handleUseText = (_item: typeof actionTexts.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleViewText = (item: typeof actionTexts.value[0]) => {
-  alert(`查看文案详情: ${item.text}`)
+const handleViewText = (_item: typeof actionTexts.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>
 

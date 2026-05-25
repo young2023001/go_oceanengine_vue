@@ -133,7 +133,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
+
+const router = useRouter()
 
 const coreStats = ref([
   { label: '消耗', value: '¥3,560', trend: 12.5 },
@@ -144,11 +147,11 @@ const coreStats = ref([
 ])
 
 const handleEdit = () => {
-  alert(`编辑广告: ${adDetail.value.name}`)
+  router.push(`/qianchuan/ad/${adDetail.value.id}`)
 }
 
 const handleCopy = () => {
-  alert(`复制广告: ${adDetail.value.name}`)
+  // TODO: 调用后端 API
 }
 
 const adDetail = ref({

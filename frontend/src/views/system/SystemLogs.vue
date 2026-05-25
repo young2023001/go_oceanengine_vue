@@ -75,7 +75,6 @@ const deleteBeforeDate = ref('')
 
 const handleDeleteLogs = async () => {
   if (!deleteBeforeDate.value) {
-    alert('请选择截止日期')
     return
   }
   if (!confirm(`确定删除 ${deleteBeforeDate.value} 之前的所有日志吗？此操作不可撤销！`)) {
@@ -86,10 +85,8 @@ const handleDeleteLogs = async () => {
     showDeleteDialog.value = false
     deleteBeforeDate.value = ''
     fetchLogs()
-    alert('删除成功')
   } catch (error) {
     console.error('删除失败:', error)
-    alert('删除失败')
   }
 }
 

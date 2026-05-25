@@ -16,15 +16,15 @@ const trackTypes = [
 ]
 
 const handleCancel = () => {
-  alert('取消')
+  // TODO: implement
 }
 
 const handleCreateLink = () => {
-  alert('创建链接')
+  // TODO: implement
 }
 
 const handleCopyPreviewLink = () => {
-  alert('复制链接')
+  // TODO: implement
 }
 </script>
 

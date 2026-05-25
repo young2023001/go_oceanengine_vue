@@ -32,8 +32,8 @@ const filterByCategory = (category: string) => {
   }
 }
 
-const handleUseService = (service: any) => {
-  alert(`使用服务: ${service.name}`)
+const handleUseService = (_service: any) => {
+  // TODO: implement
 }
 </script>
 

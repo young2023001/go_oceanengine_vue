@@ -17,15 +17,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAdd = () => {
-  alert('添加应用')
+  // TODO: implement
 }
 
-const handleManage = (app: typeof apps.value[0]) => {
-  alert(`管理应用: ${app.name}`)
+const handleManage = (_app: typeof apps.value[0]) => {
+  // TODO: implement
 }
 
-const handleDetail = (app: typeof apps.value[0]) => {
-  alert(`查看详情: ${app.name}`)
+const handleDetail = (_app: typeof apps.value[0]) => {
+  // TODO: implement
 }
 </script>
 

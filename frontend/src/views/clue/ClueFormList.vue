@@ -29,7 +29,6 @@ const handleViewData = (form: typeof forms.value[0]) => {
 
 const handleCopy = (form: typeof forms.value[0]) => {
   if (confirm(`确定复制表单「${form.name}」吗？`)) {
-    alert('表单复制成功')
   }
 }
 </script>

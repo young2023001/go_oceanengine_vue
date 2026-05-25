@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleUpload = () => {
-  alert('上传创意分析')
+  // TODO: implement
 }
 
-const handleDetail = (creative: typeof creatives.value[0]) => {
-  alert(`查看详情: ${creative.name}`)
+const handleDetail = (_creative: typeof creatives.value[0]) => {
+  // TODO: implement
 }
 
-const handleSuggestion = (creative: typeof creatives.value[0]) => {
-  alert(`优化建议: ${creative.name}`)
+const handleSuggestion = (_creative: typeof creatives.value[0]) => {
+  // TODO: implement
 }
 </script>
 

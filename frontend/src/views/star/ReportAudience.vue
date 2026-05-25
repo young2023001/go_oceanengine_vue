@@ -107,7 +107,7 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 const filters = ref({ task: '', startDate: '', endDate: '' })
 
 const handleQuery = () => {
-  alert('查询受众分析')
+  // TODO: implement
 }
 
 const stats = ref({ reach: 5680000, interaction: 286000, conversion: 3560, costPerInteraction: 0.35 })

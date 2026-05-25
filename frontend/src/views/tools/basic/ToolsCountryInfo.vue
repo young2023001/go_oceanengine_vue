@@ -31,7 +31,6 @@ const filteredCountries = computed(() => {
 
 const handleCopyCode = (code: string) => {
   navigator.clipboard.writeText(code)
-  alert(`已复制代码: ${code}`)
 }
 </script>
 

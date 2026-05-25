@@ -18,15 +18,15 @@ const verifyMethods = [
 const generatedCode = ref('ocean_verify_abc123def456')
 
 const handleDownloadFile = () => {
-  alert('下载验证文件')
+  // TODO: implement
 }
 
 const handleCancel = () => {
-  alert('取消')
+  // TODO: implement
 }
 
 const handleStartVerify = () => {
-  alert('开始验证')
+  // TODO: implement
 }
 </script>
 

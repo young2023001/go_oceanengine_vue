@@ -23,11 +23,11 @@ const sourceTypes = [
 ]
 
 const handleCancel = () => {
-  alert('取消')
+  // TODO: implement
 }
 
 const handleCreate = () => {
-  alert(`创建人群包: ${formData.value.name}`)
+  // TODO: implement
 }
 </script>
 

@@ -21,8 +21,8 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleDelete = (kw: typeof keywords.value[0]) => {
-  alert(`确定删除关键词: ${kw.keyword}?`)
+const handleDelete = (_kw: typeof keywords.value[0]) => {
+  // TODO: implement
 }
 </script>
 

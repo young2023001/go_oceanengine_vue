@@ -18,7 +18,7 @@ const handlePageChange = (page: number) => {
 }
 
 const handleExport = () => {
-  alert('导出广告系列报表')
+  // TODO: implement
 }
 </script>
 

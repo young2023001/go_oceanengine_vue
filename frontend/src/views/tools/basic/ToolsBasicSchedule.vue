@@ -16,16 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建排期')
+  // TODO: implement
 }
 
-const handleEdit = (schedule: typeof schedules.value[0]) => {
-  alert(`编辑排期: ${schedule.name}`)
+const handleEdit = (_schedule: typeof schedules.value[0]) => {
+  // TODO: implement
 }
 
 const handleToggle = (schedule: typeof schedules.value[0]) => {
   schedule.status = schedule.status === 'active' ? 'inactive' : 'active'
-  alert(`已${schedule.status === 'active' ? '启用' : '禁用'}: ${schedule.name}`)
 }
 </script>
 

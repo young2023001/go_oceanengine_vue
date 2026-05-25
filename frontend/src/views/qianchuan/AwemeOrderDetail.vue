@@ -192,6 +192,6 @@ const order = ref({
 })
 
 const handleStopDelivery = () => {
-  alert(`停止投放: ${order.value.id}`)
+  // TODO: 调用后端 API
 }
 </script>

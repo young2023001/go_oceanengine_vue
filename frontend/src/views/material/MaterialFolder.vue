@@ -13,17 +13,16 @@ const folders = ref([
 const showCreateModal = ref(false)
 const newFolderName = ref('')
 
-const handleOpenFolder = (folder: typeof folders.value[0]) => {
-  alert(`打开文件夹: ${folder.name}`)
+const handleOpenFolder = (_folder: typeof folders.value[0]) => {
+  // TODO: implement
 }
 
-const handleFolderMenu = (folder: typeof folders.value[0]) => {
-  alert(`文件夹菜单: ${folder.name}`)
+const handleFolderMenu = (_folder: typeof folders.value[0]) => {
+  // TODO: implement
 }
 
 const handleCreateFolder = () => {
   if (newFolderName.value) {
-    alert(`创建文件夹: ${newFolderName.value}`)
     showCreateModal.value = false
     newFolderName.value = ''
   }

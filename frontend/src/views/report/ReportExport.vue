@@ -17,11 +17,11 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建导出任务')
+  // TODO: implement
 }
 
-const handleDownload = (task: typeof exportTasks.value[0]) => {
-  alert(`下载: ${task.name}`)
+const handleDownload = (_task: typeof exportTasks.value[0]) => {
+  // TODO: implement
 }
 </script>
 

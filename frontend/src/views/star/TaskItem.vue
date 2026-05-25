@@ -99,11 +99,10 @@ const handleCreate = () => {
 }
 
 const handleSearch = () => {
-  console.log('搜索:', filters.value)
-  alert('查询完成')
+  // TODO: implement
 }
 
-const handleEdit = (task: typeof tasks.value[0]) => {
-  alert(`编辑任务: ${task.name}`)
+const handleEdit = (_task: typeof tasks.value[0]) => {
+  // TODO: implement
 }
 </script>

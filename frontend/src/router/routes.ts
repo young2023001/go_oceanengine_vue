@@ -1566,6 +1566,12 @@ export const protectedRoutes: RouteRecordRaw[] = [
         meta: { title: '线索管理', hidden: true }
       },
       {
+        path: 'local/clue/:id',
+        name: 'LocalClueDetail',
+        component: () => import('@/views/local/ClueDetail.vue'),
+        meta: { title: '线索详情', hidden: true }
+      },
+      {
         path: 'local/report',
         name: 'LocalReport',
         component: () => import('@/views/local/ReportProject.vue'),

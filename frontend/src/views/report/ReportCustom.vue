@@ -16,27 +16,26 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建新的自定义报表')
+  // TODO: implement
 }
 
-const handleRun = (report: typeof customReports.value[0]) => {
-  alert(`运行报表: ${report.name}`)
+const handleRun = (_report: typeof customReports.value[0]) => {
+  // TODO: implement
 }
 
-const handleEdit = (report: typeof customReports.value[0]) => {
-  alert(`编辑报表: ${report.name}`)
+const handleEdit = (_report: typeof customReports.value[0]) => {
+  // TODO: implement
 }
 
 const handleDelete = (report: typeof customReports.value[0]) => {
   if (confirm(`确定删除报表「${report.name}」吗？`)) {
     const idx = customReports.value.findIndex(r => r.id === report.id)
     if (idx > -1) customReports.value.splice(idx, 1)
-    alert('删除成功')
   }
 }
 
-const handleUseTemplate = (name: string) => {
-  alert(`使用${name}模板创建报表`)
+const handleUseTemplate = (_name: string) => {
+  // TODO: implement
 }
 </script>
 

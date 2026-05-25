@@ -26,15 +26,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建原生锚点')
+  // TODO: 调用后端 API
 }
 
-const handleEdit = (anchor: typeof anchors.value[0]) => {
-  alert(`编辑锚点: ${anchor.name}`)
+const handleEdit = (_anchor: typeof anchors.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleData = (anchor: typeof anchors.value[0]) => {
-  alert(`查看数据: ${anchor.name}`)
+const handleData = (_anchor: typeof anchors.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>
 

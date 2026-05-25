@@ -61,16 +61,15 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
 
 const handleAddBind = () => {
-  alert('添加绑定')
+  // TODO: implement
 }
 
-const handleBindDetail = (item: typeof bindings.value[0]) => {
-  alert(`绑定详情: ${item.name}`)
+const handleBindDetail = (_item: typeof bindings.value[0]) => {
+  // TODO: implement
 }
 
 const handleUnbind = (item: typeof bindings.value[0]) => {
   if (confirm(`确定解绑 ${item.name} 吗？`)) {
-    alert(`已解绑: ${item.name}`)
   }
 }
 

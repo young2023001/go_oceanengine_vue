@@ -21,16 +21,16 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleRun = (item: typeof reports.value[0]) => {
-  alert(`运行报表: ${item.name}`)
+const handleRun = (_item: typeof reports.value[0]) => {
+  // TODO: implement
 }
 
-const handleEdit = (item: typeof reports.value[0]) => {
-  alert(`编辑报表: ${item.name}`)
+const handleEdit = (_item: typeof reports.value[0]) => {
+  // TODO: implement
 }
 
-const handleDownload = (item: typeof reports.value[0]) => {
-  alert(`下载报表: ${item.name}`)
+const handleDownload = (_item: typeof reports.value[0]) => {
+  // TODO: implement
 }
 </script>
 

@@ -22,15 +22,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建预约活动')
+  // TODO: 调用后端 API
 }
 
-const handleDetail = (booking: typeof bookings.value[0]) => {
-  alert(`查看详情: ${booking.appName}`)
+const handleDetail = (_booking: typeof bookings.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handlePromote = (booking: typeof bookings.value[0]) => {
-  alert(`推广活动: ${booking.appName}`)
+const handlePromote = (_booking: typeof bookings.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>
 

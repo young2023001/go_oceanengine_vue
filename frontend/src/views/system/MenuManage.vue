@@ -116,7 +116,6 @@ const handleEditMenu = (menu: MenuTree) => {
 const handleSaveMenu = async () => {
   try {
     if (!menuForm.name) {
-      alert('请填写菜单名称')
       return
     }
     if (menuFormMode.value === 'add') {
@@ -133,7 +132,6 @@ const handleSaveMenu = async () => {
         hidden: menuForm.hidden,
         remark: menuForm.remark
       })
-      alert('创建成功')
     } else {
       await systemApi.updateMenu(menuForm.id, {
         id: menuForm.id,
@@ -149,30 +147,25 @@ const handleSaveMenu = async () => {
         hidden: menuForm.hidden,
         remark: menuForm.remark
       })
-      alert('更新成功')
     }
     showMenuDialog.value = false
     fetchMenus()
   } catch (error) {
     console.error('保存失败:', error)
-    alert('保存失败')
   }
 }
 
 // 删除菜单
 const handleDeleteMenu = async (menu: MenuTree) => {
   if (menu.children && menu.children.length > 0) {
-    alert('请先删除子菜单')
     return
   }
   if (!confirm(`确定删除菜单「${menu.name}」吗？`)) return
   try {
     await systemApi.deleteMenu(menu.id)
-    alert('删除成功')
     fetchMenus()
   } catch (error) {
     console.error('删除失败:', error)
-    alert('删除失败')
   }
 }
 

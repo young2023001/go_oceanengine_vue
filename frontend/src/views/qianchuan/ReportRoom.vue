@@ -69,11 +69,11 @@ import Pagination from '@/components/common/Pagination.vue'
 const filters = ref({ startDate: '', endDate: '' })
 
 const handleQuery = () => {
-  alert('查询直播间报表')
+  // TODO: 调用后端 API
 }
 
 const handleExport = () => {
-  alert('导出直播间报表')
+  // TODO: 调用后端 API
 }
 
 const rooms = ref([

@@ -15,11 +15,11 @@ const issues = ref([
 ])
 
 const handleReDiagnose = () => {
-  alert('重新诊断账户')
+  // TODO: implement
 }
 
-const handleIssueAction = (issue: typeof issues.value[0]) => {
-  alert(`${issue.action}: ${issue.title}`)
+const handleIssueAction = (_issue: typeof issues.value[0]) => {
+  // TODO: implement
 }
 </script>
 

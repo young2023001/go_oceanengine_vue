@@ -20,16 +20,16 @@ const templates = ref([
   { id: 'T006', name: '产品详情模板', category: 'ecommerce', uses: 656, preview: '📦' }
 ])
 
-const handleUseTemplate = (template: any) => {
-  alert(`使用模板: ${template.name}`)
+const handleUseTemplate = (_template: any) => {
+  // TODO: implement
 }
 
 const handleLoadMore = () => {
-  alert('加载更多模板')
+  // TODO: implement
 }
 
-const handlePreviewTemplate = (template: any) => {
-  alert(`预览模板: ${template.name}`)
+const handlePreviewTemplate = (_template: any) => {
+  // TODO: implement
 }
 </script>
 

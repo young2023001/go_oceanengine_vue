@@ -26,10 +26,8 @@ const generatedImages = ref<string[]>([])
 
 const handleGenerate = () => {
   if (!formData.value.prompt) {
-    alert('请输入描述内容')
     return
   }
-  alert('开始生成素材')
 }
 </script>
 

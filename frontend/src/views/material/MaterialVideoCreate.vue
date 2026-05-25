@@ -12,7 +12,7 @@ const formData = ref({
 const uploadList = ref<{ name: string; progress: number; status: string }[]>([])
 
 const handleSelectVideo = () => {
-  alert('选择视频')
+  // TODO: implement
 }
 </script>
 

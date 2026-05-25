@@ -39,30 +39,30 @@ const productLines: ProductLine[] = [
       }
     ]
   },
-  {
-    id: 'qianchuan',
-    name: '巨量千川',
-    color: 'orange',
-    icon: 'shop',
-    sections: [
-      {
-        title: '推广管理',
-        items: [
-          { name: '千川工作台', path: '/qianchuan', icon: 'shop' },
-          { name: '广告计划', path: '/qianchuan/campaign', icon: 'campaign' },
-          { name: '广告管理', path: '/qianchuan/ad', icon: 'ad' }
-        ]
-      },
-      {
-        title: '电商资产',
-        items: [
-          { name: '商品管理', path: '/qianchuan/product', icon: 'list' },
-          { name: '全域推广', path: '/qianchuan/uni', icon: 'globe' },
-          { name: '随心推', path: '/qianchuan/aweme-order', icon: 'heart' }
-        ]
-      }
-    ]
-  },
+  // {
+  //   id: 'qianchuan',
+  //   name: '巨量千川',
+  //   color: 'orange',
+  //   icon: 'shop',
+  //   sections: [
+  //     {
+  //       title: '推广管理',
+  //       items: [
+  //         { name: '千川工作台', path: '/qianchuan', icon: 'shop' },
+  //         { name: '广告计划', path: '/qianchuan/campaign', icon: 'campaign' },
+  //         { name: '广告管理', path: '/qianchuan/ad', icon: 'ad' }
+  //       ]
+  //     },
+  //     {
+  //       title: '电商资产',
+  //       items: [
+  //         { name: '商品管理', path: '/qianchuan/product', icon: 'list' },
+  //         { name: '全域推广', path: '/qianchuan/uni', icon: 'globe' },
+  //         { name: '随心推', path: '/qianchuan/aweme-order', icon: 'heart' }
+  //       ]
+  //     }
+  //   ]
+  // },
   {
     id: 'local',
     name: '本地推',
@@ -107,29 +107,29 @@ const productLines: ProductLine[] = [
       }
     ]
   },
-  {
-    id: 'star',
-    name: '巨量星图',
-    color: 'yellow',
-    icon: 'star',
-    sections: [
-      {
-        title: '达人营销',
-        items: [
-          { name: '星图工作台', path: '/star', icon: 'star' },
-          { name: '任务管理', path: '/star/task', icon: 'list' },
-          { name: '需求管理', path: '/star/demand', icon: 'campaign' }
-        ]
-      },
-      {
-        title: '财务数据',
-        items: [
-          { name: '资金管理', path: '/star/fund', icon: 'wallet' },
-          { name: '数据报表', path: '/star/report', icon: 'chart' }
-        ]
-      }
-    ]
-  },
+  // {
+  //   id: 'star',
+  //   name: '巨量星图',
+  //   color: 'yellow',
+  //   icon: 'star',
+  //   sections: [
+  //     {
+  //       title: '达人营销',
+  //       items: [
+  //         { name: '星图工作台', path: '/star', icon: 'star' },
+  //         { name: '任务管理', path: '/star/task', icon: 'list' },
+  //         { name: '需求管理', path: '/star/demand', icon: 'campaign' }
+  //       ]
+  //     },
+  //     {
+  //       title: '财务数据',
+  //       items: [
+  //         { name: '资金管理', path: '/star/fund', icon: 'wallet' },
+  //         { name: '数据报表', path: '/star/report', icon: 'chart' }
+  //       ]
+  //     }
+  //   ]
+  // },
   {
     id: 'tools',
     name: '工具与服务',
@@ -188,7 +188,7 @@ const productLines: ProductLine[] = [
 ]
 
 // 展开/折叠状态
-const expandedProducts = ref<Set<string>>(new Set(['overview', 'qianchuan', 'local', 'enterprise', 'star', 'tools']))
+const expandedProducts = ref<Set<string>>(new Set(['overview', 'local', 'enterprise', 'tools']))
 
 const toggleProduct = (id: string) => {
   if (expandedProducts.value.has(id)) {
@@ -201,8 +201,7 @@ const toggleProduct = (id: string) => {
 const isExpanded = (id: string) => expandedProducts.value.has(id)
 
 const isActive = (path: string) => {
-  if (path === '/') return route.path === '/'
-  return route.path.startsWith(path)
+  return route.path === path
 }
 
 </script>
@@ -249,7 +248,7 @@ const isActive = (path: string) => {
                   :class="[
                     'group flex items-center gap-3 mx-2 px-3 py-2 rounded-md transition-all text-sm',
                     isActive(item.path)
-                      ? 'bg-blue-600 text-white font-medium shadow-sm'
+                      ? 'bg-blue-600 text-white hover:text-white font-medium shadow-sm'
                       : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                   ]"
                 >

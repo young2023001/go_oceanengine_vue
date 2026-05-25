@@ -17,21 +17,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建灰度发布')
+  // TODO: 调用后端 API
 }
 
-const handleEdit = (config: typeof grayConfigs.value[0]) => {
-  alert(`编辑灰度: ${config.name}`)
+const handleEdit = (_config: typeof grayConfigs.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handlePause = (config: typeof grayConfigs.value[0]) => {
   config.status = 'paused'
-  alert(`已暂停: ${config.name}`)
 }
 
 const handleResume = (config: typeof grayConfigs.value[0]) => {
   config.status = 'running'
-  alert(`已恢复: ${config.name}`)
 }
 </script>
 

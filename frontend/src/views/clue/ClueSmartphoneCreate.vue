@@ -24,11 +24,9 @@ const workTimes = [
 
 const validateForm = () => {
   if (!formData.value.name.trim()) {
-    alert('请输入配置名称')
     return false
   }
   if (!formData.value.phoneNumber.trim()) {
-    alert('请输入接听号码')
     return false
   }
   return true
@@ -43,7 +41,6 @@ const handleCreate = async () => {
   loading.value = true
   try {
     await new Promise(r => setTimeout(r, 500))
-    alert('智能电话配置创建成功')
     router.push('/clue/smartphone/list')
   } finally {
     loading.value = false

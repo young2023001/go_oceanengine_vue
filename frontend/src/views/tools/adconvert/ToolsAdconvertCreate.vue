@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
+
+const router = useRouter()
 
 const formData = ref({
   name: '',
@@ -20,11 +23,11 @@ const convertTypes = [
 ]
 
 const handleCancel = () => {
-  alert('取消创建')
+  router.push('/tools/adconvert')
 }
 
 const handleCreate = () => {
-  alert(`创建转化: ${formData.value.name}`)
+  // TODO: 调用后端 API
 }
 </script>
 

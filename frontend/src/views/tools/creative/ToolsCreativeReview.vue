@@ -16,12 +16,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleView = (review: typeof reviews.value[0]) => {
-  alert(`查看创意: ${review.name}`)
+const handleView = (_review: typeof reviews.value[0]) => {
+  // TODO: implement
 }
 
-const handleResubmit = (review: typeof reviews.value[0]) => {
-  alert(`重新提交: ${review.name}`)
+const handleResubmit = (_review: typeof reviews.value[0]) => {
+  // TODO: implement
 }
 </script>
 

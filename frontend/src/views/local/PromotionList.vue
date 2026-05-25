@@ -117,8 +117,7 @@ const handleCreate = () => {
 }
 
 const handleSearch = () => {
-  console.log('搜索推广:', filters.value)
-  alert('查询完成')
+  // TODO: implement
 }
 
 const handleDetail = (promo: typeof promotions.value[0]) => {
@@ -128,12 +127,10 @@ const handleDetail = (promo: typeof promotions.value[0]) => {
 const handlePause = (promo: typeof promotions.value[0]) => {
   if (confirm(`确定暂停推广「${promo.name}」吗？`)) {
     promo.status = 'paused'
-    alert('推广已暂停')
   }
 }
 
 const handleStart = (promo: typeof promotions.value[0]) => {
   promo.status = 'running'
-  alert(`推广「${promo.name}」已启动`)
 }
 </script>

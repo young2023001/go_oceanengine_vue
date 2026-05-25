@@ -53,7 +53,6 @@ const regionOptions = [
 
 const handleSubmit = async () => {
   if (!form.name || !form.campaignId) {
-    alert('请填写必填项')
     return
   }
   
@@ -61,8 +60,6 @@ const handleSubmit = async () => {
   
   // 模拟提交
   await new Promise(resolve => setTimeout(resolve, 1500))
-  
-  alert('广告创建成功！')
   loading.value = false
   router.push('/ads')
 }

@@ -77,6 +77,7 @@ func (h *GroupHandler) Delete(c *gin.Context) {
 }
 
 func (h *GroupHandler) AddMembers(c *gin.Context) {
+	tenantID := ginutil.GetTenantID(c)
 	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		response.BadRequest(c, "无效的ID")
@@ -87,7 +88,7 @@ func (h *GroupHandler) AddMembers(c *gin.Context) {
 		response.BadRequest(c, err.Error())
 		return
 	}
-	if err := h.svc.AddMembers(c.Request.Context(), id, &req); err != nil {
+	if err := h.svc.AddMembers(c.Request.Context(), tenantID, id, &req); err != nil {
 		response.InternalError(c, err.Error())
 		return
 	}
@@ -95,6 +96,7 @@ func (h *GroupHandler) AddMembers(c *gin.Context) {
 }
 
 func (h *GroupHandler) RemoveMembers(c *gin.Context) {
+	tenantID := ginutil.GetTenantID(c)
 	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		response.BadRequest(c, "无效的ID")
@@ -105,7 +107,7 @@ func (h *GroupHandler) RemoveMembers(c *gin.Context) {
 		response.BadRequest(c, err.Error())
 		return
 	}
-	if err := h.svc.RemoveMembers(c.Request.Context(), id, &req); err != nil {
+	if err := h.svc.RemoveMembers(c.Request.Context(), tenantID, id, &req); err != nil {
 		response.InternalError(c, err.Error())
 		return
 	}

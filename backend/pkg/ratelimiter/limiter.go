@@ -44,7 +44,11 @@ func (l *TenantRateLimiter) Allow(ctx context.Context, tenantID uint64) (bool, e
 }
 
 func (l *TenantRateLimiter) Wait(ctx context.Context, tenantID uint64) error {
+	deadline := time.Now().Add(30 * time.Second)
 	for {
+		if time.Now().After(deadline) {
+			return fmt.Errorf("rate limit wait timeout for tenant %d", tenantID)
+		}
 		allowed, err := l.Allow(ctx, tenantID)
 		if err != nil {
 			return err

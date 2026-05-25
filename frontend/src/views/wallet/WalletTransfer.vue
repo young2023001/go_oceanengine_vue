@@ -18,16 +18,13 @@ const loading = ref(false)
 
 const validateForm = () => {
   if (!form.targetId) {
-    alert('请选择目标账户')
     return false
   }
   const amount = parseFloat(form.amount)
   if (!amount || amount <= 0) {
-    alert('请输入有效的转账金额')
     return false
   }
   if (amount > walletInfo.available) {
-    alert('转账金额不能超过可转金额')
     return false
   }
   return true
@@ -38,7 +35,6 @@ const handleSubmit = async () => {
   loading.value = true
   try {
     await new Promise(r => setTimeout(r, 500))
-    alert(`转账成功！金额: ¥${parseFloat(form.amount).toLocaleString()}`)
     form.targetId = ''
     form.amount = ''
     form.remark = ''

@@ -2,6 +2,7 @@ package router
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -172,7 +173,11 @@ func (r *Router) registerPublicRoutes(rg *gin.RouterGroup) {
 	tenantOAuthRepo := tenantRepo.NewTenantRepository(r.db)
 	tenantOAuthSvc := tenantService.NewTenantService(tenantOAuthRepo)
 	tenantOAuthClient := tenantService.NewOAuthClient()
-	tenantOAuthHandler := tenantApi.NewTenantHandler(tenantOAuthSvc, tenantOAuthClient)
+	stateSecret := os.Getenv("OAUTH_STATE_SECRET")
+	if stateSecret == "" {
+		stateSecret = "default-oauth-state-secret-change-in-production"
+	}
+	tenantOAuthHandler := tenantApi.NewTenantHandler(tenantOAuthSvc, tenantOAuthClient, stateSecret)
 	rg.GET("/tenants/oauth/callback", tenantOAuthHandler.OAuthCallback)
 
 	// 千川 OAuth 路由（公开）
@@ -1029,7 +1034,11 @@ func (r *Router) registerTenantRoutes(rg *gin.RouterGroup) {
 	repo := tenantRepo.NewTenantRepository(r.db)
 	svc := tenantService.NewTenantService(repo)
 	oauth := tenantService.NewOAuthClient()
-	handler := tenantApi.NewTenantHandler(svc, oauth)
+	tenantStateSecret := os.Getenv("OAUTH_STATE_SECRET")
+	if tenantStateSecret == "" {
+		tenantStateSecret = "default-oauth-state-secret-change-in-production"
+	}
+	handler := tenantApi.NewTenantHandler(svc, oauth, tenantStateSecret)
 
 	tenants := rg.Group("/tenants")
 	{

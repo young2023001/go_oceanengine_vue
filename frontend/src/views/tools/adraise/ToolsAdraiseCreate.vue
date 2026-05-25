@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
+
+const router = useRouter()
 
 const formData = ref({
   name: '',
@@ -25,11 +28,11 @@ const durations = [
 ]
 
 const handleCancel = () => {
-  alert('取消创建')
+  router.push('/tools/adraise')
 }
 
 const handleCreate = () => {
-  alert(`创建任务: ${formData.value.name}`)
+  // TODO: 调用后端 API
 }
 </script>
 

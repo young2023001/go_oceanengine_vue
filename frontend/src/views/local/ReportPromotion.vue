@@ -121,11 +121,11 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
 
 const handleSearch = () => {
-  alert('查询推广报表')
+  // TODO: implement
 }
 
 const handleExport = () => {
-  alert('导出报表')
+  // TODO: implement
 }
 
 const filters = ref({
@@ -177,7 +177,7 @@ const formatNumber = (num: number) => {
   return num.toLocaleString()
 }
 
-const handleViewPromotion = (item: typeof reportData.value[0]) => {
-  alert(`查看推广详情: ${item.name}`)
+const handleViewPromotion = (_item: typeof reportData.value[0]) => {
+  // TODO: implement
 }
 </script>

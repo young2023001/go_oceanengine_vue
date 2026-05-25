@@ -107,10 +107,10 @@ const dailyData = ref([
 ])
 
 const handleQuery = () => {
-  alert('查询每日报告')
+  // TODO: implement
 }
 
 const handleExport = () => {
-  alert('导出每日报告')
+  // TODO: implement
 }
 </script>

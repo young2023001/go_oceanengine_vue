@@ -30,7 +30,10 @@ func (c *ReportCache) Get(ctx context.Context, key string, dest interface{}) boo
 }
 
 func (c *ReportCache) Set(ctx context.Context, key string, value interface{}) {
-	data, _ := json.Marshal(value)
+	data, err := json.Marshal(value)
+	if err != nil {
+		return
+	}
 	c.rdb.Set(ctx, key, string(data), c.ttl)
 }
 

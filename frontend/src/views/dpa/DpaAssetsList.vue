@@ -28,11 +28,11 @@ const handlePageChange = (page: number) => {
 }
 
 const handleUploadAsset = () => {
-  alert('上传素材')
+  // TODO: implement
 }
 
-const handleViewAsset = (asset: typeof assets.value[0]) => {
-  alert(`查看素材: ${asset.name}`)
+const handleViewAsset = (_asset: typeof assets.value[0]) => {
+  // TODO: implement
 }
 </script>
 

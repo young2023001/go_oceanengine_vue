@@ -22,7 +22,7 @@ const reviews = ref([
 ])
 
 const handleUseService = () => {
-  alert(`开始使用服务: ${service.value.name}`)
+  // TODO: implement
 }
 </script>
 

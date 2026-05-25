@@ -14,7 +14,7 @@ const uploadHistory = ref([
 ])
 
 const handleSelectFile = () => {
-  alert('选择文件上传')
+  // TODO: implement
 }
 </script>
 

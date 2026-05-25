@@ -90,11 +90,11 @@ import Pagination from '@/components/common/Pagination.vue'
 const filters = ref({ startDate: '', endDate: '', status: '' })
 
 const handleQuery = () => {
-  alert('查询广告报表')
+  // TODO: 调用后端 API
 }
 
 const handleExport = () => {
-  alert('导出广告报表')
+  // TODO: 调用后端 API
 }
 
 const summary = ref({

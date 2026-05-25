@@ -45,11 +45,11 @@ const toggleExpand = (id: string) => {
 }
 
 const handleCreateCategory = () => {
-  alert('新建分类')
+  // TODO: implement
 }
 
-const handleEditCategory = (childId: string, childName: string) => {
-  alert(`编辑分类: ${childName} (ID: ${childId})`)
+const handleEditCategory = (_childId: string, _childName: string) => {
+  // TODO: implement
 }
 </script>
 

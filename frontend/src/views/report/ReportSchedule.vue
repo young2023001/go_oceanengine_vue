@@ -17,19 +17,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建定时任务')
+  // TODO: implement
 }
 
-const handleEdit = (schedule: typeof schedules.value[0]) => {
-  alert(`编辑: ${schedule.name}`)
+const handleEdit = (_schedule: typeof schedules.value[0]) => {
+  // TODO: implement
 }
 
-const handlePause = (schedule: typeof schedules.value[0]) => {
-  alert(`暂停: ${schedule.name}`)
+const handlePause = (_schedule: typeof schedules.value[0]) => {
+  // TODO: implement
 }
 
-const handleEnable = (schedule: typeof schedules.value[0]) => {
-  alert(`启用: ${schedule.name}`)
+const handleEnable = (_schedule: typeof schedules.value[0]) => {
+  // TODO: implement
 }
 </script>
 

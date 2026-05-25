@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 68 })
 const filterSource = ref('')
@@ -20,15 +23,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建新的人群包')
+  router.push('/tools/audience/create')
 }
 
-const handleApply = (audience: typeof audiences.value[0]) => {
-  alert(`应用人群包: ${audience.name}\n覆盖人数: ${(audience.coverage / 10000).toFixed(0)}万`)
+const handleApply = (_audience: typeof audiences.value[0]) => {
+  // TODO: implement
 }
 
-const handleDetail = (audience: typeof audiences.value[0]) => {
-  alert(`人群包详情: ${audience.name}\n来源: ${audience.source}\n匹配率: ${audience.matchRate}%`)
+const handleDetail = (_audience: typeof audiences.value[0]) => {
+  // TODO: implement
 }
 </script>
 

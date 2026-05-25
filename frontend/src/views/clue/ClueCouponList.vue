@@ -32,8 +32,8 @@ const handleEditCoupon = (coupon: typeof coupons.value[0]) => {
   router.push(`/clue/coupon/edit/${coupon.id}`)
 }
 
-const handleViewData = (coupon: typeof coupons.value[0]) => {
-  alert(`查看优惠券「${coupon.name}」的使用数据`)
+const handleViewData = (_coupon: typeof coupons.value[0]) => {
+  // TODO: implement
 }
 </script>
 

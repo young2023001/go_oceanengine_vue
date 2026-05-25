@@ -169,15 +169,12 @@ const form = ref({
 
 const validateForm = () => {
   if (!form.value.campaignId) {
-    alert('请选择广告计划')
     return false
   }
   if (!form.value.name.trim()) {
-    alert('请输入广告名称')
     return false
   }
   if (!form.value.bid || form.value.bid < 1) {
-    alert('请设置有效的出价')
     return false
   }
   return true
@@ -185,13 +182,12 @@ const validateForm = () => {
 
 const saveDraft = async () => {
   if (!form.value.name.trim()) {
-    alert('请先输入广告名称')
     return
   }
   loading.value = true
   try {
     await new Promise(r => setTimeout(r, 500))
-    alert('草稿保存成功')
+    // TODO: 调用后端 API
   } finally {
     loading.value = false
   }
@@ -202,7 +198,6 @@ const submitAd = async () => {
   loading.value = true
   try {
     await new Promise(r => setTimeout(r, 500))
-    alert('广告提交成功，等待审核')
     router.push('/qianchuan/ad')
   } finally {
     loading.value = false
@@ -210,10 +205,10 @@ const submitAd = async () => {
 }
 
 const addInterestTag = () => {
-  alert('兴趣标签选择功能开发中...')
+  // TODO: 调用后端 API
 }
 
 const selectFile = () => {
-  alert('文件上传功能开发中...')
+  // TODO: 调用后端 API
 }
 </script>

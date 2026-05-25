@@ -171,6 +171,6 @@ const totalBudget = computed(() => {
 })
 
 const handleSubmit = () => {
-  alert(`提交订单: ¥${totalBudget.value}`)
+  // TODO: 调用后端 API
 }
 </script>

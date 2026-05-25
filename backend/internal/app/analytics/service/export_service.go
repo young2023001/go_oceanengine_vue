@@ -44,7 +44,14 @@ func (s *ExportService) CreateExport(ctx context.Context, tenantID, userID uint6
 		return nil, err
 	}
 
-	go s.executeExport(task.ID, tenantID, scopeIDs, req)
+	go func() {
+		defer func() {
+			if r := recover(); r != nil {
+				s.exportRepo.UpdateStatus(context.Background(), task.ID, "failed", "", 0)
+			}
+		}()
+		s.executeExport(task.ID, tenantID, scopeIDs, req)
+	}()
 
 	return task, nil
 }

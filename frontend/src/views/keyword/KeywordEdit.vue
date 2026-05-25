@@ -23,7 +23,6 @@ const matchTypes = [
 ]
 
 const handleSubmit = () => {
-  console.log('Update keyword:', form)
   router.push('/keyword/list')
 }
 </script>

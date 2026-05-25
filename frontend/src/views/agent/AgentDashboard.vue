@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 
+const router = useRouter()
+
 const stats = reactive({
-  totalAdvertisers: 128,
-  activeAdvertisers: 95,
   todaySpend: 1258600,
   monthSpend: 32580000,
   balance: 5680000,
-  pendingTasks: 23
+  pendingTasks: 23,
+  totalAdvertisers: 128,
+  activeAdvertisers: 95
 })
 
 const recentAdvertisers = ref([
@@ -23,19 +26,19 @@ const pendingTasks = ref([
 ])
 
 const handleViewAdvertiser = (adv: typeof recentAdvertisers.value[0]) => {
-  alert(`查看广告主: ${adv.name}`)
+  router.push(`/advertisers/${adv.id}`)
 }
 
 const handleAdvAction = (adv: typeof recentAdvertisers.value[0]) => {
   if (adv.status === '余额不足') {
-    alert(`为 ${adv.name} 充值`)
+    router.push(`/agent/recharge?advertiser_id=${adv.id}`)
   } else {
-    alert(`管理广告主: ${adv.name}`)
+    router.push(`/advertisers/${adv.id}`)
   }
 }
 
-const handleTaskAction = (task: typeof pendingTasks.value[0]) => {
-  alert(`处理任务: ${task.title}`)
+const handleTaskAction = (_task: typeof pendingTasks.value[0]) => {
+  router.push('/agent/advertisers')
 }
 
 onMounted(() => {

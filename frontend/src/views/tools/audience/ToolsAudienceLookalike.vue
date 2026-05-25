@@ -21,11 +21,11 @@ const scales = [
 ]
 
 const handleCancel = () => {
-  alert('取消')
+  // TODO: implement
 }
 
 const handleCreate = () => {
-  alert(`创建Lookalike扩展包: ${formData.value.name}`)
+  // TODO: implement
 }
 </script>
 

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 45 })
 
@@ -17,16 +20,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddThirdsite = () => {
-  alert('添加第三方落地页')
+  router.push('/site/thirdsite/create')
 }
 
-const handleEditSite = (site: typeof sites.value[0]) => {
-  alert(`编辑: ${site.name}`)
+const handleEditSite = (_site: typeof sites.value[0]) => {
+  // TODO: implement
 }
 
 const handleDeleteSite = (site: typeof sites.value[0]) => {
   if (confirm(`确定删除 ${site.name}?`)) {
-    alert('删除成功')
   }
 }
 </script>

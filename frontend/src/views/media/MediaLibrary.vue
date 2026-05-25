@@ -68,15 +68,15 @@ onMounted(() => {
 })
 
 const handleUpload = () => {
-  alert('上传素材')
+  // TODO: implement
 }
 
-const handleDownload = (media: any) => {
-  alert(`下载: ${media.name}`)
+const handleDownload = (_media: any) => {
+  // TODO: implement
 }
 
-const handleDelete = (media: any) => {
-  alert(`删除: ${media.name}`)
+const handleDelete = (_media: any) => {
+  // TODO: implement
 }
 </script>
 

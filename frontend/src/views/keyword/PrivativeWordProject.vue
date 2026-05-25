@@ -17,15 +17,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建否定词项目')
+  // TODO: implement
 }
 
-const handleManage = (project: typeof projects.value[0]) => {
-  alert(`管理项目: ${project.name}`)
+const handleManage = (_project: typeof projects.value[0]) => {
+  // TODO: implement
 }
 
-const handleEdit = (project: typeof projects.value[0]) => {
-  alert(`编辑项目: ${project.name}`)
+const handleEdit = (_project: typeof projects.value[0]) => {
+  // TODO: implement
 }
 </script>
 

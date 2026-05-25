@@ -49,15 +49,12 @@ const fetchAdDetail = async () => {
 
 const handleSubmit = async () => {
   if (!form.name) {
-    alert('请输入广告名称')
     return
   }
   
   submitting.value = true
   await new Promise(resolve => setTimeout(resolve, 500))
   submitting.value = false
-  
-  alert('保存成功')
   router.push(`/ads/${adId}`)
 }
 

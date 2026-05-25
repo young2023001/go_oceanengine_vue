@@ -71,18 +71,18 @@ const reports = ref([
 ])
 
 const handleCreate = () => {
-  alert('新建报表')
+  // TODO: 调用后端 API
 }
 
-const handleView = (report: typeof reports.value[0]) => {
-  alert(`查看报表: ${report.name}`)
+const handleView = (_report: typeof reports.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleDownload = (report: typeof reports.value[0]) => {
-  alert(`下载报表: ${report.name}`)
+const handleDownload = (_report: typeof reports.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleDelete = (report: typeof reports.value[0]) => {
-  alert(`删除报表: ${report.name}`)
+const handleDelete = (_report: typeof reports.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

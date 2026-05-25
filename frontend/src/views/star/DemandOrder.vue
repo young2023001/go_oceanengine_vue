@@ -96,23 +96,21 @@ const handleCreate = () => {
 }
 
 const handleSearch = () => {
-  console.log('搜索:', filters.value)
-  alert('查询完成')
+  // TODO: implement
 }
 
-const handleView = (order: typeof orders.value[0]) => {
-  alert(`查看需求单: ${order.title}`)
+const handleView = (_order: typeof orders.value[0]) => {
+  // TODO: implement
 }
 
-const handleEdit = (order: typeof orders.value[0]) => {
-  alert(`编辑需求单: ${order.title}`)
+const handleEdit = (_order: typeof orders.value[0]) => {
+  // TODO: implement
 }
 
 const handleDelete = (order: typeof orders.value[0]) => {
   if (confirm(`确定删除需求单「${order.title}」吗？`)) {
     const idx = orders.value.findIndex(o => o.id === order.id)
     if (idx > -1) orders.value.splice(idx, 1)
-    alert('删除成功')
   }
 }
 </script>

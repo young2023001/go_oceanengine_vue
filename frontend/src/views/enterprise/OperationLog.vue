@@ -64,7 +64,7 @@ import Pagination from '@/components/common/Pagination.vue'
 const filters = ref({ startDate: '', endDate: '', type: '' })
 
 const handleSearch = () => {
-  alert('查询操作日志')
+  // TODO: implement
 }
 
 const logs = ref([

@@ -19,7 +19,7 @@ const handleGenerate = () => {
 }
 
 const handleDownload = () => {
-  alert('下载二维码')
+  // TODO: implement
 }
 </script>
 

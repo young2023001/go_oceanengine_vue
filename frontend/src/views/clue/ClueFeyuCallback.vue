@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddCallback = () => {
-  alert('创建新的飞鱼CRM回调配置')
+  // TODO: implement
 }
 
-const handleEditCallback = (cb: typeof callbacks.value[0]) => {
-  alert(`编辑回调配置: ${cb.name}`)
+const handleEditCallback = (_cb: typeof callbacks.value[0]) => {
+  // TODO: implement
 }
 
-const handleViewLogs = (cb: typeof callbacks.value[0]) => {
-  alert(`查看「${cb.name}」的同步日志`)
+const handleViewLogs = (_cb: typeof callbacks.value[0]) => {
+  // TODO: implement
 }
 </script>
 

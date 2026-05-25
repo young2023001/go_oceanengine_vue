@@ -17,15 +17,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handlePublish = () => {
-  alert('发布视频')
+  // TODO: implement
 }
 
-const handleView = (video: typeof videos.value[0]) => {
-  alert(`查看视频: ${video.title}`)
+const handleView = (_video: typeof videos.value[0]) => {
+  // TODO: implement
 }
 
-const handleAnalyze = (video: typeof videos.value[0]) => {
-  alert(`分析视频: ${video.title}`)
+const handleAnalyze = (_video: typeof videos.value[0]) => {
+  // TODO: implement
 }
 </script>
 

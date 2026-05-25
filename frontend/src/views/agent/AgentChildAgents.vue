@@ -17,19 +17,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddChildAgent = () => {
-  alert('新增子代理')
+  // TODO: implement
 }
 
-const handleAgentDetail = (agent: typeof childAgents.value[0]) => {
-  alert(`子代理详情: ${agent.name}`)
+const handleAgentDetail = (_agent: typeof childAgents.value[0]) => {
+  // TODO: implement
 }
 
-const handleAgentRecharge = (agent: typeof childAgents.value[0]) => {
-  alert(`为 ${agent.name} 充值`)
+const handleAgentRecharge = (_agent: typeof childAgents.value[0]) => {
+  // TODO: implement
 }
 
-const handleAgentEdit = (agent: typeof childAgents.value[0]) => {
-  alert(`编辑子代理: ${agent.name}`)
+const handleAgentEdit = (_agent: typeof childAgents.value[0]) => {
+  // TODO: implement
 }
 </script>
 

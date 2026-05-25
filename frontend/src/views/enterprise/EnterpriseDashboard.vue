@@ -108,12 +108,12 @@ const topVideos = ref([
   { id: 5, title: '限时优惠活动', cover: 'https://via.placeholder.com/64x80', plays: '52.3w', likes: '3.8w' }
 ])
 
-const handleReplyComment = (comment: typeof pendingComments.value[0]) => {
-  alert(`回复评论: ${comment.content}`)
+const handleReplyComment = (_comment: typeof pendingComments.value[0]) => {
+  // TODO: implement
 }
 
-const handleHideComment = (comment: typeof pendingComments.value[0]) => {
-  alert(`隐藏评论: ${comment.content}`)
+const handleHideComment = (_comment: typeof pendingComments.value[0]) => {
+  // TODO: implement
 }
 
 const pendingComments = ref([

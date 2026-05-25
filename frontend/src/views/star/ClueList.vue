@@ -109,18 +109,18 @@ const getStatusText = (status: string) => {
 }
 
 const handleQuery = () => {
-  alert('查询线索')
+  // TODO: implement
 }
 
 const handleExport = () => {
-  alert('导出线索数据')
+  // TODO: implement
 }
 
-const handleDetail = (clue: typeof clues.value[0]) => {
-  alert(`查看线索详情: ${clue.name}`)
+const handleDetail = (_clue: typeof clues.value[0]) => {
+  // TODO: implement
 }
 
-const handleFollow = (clue: typeof clues.value[0]) => {
-  alert(`跟进线索: ${clue.name}`)
+const handleFollow = (_clue: typeof clues.value[0]) => {
+  // TODO: implement
 }
 </script>
