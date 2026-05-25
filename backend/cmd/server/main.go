@@ -17,6 +17,8 @@ import (
 	groupModel "oceanengine-backend/internal/app/group/model"
 	scopeModel "oceanengine-backend/internal/app/scope/model"
 	tenantModel "oceanengine-backend/internal/app/tenant/model"
+	tenantRepository "oceanengine-backend/internal/app/tenant/repository"
+	tenantService "oceanengine-backend/internal/app/tenant/service"
 	"oceanengine-backend/internal/router"
 	"oceanengine-backend/pkg/auth"
 	"oceanengine-backend/pkg/database"
@@ -77,6 +79,15 @@ func main() {
 	// 设置路由
 	r := router.NewRouter(db, log, jwtManager, &cfg.Ocean)
 	engine := r.Setup(cfg.Server.Mode)
+
+	// Token 自动续期
+	refreshCtx, refreshCancel := context.WithCancel(context.Background())
+	defer refreshCancel()
+
+	tRepo := tenantRepository.NewTenantRepository(db)
+	oauthClient := tenantService.NewOAuthClient()
+	tokenRefresher := tenantService.NewTokenRefresher(tRepo, oauthClient, log)
+	go tokenRefresher.Start(refreshCtx)
 
 	// 创建 HTTP 服务器
 	addr := fmt.Sprintf(":%d", cfg.Server.Port)
