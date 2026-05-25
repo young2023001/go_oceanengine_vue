@@ -13,6 +13,9 @@ import (
 	adApi "oceanengine-backend/internal/app/ad/api"
 	adminApi "oceanengine-backend/internal/app/admin/api"
 	"oceanengine-backend/internal/app/admin/service"
+	batchApi "oceanengine-backend/internal/app/batch/api"
+	batchRepo "oceanengine-backend/internal/app/batch/repository"
+	batchService "oceanengine-backend/internal/app/batch/service"
 	advApi "oceanengine-backend/internal/app/advertiser/api"
 	advtoolsApi "oceanengine-backend/internal/app/advtools/api"
 	audienceApi "oceanengine-backend/internal/app/audience/api"
@@ -246,6 +249,9 @@ func (r *Router) registerProtectedRoutes(rg *gin.RouterGroup) {
 
 	// DPA商品广告模块
 	r.registerDPARoutes(rg)
+
+	// 批量操作模块
+	r.registerBatchRoutes(rg)
 
 	// 模板管理
 	r.registerTemplateRoutes(rg)
@@ -1070,5 +1076,25 @@ func (r *Router) registerProjectRoutes(rg *gin.RouterGroup) {
 	promotions := rg.Group("/promotions")
 	{
 		promotions.GET("", handler.ListPromotions)
+	}
+}
+
+// registerBatchRoutes 注册批量操作路由
+func (r *Router) registerBatchRoutes(rg *gin.RouterGroup) {
+	repo := batchRepo.NewBatchRepository(r.db)
+	svc := batchService.NewBatchService(repo)
+	handler := batchApi.NewBatchHandler(svc, r.db)
+
+	batch := rg.Group("/batch")
+	{
+		batch.POST("/projects", handler.CreateTask)
+		batch.POST("/promotions", handler.CreateTask)
+		batch.POST("/budget", handler.CreateTask)
+		batch.POST("/bid", handler.CreateTask)
+		batch.POST("/status", handler.CreateTask)
+		batch.GET("/tasks", handler.ListTasks)
+		batch.GET("/tasks/:id", handler.GetTask)
+		batch.POST("/tasks/:id/cancel", handler.CancelTask)
+		batch.POST("/tasks/:id/retry", handler.RetryTask)
 	}
 }
