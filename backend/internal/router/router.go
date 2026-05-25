@@ -176,6 +176,9 @@ func (r *Router) registerPublicRoutes(rg *gin.RouterGroup) {
 	stateSecret := os.Getenv("OAUTH_STATE_SECRET")
 	if stateSecret == "" {
 		stateSecret = "default-oauth-state-secret-change-in-production"
+		if r.logger != nil {
+			r.logger.Warn("OAUTH_STATE_SECRET not set, using default value - CHANGE IN PRODUCTION")
+		}
 	}
 	tenantOAuthHandler := tenantApi.NewTenantHandler(tenantOAuthSvc, tenantOAuthClient, stateSecret)
 	rg.GET("/tenants/oauth/callback", tenantOAuthHandler.OAuthCallback)
@@ -1037,6 +1040,9 @@ func (r *Router) registerTenantRoutes(rg *gin.RouterGroup) {
 	tenantStateSecret := os.Getenv("OAUTH_STATE_SECRET")
 	if tenantStateSecret == "" {
 		tenantStateSecret = "default-oauth-state-secret-change-in-production"
+		if r.logger != nil {
+			r.logger.Warn("OAUTH_STATE_SECRET not set, using default value - CHANGE IN PRODUCTION")
+		}
 	}
 	handler := tenantApi.NewTenantHandler(svc, oauth, tenantStateSecret)
 

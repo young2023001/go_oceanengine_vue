@@ -387,6 +387,9 @@ async function handleSubmit(): Promise<void> {
     }
     await batchApi.createTask(params)
     router.push('/batch/tasks')
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : '操作失败，请重试'
+    alert(message)
   } finally {
     submitting.value = false
   }

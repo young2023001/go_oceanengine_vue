@@ -57,14 +57,14 @@ import { batchApi, type BatchTask } from '@/api/batch'
 
 const tasks = ref<BatchTask[]>([])
 
-const POLL_INTERVAL_MS = 2000
+const POLL_INTERVAL_MS = 5000
 
 let pollTimer: ReturnType<typeof setInterval> | null = null
 
 async function fetchTasks(): Promise<void> {
   try {
     const res = await batchApi.getList()
-    tasks.value = res.data?.list ?? []
+    tasks.value = res.list ?? []
   } catch {
     // 静默处理轮询错误，避免干扰用户
   }
