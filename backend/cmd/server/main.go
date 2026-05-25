@@ -14,8 +14,11 @@ import (
 
 	"oceanengine-backend/config"
 	accountModel "oceanengine-backend/internal/app/account/model"
+	batchModel "oceanengine-backend/internal/app/batch/model"
 	groupModel "oceanengine-backend/internal/app/group/model"
+	projectModel "oceanengine-backend/internal/app/project/model"
 	scopeModel "oceanengine-backend/internal/app/scope/model"
+	templateModel "oceanengine-backend/internal/app/template/model"
 	tenantModel "oceanengine-backend/internal/app/tenant/model"
 	tenantRepository "oceanengine-backend/internal/app/tenant/repository"
 	tenantService "oceanengine-backend/internal/app/tenant/service"
@@ -50,7 +53,7 @@ func main() {
 	}
 	log.Info("数据库连接成功")
 
-	// 自动迁移 Phase 1 表
+	// 自动迁移 Phase 1 & Phase 2 表
 	if err := db.AutoMigrate(
 		&tenantModel.Tenant{},
 		&accountModel.LocalAccount{},
@@ -58,6 +61,12 @@ func main() {
 		&groupModel.AccountGroup{},
 		&groupModel.AccountGroupMember{},
 		&scopeModel.UserAccountScope{},
+		&projectModel.LocalProject{},
+		&projectModel.LocalPromotion{},
+		&batchModel.BatchTask{},
+		&batchModel.BatchTaskItem{},
+		&templateModel.ProjectTemplate{},
+		&templateModel.PromotionTemplate{},
 	); err != nil {
 		log.Fatal(fmt.Sprintf("auto migrate failed: %v", err))
 	}
