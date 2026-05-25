@@ -23,7 +23,9 @@ func (c *ReportCache) Get(ctx context.Context, key string, dest interface{}) boo
 	if err != nil {
 		return false
 	}
-	json.Unmarshal([]byte(val), dest)
+	if err := json.Unmarshal([]byte(val), dest); err != nil {
+		return false
+	}
 	return true
 }
 
@@ -34,7 +36,11 @@ func (c *ReportCache) Set(ctx context.Context, key string, value interface{}) {
 
 func (c *ReportCache) Invalidate(ctx context.Context, tenantID uint64) {
 	pattern := fmt.Sprintf("report:%d:*", tenantID)
-	keys, _ := c.rdb.Keys(ctx, pattern).Result()
+	iter := c.rdb.Scan(ctx, 0, pattern, 100).Iterator()
+	var keys []string
+	for iter.Next(ctx) {
+		keys = append(keys, iter.Val())
+	}
 	if len(keys) > 0 {
 		c.rdb.Del(ctx, keys...)
 	}

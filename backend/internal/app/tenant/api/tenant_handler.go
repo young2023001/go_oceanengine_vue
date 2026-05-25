@@ -1,8 +1,12 @@
 package api
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"oceanengine-backend/internal/app/tenant/service"
@@ -16,6 +20,29 @@ type TenantHandler struct {
 
 func NewTenantHandler(svc *service.TenantService, oauth service.OAuthClient) *TenantHandler {
 	return &TenantHandler{svc: svc, oauth: oauth}
+}
+
+const oauthStateSecret = "oauth-state-secret"
+
+func signState(tenantID uint64, secret string) string {
+	msg := fmt.Sprintf("%d", tenantID)
+	mac := hmac.New(sha256.New, []byte(secret))
+	mac.Write([]byte(msg))
+	sig := hex.EncodeToString(mac.Sum(nil))[:16]
+	return fmt.Sprintf("%d:%s", tenantID, sig)
+}
+
+func verifyState(state, secret string) (uint64, bool) {
+	parts := strings.SplitN(state, ":", 2)
+	if len(parts) != 2 {
+		return 0, false
+	}
+	tenantID, err := strconv.ParseUint(parts[0], 10, 64)
+	if err != nil {
+		return 0, false
+	}
+	expected := signState(tenantID, secret)
+	return tenantID, state == expected
 }
 
 func (h *TenantHandler) Create(c *gin.Context) {
@@ -66,8 +93,12 @@ func (h *TenantHandler) GetOAuthURL(c *gin.Context) {
 		response.InternalError(c, err.Error())
 		return
 	}
-	redirectURI := fmt.Sprintf("%s/api/v1/tenants/oauth/callback", c.Request.Host)
-	state := fmt.Sprintf("%d", tenant.ID)
+	scheme := "https"
+	if proto := c.GetHeader("X-Forwarded-Proto"); proto != "" {
+		scheme = proto
+	}
+	redirectURI := fmt.Sprintf("%s://%s/api/v1/tenants/oauth/callback", scheme, c.Request.Host)
+	state := signState(tenant.ID, oauthStateSecret)
 	authURL := h.oauth.GetAuthURL(tenant.OAuthAppID, redirectURI, state)
 	response.OKWithData(c, gin.H{"auth_url": authURL})
 }
@@ -80,9 +111,9 @@ func (h *TenantHandler) OAuthCallback(c *gin.Context) {
 		return
 	}
 
-	tenantID, err := strconv.ParseUint(state, 10, 64)
-	if err != nil {
-		response.BadRequest(c, "invalid state")
+	tenantID, valid := verifyState(state, oauthStateSecret)
+	if !valid {
+		response.BadRequest(c, "invalid state signature")
 		return
 	}
 

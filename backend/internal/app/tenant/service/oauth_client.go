@@ -1,12 +1,13 @@
 package service
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
-	"strings"
+	"time"
 )
 
 type OAuthClient interface {
@@ -20,7 +21,7 @@ type oceanOAuthClient struct {
 }
 
 func NewOAuthClient() OAuthClient {
-	return &oceanOAuthClient{httpClient: &http.Client{}}
+	return &oceanOAuthClient{httpClient: &http.Client{Timeout: 30 * time.Second}}
 }
 
 func (c *oceanOAuthClient) GetAuthURL(appID, redirectURI, state string) string {
@@ -41,9 +42,18 @@ type oauthTokenResponse struct {
 
 func (c *oceanOAuthClient) ExchangeToken(ctx context.Context, appID, secret, authCode string) (string, string, int64, error) {
 	reqURL := "https://open.oceanengine.com/open_api/oauth2/access_token/"
-	body := fmt.Sprintf(`{"app_id":"%s","secret":"%s","grant_type":"auth_code","auth_code":"%s"}`, appID, secret, authCode)
+	payload := map[string]string{
+		"app_id":     appID,
+		"secret":     secret,
+		"grant_type": "auth_code",
+		"auth_code":  authCode,
+	}
+	bodyBytes, err := json.Marshal(payload)
+	if err != nil {
+		return "", "", 0, err
+	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", reqURL, strings.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, "POST", reqURL, bytes.NewReader(bodyBytes))
 	if err != nil {
 		return "", "", 0, err
 	}
@@ -67,9 +77,18 @@ func (c *oceanOAuthClient) ExchangeToken(ctx context.Context, appID, secret, aut
 
 func (c *oceanOAuthClient) RefreshToken(ctx context.Context, appID, secret, refreshToken string) (string, string, int64, error) {
 	reqURL := "https://open.oceanengine.com/open_api/oauth2/refresh_token/"
-	body := fmt.Sprintf(`{"app_id":"%s","secret":"%s","grant_type":"refresh_token","refresh_token":"%s"}`, appID, secret, refreshToken)
+	payload := map[string]string{
+		"app_id":        appID,
+		"secret":        secret,
+		"grant_type":    "refresh_token",
+		"refresh_token": refreshToken,
+	}
+	bodyBytes, err := json.Marshal(payload)
+	if err != nil {
+		return "", "", 0, err
+	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", reqURL, strings.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, "POST", reqURL, bytes.NewReader(bodyBytes))
 	if err != nil {
 		return "", "", 0, err
 	}

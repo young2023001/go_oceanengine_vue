@@ -2,6 +2,7 @@ package api
 
 import (
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"oceanengine-backend/internal/app/analytics/service"
@@ -175,6 +176,11 @@ func (h *AnalyticsHandler) DownloadExport(c *gin.Context) {
 
 	if task.Status != "done" {
 		response.BadRequest(c, "export task not completed")
+		return
+	}
+
+	if !strings.HasPrefix(task.FilePath, "/tmp/exports/") {
+		response.BadRequest(c, "invalid file path")
 		return
 	}
 

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"time"
 )
 
 type Client struct {
@@ -13,7 +14,7 @@ type Client struct {
 }
 
 func NewClient() *Client {
-	return &Client{httpClient: &http.Client{}}
+	return &Client{httpClient: &http.Client{Timeout: 30 * time.Second}}
 }
 
 type CreateProjectRequest struct {

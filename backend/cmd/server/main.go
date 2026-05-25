@@ -22,6 +22,7 @@ import (
 	templateModel "oceanengine-backend/internal/app/template/model"
 	tenantModel "oceanengine-backend/internal/app/tenant/model"
 	batchService "oceanengine-backend/internal/app/batch/service"
+	batchRepository "oceanengine-backend/internal/app/batch/repository"
 	tenantRepository "oceanengine-backend/internal/app/tenant/repository"
 	tenantService "oceanengine-backend/internal/app/tenant/service"
 	"github.com/redis/go-redis/v9"
@@ -31,6 +32,7 @@ import (
 	"oceanengine-backend/pkg/database"
 	"oceanengine-backend/pkg/logger"
 	"oceanengine-backend/pkg/ocean"
+	"oceanengine-backend/pkg/oceanengine"
 	"oceanengine-backend/pkg/ratelimiter"
 )
 
@@ -110,6 +112,16 @@ func main() {
 	// 批量任务断点续传
 	recovery := batchService.NewTaskRecovery(db, log)
 	recovery.RecoverOnStartup(refreshCtx)
+
+	// 启动批量任务 Worker
+	batchRepo := batchRepository.NewBatchRepository(db)
+	oceanEngineClient := oceanengine.NewClient(cfg.Ocean.AppID, cfg.Ocean.Secret)
+	tokenStore := tenantService.NewDBTokenStore(db)
+	if redisClient != nil {
+		workerLimiter := ratelimiter.NewTenantRateLimiter(redisClient, 10)
+		worker := batchService.NewWorker(batchRepo, oceanEngineClient, workerLimiter, tokenStore, log)
+		go worker.Start(refreshCtx)
+	}
 
 	// 项目同步定时任务
 	if redisClient != nil {
