@@ -63,3 +63,4 @@ coverage/
 *.crt
 *.p12
 *.pfx
+backend/server
