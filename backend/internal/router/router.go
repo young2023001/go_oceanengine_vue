@@ -7,6 +7,9 @@ import (
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 	"oceanengine-backend/config"
+	accountApi "oceanengine-backend/internal/app/account/api"
+	accountRepo "oceanengine-backend/internal/app/account/repository"
+	accountService "oceanengine-backend/internal/app/account/service"
 	adApi "oceanengine-backend/internal/app/ad/api"
 	adminApi "oceanengine-backend/internal/app/admin/api"
 	"oceanengine-backend/internal/app/admin/service"
@@ -21,6 +24,9 @@ import (
 	dpaApi "oceanengine-backend/internal/app/dpa/api"
 	enterpriseApi "oceanengine-backend/internal/app/enterprise/api"
 	eventmanagerApi "oceanengine-backend/internal/app/eventmanager/api"
+	groupApi "oceanengine-backend/internal/app/group/api"
+	groupRepo "oceanengine-backend/internal/app/group/repository"
+	groupService "oceanengine-backend/internal/app/group/service"
 	localApi "oceanengine-backend/internal/app/local/api"
 	mediaApi "oceanengine-backend/internal/app/media/api"
 	mediaService "oceanengine-backend/internal/app/media/service"
@@ -29,6 +35,9 @@ import (
 	serveMarketApi "oceanengine-backend/internal/app/servemarket/api"
 	siteApi "oceanengine-backend/internal/app/site/api"
 	starApi "oceanengine-backend/internal/app/star/api"
+	tenantApi "oceanengine-backend/internal/app/tenant/api"
+	tenantRepo "oceanengine-backend/internal/app/tenant/repository"
+	tenantService "oceanengine-backend/internal/app/tenant/service"
 	v3Api "oceanengine-backend/internal/app/v3/api"
 	"oceanengine-backend/internal/middleware"
 	"oceanengine-backend/pkg/auth"
@@ -137,6 +146,13 @@ func (r *Router) registerPublicRoutes(rg *gin.RouterGroup) {
 		oauthGroup.GET("/callback", advHandler.OAuthCallback)
 	}
 
+	// 租户 OAuth 回调（公开）
+	tenantOAuthRepo := tenantRepo.NewTenantRepository(r.db)
+	tenantOAuthSvc := tenantService.NewTenantService(tenantOAuthRepo)
+	tenantOAuthClient := tenantService.NewOAuthClient()
+	tenantOAuthHandler := tenantApi.NewTenantHandler(tenantOAuthSvc, tenantOAuthClient)
+	rg.GET("/tenants/oauth/callback", tenantOAuthHandler.OAuthCallback)
+
 	// 千川 OAuth 路由（公开）
 	if r.qianchuanCfg != nil {
 		qcOAuthHandler := qianchuanApi.NewQianchuanOAuthHandlerDefault(r.qianchuanCfg)
@@ -221,6 +237,15 @@ func (r *Router) registerProtectedRoutes(rg *gin.RouterGroup) {
 
 	// DPA商品广告模块
 	r.registerDPARoutes(rg)
+
+	// 账户管理模块
+	r.registerAccountRoutes(rg)
+
+	// 租户管理
+	r.registerTenantRoutes(rg)
+
+	// 分组管理
+	r.registerGroupRoutes(rg)
 }
 
 // registerSystemRoutes 注册系统管理路由
@@ -935,5 +960,52 @@ func (r *Router) registerDPARoutes(rg *gin.RouterGroup) {
 			sets.PUT("/:set_id", handler.UpdateProductSet)
 			sets.DELETE("/:set_id", handler.DeleteProductSet)
 		}
+	}
+}
+
+// registerTenantRoutes 注册租户管理路由
+func (r *Router) registerTenantRoutes(rg *gin.RouterGroup) {
+	repo := tenantRepo.NewTenantRepository(r.db)
+	svc := tenantService.NewTenantService(repo)
+	oauth := tenantService.NewOAuthClient()
+	handler := tenantApi.NewTenantHandler(svc, oauth)
+
+	tenants := rg.Group("/tenants")
+	{
+		tenants.POST("", handler.Create)
+		tenants.GET("", handler.List)
+		tenants.GET("/:id", handler.GetByID)
+		tenants.GET("/:id/oauth/url", handler.GetOAuthURL)
+	}
+}
+
+// registerAccountRoutes 注册账户管理路由
+func (r *Router) registerAccountRoutes(rg *gin.RouterGroup) {
+	repo := accountRepo.NewAccountRepository(r.db)
+	svc := accountService.NewAccountService(repo)
+	handler := accountApi.NewAccountHandler(svc)
+
+	accounts := rg.Group("/accounts")
+	{
+		accounts.POST("/import", handler.Import)
+		accounts.GET("", handler.List)
+		accounts.GET("/:id", handler.GetByID)
+	}
+}
+
+// registerGroupRoutes 注册分组管理路由
+func (r *Router) registerGroupRoutes(rg *gin.RouterGroup) {
+	repo := groupRepo.NewGroupRepository(r.db)
+	svc := groupService.NewGroupService(repo)
+	handler := groupApi.NewGroupHandler(svc)
+
+	groups := rg.Group("/groups")
+	{
+		groups.POST("", handler.Create)
+		groups.GET("", handler.List)
+		groups.PUT("/:id", handler.Update)
+		groups.DELETE("/:id", handler.Delete)
+		groups.POST("/:id/members", handler.AddMembers)
+		groups.DELETE("/:id/members", handler.RemoveMembers)
 	}
 }
