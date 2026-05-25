@@ -13,6 +13,10 @@ import (
 	"time"
 
 	"oceanengine-backend/config"
+	accountModel "oceanengine-backend/internal/app/account/model"
+	groupModel "oceanengine-backend/internal/app/group/model"
+	scopeModel "oceanengine-backend/internal/app/scope/model"
+	tenantModel "oceanengine-backend/internal/app/tenant/model"
 	"oceanengine-backend/internal/router"
 	"oceanengine-backend/pkg/auth"
 	"oceanengine-backend/pkg/database"
@@ -43,6 +47,19 @@ func main() {
 		log.Fatal(fmt.Sprintf("初始化数据库失败: %v", err))
 	}
 	log.Info("数据库连接成功")
+
+	// 自动迁移 Phase 1 表
+	if err := db.AutoMigrate(
+		&tenantModel.Tenant{},
+		&accountModel.LocalAccount{},
+		&accountModel.Store{},
+		&groupModel.AccountGroup{},
+		&groupModel.AccountGroupMember{},
+		&scopeModel.UserAccountScope{},
+	); err != nil {
+		log.Fatal(fmt.Sprintf("auto migrate failed: %v", err))
+	}
+	log.Info("数据库迁移完成")
 
 	// 初始化 Redis (可选)
 	if cfg.Redis.Addr != "" {
