@@ -58,7 +58,7 @@
   后端: POST /api/v1/templates/projects
 
 步骤4: 批量创建项目
-  前端: batch/BatchCreate.vue → batchApi.createTask()
+  前端: local/BatchCreate.vue（路由: /local/batch/create） → batchApi.createTask()
   后端: POST /api/v1/batch/projects
 
 步骤5: 查看任务进度
@@ -87,13 +87,14 @@
 | GET /api/v1/tenants/:id/oauth/url | tenantApi.getOAuthURL | TenantManage.vue | 缺页面 |
 | POST /api/v1/accounts/import | accountApi.importAccounts | AccountList.vue | 缺页面 |
 | GET /api/v1/accounts | accountApi.getList | AccountList.vue | 缺页面 |
+| GET /api/v1/accounts/:id | accountApi.getDetail | AccountList.vue | 缺页面 |
 | GET /api/v1/projects | projectApi.getList | ProjectList.vue | 需改造 |
-| GET /api/v1/projects/:id | projectApi.getDetail | ProjectDetail.vue | 需改造 |
+| GET /api/v1/projects/:id | projectApi.getProject | ProjectDetail.vue | 需改造 |
 | PUT /api/v1/projects/:id/status | projectApi.updateStatus | ProjectList.vue | 需改造 |
 | GET /api/v1/promotions | projectApi.getPromotions | PromotionList.vue | 需改造 |
 | POST /api/v1/batch/projects | batchApi.createTask | BatchCreate.vue | 缺路由 |
 | GET /api/v1/batch/tasks | batchApi.getList | BatchTaskList.vue | 缺路由 |
-| GET /api/v1/batch/tasks/:id | batchApi.getDetail | BatchTaskList.vue | 缺路由 |
+| GET /api/v1/batch/tasks/:id | batchApi.getTask | BatchTaskList.vue | 缺路由 |
 | POST /api/v1/batch/tasks/:id/cancel | batchApi.cancel | BatchTaskList.vue | 缺路由 |
 | POST /api/v1/batch/tasks/:id/retry | batchApi.retry | BatchTaskList.vue | 缺路由 |
 | GET /api/v1/analytics/overview | analyticsApi.getOverview | AnalyticsDashboard.vue | 缺路由 |
@@ -129,7 +130,7 @@
 
 ## 4. 完整文件改动清单
 
-### 4.1 新建文件（15 个）
+### 4.1 新建文件（12 个）
 
 | 文件路径 | 功能 |
 |---------|------|
@@ -146,13 +147,14 @@
 | src/views/system/TenantManage.vue | 租户管理 + OAuth 授权 + Token 状态 |
 | src/views/system/ScopeManage.vue | 投手权限分配（选用户→选账户） |
 
-### 4.2 改造文件（8 个）
+### 4.2 改造文件（9 个）
 
 | 文件路径 | 改造内容 |
 |---------|---------|
 | src/views/local/LocalDashboard.vue | 替换为调 analyticsApi.getOverview/getTrend/getRank |
 | src/views/local/ProjectList.vue | 去掉手动 token 输入，改调 projectApi.getList |
 | src/views/local/ProjectCreate.vue | 改调新 API（单账户创建项目） |
+| src/views/local/ProjectDetail.vue | 去掉 SDK 透传，改调 projectApi.getProject |
 | src/views/local/PromotionList.vue | 改调 projectApi.getPromotions |
 | src/views/local/PromotionCreate.vue | 改调新 API |
 | src/views/local/ReportProject.vue | 改调 analyticsApi.getDetail |
@@ -163,12 +165,13 @@
 
 ```typescript
 // 本地推 - 投放管理
-{ path: 'local', component: LocalDashboard, meta: { title: '工作台' } }
+{ path: '/', component: LocalDashboard, meta: { title: '工作台' } }
 { path: 'local/project', component: ProjectList, meta: { title: '项目列表' } }
 { path: 'local/project/create', component: ProjectCreate, meta: { title: '创建项目' } }
 { path: 'local/project/:id', component: ProjectDetail, meta: { title: '项目详情' } }
 { path: 'local/promotion', component: PromotionList, meta: { title: '单元列表' } }
 { path: 'local/promotion/create', component: PromotionCreate, meta: { title: '创建单元' } }
+{ path: 'local/promotion/:id', component: PromotionDetail, meta: { title: '单元详情' } }
 
 // 本地推 - 批量操作
 { path: 'local/batch/create', component: BatchCreate, meta: { title: '批量创建' } }
@@ -190,6 +193,7 @@
 
 // 本地推 - 线索
 { path: 'local/clue', component: ClueList, meta: { title: '线索管理' } }
+{ path: 'local/clue/:id', component: ClueDetail, meta: { title: '线索详情' } }
 
 // 系统设置
 { path: 'system/tenant', component: TenantManage, meta: { title: '租户管理', admin: true } }
@@ -206,7 +210,7 @@ const productLines = [
     id: 'overview',
     name: '概览',
     sections: [{ title: '', items: [
-      { name: '工作台', path: '/local' }
+      { name: '工作台', path: '/' }
     ]}]
   },
   {
@@ -294,6 +298,17 @@ const productLines = [
 - 左侧：投手列表（系统用户，role=operator）
 - 右侧：选中投手的账户权限范围（checkbox 列表）
 - 操作：勾选/取消账户 → 保存
+
+### StoreList.vue（门店列表）
+- 表格：门店名称 | 所属账户 | 城市 | 区域 | 地址 | POI ID
+- 只读展示，数据来源于账户导入时关联的门店信息
+- 支持按城市/区域筛选
+
+### AnalyticsMultiDim.vue（多维分析）
+- 顶部：日期范围选择 + 维度切换（按门店/按加盟商/按区域/按投手）
+- 表格：维度名称 | 消耗 | 展示 | 点击 | 转化 | 转化成本
+- 支持排序和分页
+- 调用 analyticsApi.getRank（按不同维度）
 
 ### ProjectList.vue（改造）
 - 去掉顶部的 token/advertiser_id 输入框
