@@ -12,6 +12,7 @@ import (
 	"oceanengine-backend/internal/app/batch/repository"
 	oceanengine "oceanengine-backend/pkg/oceanengine"
 	"oceanengine-backend/pkg/ratelimiter"
+	"oceanengine-backend/pkg/retry"
 )
 
 // TokenStore 提供租户 access token 的接口
@@ -150,7 +151,10 @@ func (w *Worker) execCreateProject(ctx context.Context, task *model.BatchTask, i
 			ProjectID uint64 `json:"project_id"`
 		} `json:"data"`
 	}
-	if err := w.sdk.PostWithToken(ctx, accessToken, "/2/campaign/create/", req, &result); err != nil {
+	err = retry.Do(ctx, retry.DefaultConfig(), func() error {
+		return w.sdk.PostWithToken(ctx, accessToken, "/2/campaign/create/", req, &result)
+	})
+	if err != nil {
 		return 0, err
 	}
 
@@ -172,7 +176,9 @@ func (w *Worker) execUpdateBudget(ctx context.Context, task *model.BatchTask, it
 	}
 	req["advertiser_id"] = item.AccountID
 
-	return w.sdk.PostWithToken(ctx, accessToken, "/2/campaign/update/", req, nil)
+	return retry.Do(ctx, retry.DefaultConfig(), func() error {
+		return w.sdk.PostWithToken(ctx, accessToken, "/2/campaign/update/", req, nil)
+	})
 }
 
 // execUpdateBid 更新出价
@@ -190,7 +196,9 @@ func (w *Worker) execUpdateBid(ctx context.Context, task *model.BatchTask, item 
 	}
 	req["advertiser_id"] = item.AccountID
 
-	return w.sdk.PostWithToken(ctx, accessToken, "/2/ad/update/", req, nil)
+	return retry.Do(ctx, retry.DefaultConfig(), func() error {
+		return w.sdk.PostWithToken(ctx, accessToken, "/2/ad/update/", req, nil)
+	})
 }
 
 // execUpdateStatus 更新广告状态
@@ -208,7 +216,9 @@ func (w *Worker) execUpdateStatus(ctx context.Context, task *model.BatchTask, it
 	}
 	req["advertiser_id"] = item.AccountID
 
-	return w.sdk.PostWithToken(ctx, accessToken, "/2/ad/update/status/", req, nil)
+	return retry.Do(ctx, retry.DefaultConfig(), func() error {
+		return w.sdk.PostWithToken(ctx, accessToken, "/2/ad/update/status/", req, nil)
+	})
 }
 
 // finalizeTask 根据 success/failed 计数决定最终状态
