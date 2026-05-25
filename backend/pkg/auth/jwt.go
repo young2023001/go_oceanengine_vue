@@ -18,6 +18,7 @@ var (
 // Claims 自定义声明
 type Claims struct {
 	UserID    int64  `json:"user_id"`
+	TenantID  uint64 `json:"tenant_id"`
 	Username  string `json:"username"`
 	RoleKey   string `json:"role_key"`
 	RoleID    int64  `json:"role_id"`

@@ -9,6 +9,7 @@ import (
 // User 系统用户表
 type User struct {
 	ID          uint64         `gorm:"primaryKey" json:"id"`
+	TenantID    uint64         `gorm:"default:0;index" json:"tenant_id"`
 	Username    string         `gorm:"size:64;uniqueIndex" json:"username"`
 	Password    string         `gorm:"size:128" json:"-"`
 	Nickname    string         `gorm:"size:128" json:"nickname"`
