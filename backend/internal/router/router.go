@@ -238,14 +238,14 @@ func (r *Router) registerProtectedRoutes(rg *gin.RouterGroup) {
 	// DPA商品广告模块
 	r.registerDPARoutes(rg)
 
-	// 账户管理模块
-	r.registerAccountRoutes(rg)
-
 	// 租户管理
 	r.registerTenantRoutes(rg)
 
-	// 分组管理
-	r.registerGroupRoutes(rg)
+	// 需要数据权限隔离的路由
+	scoped := rg.Group("")
+	scoped.Use(middleware.DataScope(r.db))
+	r.registerAccountRoutes(scoped)
+	r.registerGroupRoutes(scoped)
 }
 
 // registerSystemRoutes 注册系统管理路由
