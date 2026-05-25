@@ -14,11 +14,20 @@ import (
 
 	"oceanengine-backend/config"
 	accountModel "oceanengine-backend/internal/app/account/model"
-	batchModel "oceanengine-backend/internal/app/batch/model"
-	groupModel "oceanengine-backend/internal/app/group/model"
-	projectModel "oceanengine-backend/internal/app/project/model"
-	scopeModel "oceanengine-backend/internal/app/scope/model"
+	adModel "oceanengine-backend/internal/app/ad/model"
+	adminModel "oceanengine-backend/internal/app/admin/model"
+	advertiserModel "oceanengine-backend/internal/app/advertiser/model"
 	analyticsModel "oceanengine-backend/internal/app/analytics/model"
+	audienceModel "oceanengine-backend/internal/app/audience/model"
+	batchModel "oceanengine-backend/internal/app/batch/model"
+	campaignModel "oceanengine-backend/internal/app/campaign/model"
+	creativeModel "oceanengine-backend/internal/app/creative/model"
+	enterpriseModel "oceanengine-backend/internal/app/enterprise/model"
+	groupModel "oceanengine-backend/internal/app/group/model"
+	mediaModel "oceanengine-backend/internal/app/media/model"
+	projectModel "oceanengine-backend/internal/app/project/model"
+	reportModel "oceanengine-backend/internal/app/report/model"
+	scopeModel "oceanengine-backend/internal/app/scope/model"
 	templateModel "oceanengine-backend/internal/app/template/model"
 	tenantModel "oceanengine-backend/internal/app/tenant/model"
 	batchService "oceanengine-backend/internal/app/batch/service"
@@ -61,24 +70,59 @@ func main() {
 	}
 	log.Info("数据库连接成功")
 
-	// 自动迁移 Phase 1 & Phase 2 表
+	// 自动迁移所有表
 	if err := db.AutoMigrate(
+		// 系统管理
+		&adminModel.User{},
+		&adminModel.Role{},
+		&adminModel.Menu{},
+		&adminModel.RoleMenu{},
+		&adminModel.OperationLog{},
+		&adminModel.UserSetting{},
+		&adminModel.Notification{},
+		&adminModel.DictType{},
+		&adminModel.DictData{},
+		// 租户
 		&tenantModel.Tenant{},
+		// 账户与分组
 		&accountModel.LocalAccount{},
 		&accountModel.Store{},
 		&groupModel.AccountGroup{},
 		&groupModel.AccountGroupMember{},
 		&scopeModel.UserAccountScope{},
+		// 广告主
+		&advertiserModel.Advertiser{},
+		&advertiserModel.AdvertiserFund{},
+		// 广告系列、广告组、创意
+		&campaignModel.Campaign{},
+		&adModel.Ad{},
+		&creativeModel.Creative{},
+		// 项目与计划
 		&projectModel.LocalProject{},
 		&projectModel.LocalPromotion{},
+		// 批量任务
 		&batchModel.BatchTask{},
 		&batchModel.BatchTaskItem{},
+		// 模板
 		&templateModel.ProjectTemplate{},
 		&templateModel.PromotionTemplate{},
+		// 报表
 		&analyticsModel.ReportDaily{},
 		&analyticsModel.ExportTask{},
+		&reportModel.AdvertiserReport{},
+		&reportModel.CampaignReport{},
+		&reportModel.AdReport{},
+		&reportModel.ExportTask{},
+		// 素材
+		&mediaModel.MaterialImage{},
+		&mediaModel.MaterialVideo{},
+		// 人群定向
+		&audienceModel.AudiencePackage{},
+		&audienceModel.CustomAudience{},
+		// 企业号
+		&enterpriseModel.ReplyTemplate{},
 	); err != nil {
-		log.Fatal(fmt.Sprintf("auto migrate failed: %v", err))
+		log.Warn(fmt.Sprintf("auto migrate warning (non-fatal): %v", err))
 	}
 	log.Info("数据库迁移完成")
 

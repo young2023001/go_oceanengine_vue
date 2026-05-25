@@ -107,15 +107,15 @@ async function fetchData(): Promise<void> {
       order_by: 'cost',
       limit: 50
     })
-    const items = res.data ?? []
-    rankList.value = items.map((item) => ({
-      id: item.id,
-      name: item.name,
-      cost: item.value,
-      impressions: 0,
-      clicks: 0,
-      conversions: 0,
-      conversionCost: item.value > 0 ? '—' : '—'
+    const items = (res as any) ?? []
+    rankList.value = items.map((item: any) => ({
+      id: item.account_id ?? item.id ?? 0,
+      name: item.name ?? '',
+      cost: item.cost ?? item.value ?? 0,
+      impressions: item.show_cnt ?? 0,
+      clicks: item.click_cnt ?? 0,
+      conversions: item.convert_cnt ?? 0,
+      conversionCost: (item.cost && item.convert_cnt) ? `¥${(item.cost / item.convert_cnt).toFixed(2)}` : '—'
     }))
   } finally {
     loading.value = false

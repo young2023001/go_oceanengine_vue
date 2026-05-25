@@ -141,7 +141,7 @@ async function fetchExports(): Promise<void> {
   loadingList.value = true
   try {
     const res = await analyticsApi.getExports()
-    exportList.value = res.data ?? []
+    exportList.value = Array.isArray(res) ? res : []
   } finally {
     loadingList.value = false
   }

@@ -20,12 +20,12 @@ const saving = ref(false)
 
 const fetchUsers = async () => {
   const res = await request.get<User[]>('/system/users')
-  users.value = res.data ?? []
+  users.value = Array.isArray(res) ? res : []
 }
 
 const fetchAccounts = async () => {
   const res = await accountApi.getList({ page: 1, page_size: 1000 })
-  accounts.value = res.data?.list ?? res.data ?? []
+  accounts.value = res.data?.list ?? Array.isArray(res) ? res : []
 }
 
 const selectUser = async (user: User) => {
@@ -33,7 +33,7 @@ const selectUser = async (user: User) => {
   loading.value = true
   try {
     const res = await scopeApi.getScope(user.id)
-    checkedAccountIds.value = res.data?.account_ids ?? []
+    checkedAccountIds.value = (res as any)?.account_ids ?? []
   } finally {
     loading.value = false
   }

@@ -127,8 +127,8 @@ const fetchAccounts = async () => {
     })
     if (res) {
       const data = res as any
-      accounts.value = data.list || []
-      pagination.value.total = data.total || 0
+      accounts.value = Array.isArray(data) ? data : (data.list || [])
+      pagination.value.total = Array.isArray(data) ? data.length : (data.total || 0)
     }
   } catch (e: unknown) {
     const message = e instanceof Error ? e.message : '获取账户列表失败'

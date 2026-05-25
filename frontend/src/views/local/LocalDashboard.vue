@@ -37,48 +37,61 @@ function calcChangePercent(current: number, previous: number): string {
 
 const summaryCards = computed(() => {
   if (!compareData.value) return []
-  const { current, previous } = compareData.value
+  const raw = compareData.value as any
+  const current = raw.current || {}
+  const previous = raw.compare || raw.previous || {}
+  const cost = current.total_cost ?? current.cost ?? 0
+  const show = current.total_show ?? current.impressions ?? 0
+  const click = current.total_click ?? current.clicks ?? 0
+  const convert = current.total_convert ?? current.conversions ?? 0
+  const prevCost = previous.total_cost ?? previous.cost ?? 0
+  const prevShow = previous.total_show ?? previous.impressions ?? 0
+  const prevClick = previous.total_click ?? previous.clicks ?? 0
+  const prevConvert = previous.total_convert ?? previous.conversions ?? 0
   return [
     {
       title: '今日消耗',
-      value: `¥${current.cost.toLocaleString()}`,
-      change: calcChangePercent(current.cost, previous.cost),
+      value: `¥${cost.toLocaleString()}`,
+      change: calcChangePercent(cost, prevCost),
       color: 'blue'
     },
     {
       title: '今日展示',
-      value: current.impressions.toLocaleString(),
-      change: calcChangePercent(current.impressions, previous.impressions),
+      value: show.toLocaleString(),
+      change: calcChangePercent(show, prevShow),
       color: 'green'
     },
     {
       title: '今日点击',
-      value: current.clicks.toLocaleString(),
-      change: calcChangePercent(current.clicks, previous.clicks),
+      value: click.toLocaleString(),
+      change: calcChangePercent(click, prevClick),
       color: 'purple'
     },
     {
       title: '今日转化',
-      value: current.conversions.toLocaleString(),
-      change: calcChangePercent(current.conversions, previous.conversions),
+      value: convert.toLocaleString(),
+      change: calcChangePercent(convert, prevConvert),
       color: 'orange'
     }
   ]
 })
 
-const chartData = computed(() => ({
-  labels: trendData.value.map(item => item.date.slice(5)),
-  datasets: [
-    {
-      label: '消耗',
-      data: trendData.value.map(item => item.value),
-      borderColor: 'rgb(59, 130, 246)',
-      backgroundColor: 'rgba(59, 130, 246, 0.1)',
-      fill: true,
-      tension: 0.4
-    }
-  ]
-}))
+const chartData = computed(() => {
+  if (!trendData.value || trendData.value.length === 0) return null
+  return {
+    labels: trendData.value.map((item: any) => (item.stat_date || item.date || '').slice(5)),
+    datasets: [
+      {
+        label: '消耗',
+        data: trendData.value.map((item: any) => item.cost ?? item.value ?? 0),
+        borderColor: 'rgb(59, 130, 246)',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  }
+})
 
 const chartOptions = {
   responsive: true,
@@ -97,8 +110,9 @@ const chartOptions = {
 }
 
 const maxRankValue = computed(() => {
-  if (rankData.value.length === 0) return 1
-  return rankData.value[0]?.value ?? 1
+  if (!rankData.value || rankData.value.length === 0) return 1
+  const first = rankData.value[0] as any
+  return first?.cost ?? first?.value ?? 1
 })
 
 async function fetchData(): Promise<void> {
@@ -178,7 +192,7 @@ onMounted(() => {
     <!-- 趋势图 -->
     <div class="bg-white rounded-lg border border-gray-200 p-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-4">最近 7 天消耗趋势</h3>
-      <div v-if="trendData.length > 0" style="height: 300px;">
+      <div v-if="chartData && trendData && trendData.length > 0" style="height: 300px;">
         <Line :data="chartData" :options="chartOptions" />
       </div>
       <div v-else-if="loading" class="h-[300px] flex items-center justify-center">
@@ -192,7 +206,7 @@ onMounted(() => {
     <!-- 排行榜表格 -->
     <div class="bg-white rounded-lg border border-gray-200 p-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-4">TOP 10 门店消耗排行</h3>
-      <div v-if="rankData.length > 0" class="overflow-x-auto">
+      <div v-if="rankData && rankData.length > 0" class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
             <tr class="border-b border-gray-200">
@@ -223,13 +237,13 @@ onMounted(() => {
                     <div
                       class="h-full rounded-full transition-all"
                       :class="getBarColor(index)"
-                      :style="{ width: `${(item.value / maxRankValue) * 100}%` }"
+                      :style="{ width: `${((item as any).cost ?? (item as any).value ?? 0) / maxRankValue * 100}%` }"
                     ></div>
                   </div>
                 </div>
               </td>
               <td class="py-3 px-2 text-right text-gray-900">
-                ¥{{ item.value.toLocaleString() }}
+                ¥{{ ((item as any).cost ?? (item as any).value ?? 0).toLocaleString() }}
               </td>
             </tr>
           </tbody>

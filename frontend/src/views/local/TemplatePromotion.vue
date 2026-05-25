@@ -13,7 +13,7 @@ const fetchList = async () => {
   loading.value = true
   try {
     const res = await templateApi.listPromotions()
-    templates.value = res.data ?? []
+    templates.value = Array.isArray(res) ? res : []
   } finally {
     loading.value = false
   }
