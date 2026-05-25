@@ -21,6 +21,7 @@ import (
 	analyticsModel "oceanengine-backend/internal/app/analytics/model"
 	templateModel "oceanengine-backend/internal/app/template/model"
 	tenantModel "oceanengine-backend/internal/app/tenant/model"
+	batchService "oceanengine-backend/internal/app/batch/service"
 	tenantRepository "oceanengine-backend/internal/app/tenant/repository"
 	tenantService "oceanengine-backend/internal/app/tenant/service"
 	"github.com/redis/go-redis/v9"
@@ -105,6 +106,10 @@ func main() {
 	oauthClient := tenantService.NewOAuthClient()
 	tokenRefresher := tenantService.NewTokenRefresher(tRepo, oauthClient, log)
 	go tokenRefresher.Start(refreshCtx)
+
+	// 批量任务断点续传
+	recovery := batchService.NewTaskRecovery(db, log)
+	recovery.RecoverOnStartup(refreshCtx)
 
 	// 项目同步定时任务
 	if redisClient != nil {
