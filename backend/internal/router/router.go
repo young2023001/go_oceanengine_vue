@@ -10,6 +10,9 @@ import (
 	accountApi "oceanengine-backend/internal/app/account/api"
 	accountRepo "oceanengine-backend/internal/app/account/repository"
 	accountService "oceanengine-backend/internal/app/account/service"
+	analyticsApi "oceanengine-backend/internal/app/analytics/api"
+	analyticsRepo "oceanengine-backend/internal/app/analytics/repository"
+	analyticsService "oceanengine-backend/internal/app/analytics/service"
 	adApi "oceanengine-backend/internal/app/ad/api"
 	adminApi "oceanengine-backend/internal/app/admin/api"
 	"oceanengine-backend/internal/app/admin/service"
@@ -265,6 +268,7 @@ func (r *Router) registerProtectedRoutes(rg *gin.RouterGroup) {
 	r.registerAccountRoutes(scoped)
 	r.registerGroupRoutes(scoped)
 	r.registerProjectRoutes(scoped)
+	r.registerAnalyticsRoutes(scoped)
 }
 
 // registerSystemRoutes 注册系统管理路由
@@ -1096,5 +1100,26 @@ func (r *Router) registerBatchRoutes(rg *gin.RouterGroup) {
 		batch.GET("/tasks/:id", handler.GetTask)
 		batch.POST("/tasks/:id/cancel", handler.CancelTask)
 		batch.POST("/tasks/:id/retry", handler.RetryTask)
+	}
+}
+
+// registerAnalyticsRoutes 注册数据分析路由
+func (r *Router) registerAnalyticsRoutes(rg *gin.RouterGroup) {
+	reportRepo := analyticsRepo.NewReportRepository(r.db)
+	exportRepo := analyticsRepo.NewExportRepository(r.db)
+	svc := analyticsService.NewAnalyticsService(reportRepo)
+	exportSvc := analyticsService.NewExportService(exportRepo, reportRepo)
+	handler := analyticsApi.NewAnalyticsHandler(svc, exportSvc)
+
+	analytics := rg.Group("/analytics")
+	{
+		analytics.GET("/overview", handler.GetOverview)
+		analytics.GET("/trend", handler.GetTrend)
+		analytics.GET("/rank", handler.GetRank)
+		analytics.GET("/compare", handler.GetCompare)
+		analytics.GET("/detail", handler.GetDetail)
+		analytics.POST("/export", handler.CreateExport)
+		analytics.GET("/exports", handler.ListExports)
+		analytics.GET("/exports/:id/download", handler.DownloadExport)
 	}
 }
