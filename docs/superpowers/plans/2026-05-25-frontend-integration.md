@@ -45,7 +45,19 @@
 
 ---
 
-## Task 1: 新增 API 模块（group.ts / template.ts / scope.ts）
+## Task 1: 新增 API 模块（group.ts / template.ts / scope.ts） ✅ (已完成 commit ba01b38)
+
+> **补充：** 已创建的 account.ts 中 Account 接口需要补充 balance 和 status 字段：
+> ```typescript
+> export interface Account {
+>   id: number
+>   local_account_id: number
+>   name: string
+>   balance?: number  // 补充
+>   status?: string   // 补充
+>   created_at: string
+> }
+> ```
 
 **Files:**
 - Create: `frontend/src/api/group.ts`
@@ -56,7 +68,7 @@
 
 ```typescript
 // frontend/src/api/group.ts
-import request, { PageResponse } from './request'
+import request from './request'
 
 export interface Group {
   id: number
@@ -105,7 +117,10 @@ export const groupApi = {
   },
 
   removeMembers(id: number, data: MembersParams) {
-    return request.delete<void>(`/groups/${id}/members`, { data })
+    // 注意：后端 DELETE /groups/:id/members 需要 JSON body
+    // 但前端 request.delete 不支持 body，需要后端新增 POST 端点
+    // 临时方案：直接用 axios instance 发 DELETE + body
+    return request.post<void>(`/groups/${id}/members/delete`, data)
   }
 }
 ```
@@ -204,7 +219,7 @@ git commit -m "feat: add group, template, scope API modules"
 
 ---
 
-## Task 2: 更新路由注册
+## Task 2: 更新路由注册 ✅ (已完成 commit 0fd22aa)
 
 **Files:**
 - Modify: `frontend/src/router/routes.ts`
@@ -367,7 +382,7 @@ git commit -m "feat: register all new SaaS routes"
 
 ---
 
-## Task 3: 更新侧边栏导航
+## Task 3: 更新侧边栏导航 ✅ (已完成 commit 65ca347)
 
 **Files:**
 - Modify: `frontend/src/components/layout/AppSidebar.vue`
@@ -407,7 +422,11 @@ const isAdmin = computed(() => {
 })
 ```
 
-在 productLines 中，system 模块用 v-if="isAdmin" 控制显示。
+在 template 中，system 模块用 v-if 控制显示：
+```html
+<div v-for="product in productLines" :key="product.id" class="mb-1"
+     v-show="product.id !== 'system' || isAdmin">
+```
 
 - [ ] **Step 2: 验证页面渲染正常**
 
@@ -519,7 +538,7 @@ const statusLabel = (status: string) => ({
 
 async function loadTenants() {
   const res = await tenantApi.getList()
-  tenants.value = res.list || res as any
+  tenants.value = Array.isArray(res) ? res : []
 }
 
 async function createTenant() {
@@ -618,6 +637,7 @@ git commit -m "feat: add tenant management page with OAuth authorization"
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { accountApi, type Account } from '@/api/account'
+// 注意：Account 接口需要补充 balance 和 status 字段（在 Task 1 执行时已创建的 account.ts 中添加）
 
 const accounts = ref<Account[]>([])
 const showImportDialog = ref(false)
@@ -662,6 +682,10 @@ git commit -m "feat: add account list page with JSON import"
 ```
 
 ---
+
+> **后端适配说明：** group.ts 的 removeMembers 使用 POST /groups/:id/members/delete，
+> 需要在后端 router.go 中新增此路由（复用现有 RemoveMembers handler）。
+> 或者修改前端 request.ts 的 delete 方法支持 body。实施时二选一。
 
 ## Task 6: 新建 GroupManage.vue
 
@@ -780,7 +804,11 @@ git commit -m "feat: add scope management page for operator permissions"
 
 核心 API：
 - `analyticsApi.getRank({ start_date, end_date, order_by: 'cost', limit: 50 })`
-- 维度切换时重新请求（后端按 scope 自动过滤）
+- 维度切换实现：后端 getRank 按 account_id 聚合，前端通过不同的展示方式区分维度：
+  - 按门店：直接显示 getRank 结果（account = 门店）
+  - 按加盟商/区域：调用 groupApi.getList 获取分组，前端按分组聚合显示
+  - 按投手：需要后端新增 /analytics/rank-by-user 端点（标注为后续迭代）
+- 当前版本先实现按门店维度，其他维度显示即将上线
 
 - [ ] **Step 2: 提交**
 
@@ -857,7 +885,7 @@ git commit -m "feat: replace local dashboard with analytics data"
 - [ ] **Step 2: 改造 ProjectCreate.vue**
 
 将 SDK 透传调用替换为新 API：
-- `projectApi.create(data)` 或通过 `batchApi.createTask({ task_type: 'create_project', account_ids: [selectedAccountId], config: formData })`
+- 通过 `batchApi.createTask({ task_type: 'create_project', account_ids: [selectedAccountId], config: formData })`（后端无单独的 project create API，统一走批量任务）
 
 - [ ] **Step 3: 提交**
 
