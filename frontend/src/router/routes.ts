@@ -37,7 +37,7 @@ export const protectedRoutes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'Dashboard',
-        component: () => import('@/views/dashboard/DashboardView.vue'),
+        component: () => import('@/views/local/LocalDashboard.vue'),
         meta: { title: '工作台', icon: 'home' }
       },
       // 个人设置
@@ -1511,17 +1511,12 @@ export const protectedRoutes: RouteRecordRaw[] = [
         meta: { title: '行业工具', hidden: true }
       },
       // ==================== 本地推模块 ====================
-      {
-        path: 'local',
-        name: 'LocalDashboard',
-        component: () => import('@/views/local/LocalDashboard.vue'),
-        meta: { title: '本地推工作台', icon: 'local' }
-      },
+      // 投放管理
       {
         path: 'local/project',
-        name: 'LocalProject',
+        name: 'LocalProjectList',
         component: () => import('@/views/local/ProjectList.vue'),
-        meta: { title: '项目管理', hidden: true }
+        meta: { title: '项目列表', hidden: true }
       },
       {
         path: 'local/project/create',
@@ -1537,28 +1532,87 @@ export const protectedRoutes: RouteRecordRaw[] = [
       },
       {
         path: 'local/promotion',
-        name: 'LocalPromotion',
+        name: 'LocalPromotionList',
         component: () => import('@/views/local/PromotionList.vue'),
-        meta: { title: '推广管理', hidden: true }
+        meta: { title: '单元列表', hidden: true }
       },
       {
         path: 'local/promotion/create',
         name: 'LocalPromotionCreate',
         component: () => import('@/views/local/PromotionCreate.vue'),
-        meta: { title: '创建广告', hidden: true }
+        meta: { title: '创建单元', hidden: true }
       },
       {
         path: 'local/promotion/:id',
         name: 'LocalPromotionDetail',
         component: () => import('@/views/local/PromotionDetail.vue'),
-        meta: { title: '广告详情', hidden: true }
+        meta: { title: '单元详情', hidden: true }
+      },
+      // 批量操作
+      {
+        path: 'local/batch/create',
+        name: 'BatchCreate',
+        component: () => import('@/views/batch/BatchCreate.vue'),
+        meta: { title: '批量创建', hidden: true }
       },
       {
-        path: 'local/promotion/edit/:id',
-        name: 'LocalPromotionEdit',
-        component: () => import('@/views/local/PromotionCreate.vue'),
-        meta: { title: '编辑广告', hidden: true }
+        path: 'local/batch/tasks',
+        name: 'BatchTaskList',
+        component: () => import('@/views/batch/BatchTaskList.vue'),
+        meta: { title: '任务记录', hidden: true }
       },
+      // 模板管理
+      {
+        path: 'local/template/project',
+        name: 'TemplateProject',
+        component: () => import('@/views/local/TemplateProject.vue'),
+        meta: { title: '项目模板', hidden: true }
+      },
+      {
+        path: 'local/template/promotion',
+        name: 'TemplatePromotion',
+        component: () => import('@/views/local/TemplatePromotion.vue'),
+        meta: { title: '单元模板', hidden: true }
+      },
+      // 账户管理
+      {
+        path: 'local/account',
+        name: 'AccountList',
+        component: () => import('@/views/local/AccountList.vue'),
+        meta: { title: '账户列表', hidden: true }
+      },
+      {
+        path: 'local/group',
+        name: 'GroupManage',
+        component: () => import('@/views/local/GroupManage.vue'),
+        meta: { title: '分组管理', hidden: true }
+      },
+      {
+        path: 'local/store',
+        name: 'StoreList',
+        component: () => import('@/views/local/StoreList.vue'),
+        meta: { title: '门店列表', hidden: true }
+      },
+      // 数据分析
+      {
+        path: 'local/analytics',
+        name: 'AnalyticsDashboard',
+        component: () => import('@/views/analytics/AnalyticsDashboard.vue'),
+        meta: { title: '投放看板', hidden: true }
+      },
+      {
+        path: 'local/analytics/multi',
+        name: 'AnalyticsMultiDim',
+        component: () => import('@/views/local/AnalyticsMultiDim.vue'),
+        meta: { title: '多维分析', hidden: true }
+      },
+      {
+        path: 'local/analytics/export',
+        name: 'AnalyticsExport',
+        component: () => import('@/views/local/AnalyticsExport.vue'),
+        meta: { title: '报表导出', hidden: true }
+      },
+      // 线索
       {
         path: 'local/clue',
         name: 'LocalClue',
@@ -1570,36 +1624,6 @@ export const protectedRoutes: RouteRecordRaw[] = [
         name: 'LocalClueDetail',
         component: () => import('@/views/local/ClueDetail.vue'),
         meta: { title: '线索详情', hidden: true }
-      },
-      {
-        path: 'local/report',
-        name: 'LocalReport',
-        component: () => import('@/views/local/ReportProject.vue'),
-        meta: { title: '数据报表', hidden: true }
-      },
-      {
-        path: 'local/report/project',
-        name: 'LocalReportProject',
-        component: () => import('@/views/local/ReportProject.vue'),
-        meta: { title: '项目报表', hidden: true }
-      },
-      {
-        path: 'local/report/promotion',
-        name: 'LocalReportPromotion',
-        component: () => import('@/views/local/ReportPromotion.vue'),
-        meta: { title: '广告报表', hidden: true }
-      },
-      {
-        path: 'local/report/material',
-        name: 'LocalReportMaterial',
-        component: () => import('@/views/local/ReportMaterial.vue'),
-        meta: { title: '素材报表', hidden: true }
-      },
-      {
-        path: 'local/material/video',
-        name: 'LocalVideoList',
-        component: () => import('@/views/local/VideoList.vue'),
-        meta: { title: '视频管理', hidden: true }
       },
       // ==================== 企业号模块 ====================
       {
@@ -1820,6 +1844,18 @@ export const protectedRoutes: RouteRecordRaw[] = [
         name: 'DictManage',
         component: () => import('@/views/system/DictManage.vue'),
         meta: { title: '字典管理', hidden: true }
+      },
+      {
+        path: 'system/tenant',
+        name: 'TenantManage',
+        component: () => import('@/views/system/TenantManage.vue'),
+        meta: { title: '租户管理', hidden: true }
+      },
+      {
+        path: 'system/scope',
+        name: 'ScopeManage',
+        component: () => import('@/views/system/ScopeManage.vue'),
+        meta: { title: '投手权限', hidden: true }
       }
     ]
   },
