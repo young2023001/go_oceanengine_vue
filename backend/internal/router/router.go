@@ -27,6 +27,9 @@ import (
 	groupApi "oceanengine-backend/internal/app/group/api"
 	groupRepo "oceanengine-backend/internal/app/group/repository"
 	groupService "oceanengine-backend/internal/app/group/service"
+	projectApi "oceanengine-backend/internal/app/project/api"
+	projectRepo "oceanengine-backend/internal/app/project/repository"
+	projectService "oceanengine-backend/internal/app/project/service"
 	localApi "oceanengine-backend/internal/app/local/api"
 	mediaApi "oceanengine-backend/internal/app/media/api"
 	mediaService "oceanengine-backend/internal/app/media/service"
@@ -38,6 +41,9 @@ import (
 	serveMarketApi "oceanengine-backend/internal/app/servemarket/api"
 	siteApi "oceanengine-backend/internal/app/site/api"
 	starApi "oceanengine-backend/internal/app/star/api"
+	templateApi "oceanengine-backend/internal/app/template/api"
+	templateRepo "oceanengine-backend/internal/app/template/repository"
+	templateService "oceanengine-backend/internal/app/template/service"
 	tenantApi "oceanengine-backend/internal/app/tenant/api"
 	tenantRepo "oceanengine-backend/internal/app/tenant/repository"
 	tenantService "oceanengine-backend/internal/app/tenant/service"
@@ -241,6 +247,9 @@ func (r *Router) registerProtectedRoutes(rg *gin.RouterGroup) {
 	// DPA商品广告模块
 	r.registerDPARoutes(rg)
 
+	// 模板管理
+	r.registerTemplateRoutes(rg)
+
 	// 租户管理
 	r.registerTenantRoutes(rg)
 
@@ -249,6 +258,7 @@ func (r *Router) registerProtectedRoutes(rg *gin.RouterGroup) {
 	scoped.Use(middleware.DataScope(r.db))
 	r.registerAccountRoutes(scoped)
 	r.registerGroupRoutes(scoped)
+	r.registerProjectRoutes(scoped)
 }
 
 // registerSystemRoutes 注册系统管理路由
@@ -972,6 +982,31 @@ func (r *Router) registerDPARoutes(rg *gin.RouterGroup) {
 	}
 }
 
+// registerTemplateRoutes 注册模板管理路由
+func (r *Router) registerTemplateRoutes(rg *gin.RouterGroup) {
+	repo := templateRepo.NewTemplateRepository(r.db)
+	svc := templateService.NewTemplateService(repo)
+	handler := templateApi.NewTemplateHandler(svc)
+
+	tpl := rg.Group("/templates")
+	{
+		projects := tpl.Group("/projects")
+		{
+			projects.POST("", handler.CreateProject)
+			projects.GET("", handler.ListProjects)
+			projects.GET("/:id", handler.GetProject)
+			projects.PUT("/:id", handler.UpdateProject)
+			projects.DELETE("/:id", handler.DeleteProject)
+		}
+		promotions := tpl.Group("/promotions")
+		{
+			promotions.POST("", handler.CreatePromotion)
+			promotions.GET("", handler.ListPromotions)
+			promotions.DELETE("/:id", handler.DeletePromotion)
+		}
+	}
+}
+
 // registerTenantRoutes 注册租户管理路由
 func (r *Router) registerTenantRoutes(rg *gin.RouterGroup) {
 	repo := tenantRepo.NewTenantRepository(r.db)
@@ -1016,5 +1051,24 @@ func (r *Router) registerGroupRoutes(rg *gin.RouterGroup) {
 		groups.DELETE("/:id", handler.Delete)
 		groups.POST("/:id/members", handler.AddMembers)
 		groups.DELETE("/:id/members", handler.RemoveMembers)
+	}
+}
+
+// registerProjectRoutes 注册项目管理路由
+func (r *Router) registerProjectRoutes(rg *gin.RouterGroup) {
+	repo := projectRepo.NewProjectRepository(r.db)
+	svc := projectService.NewProjectService(repo)
+	handler := projectApi.NewProjectHandler(svc)
+
+	projects := rg.Group("/projects")
+	{
+		projects.GET("", handler.ListProjects)
+		projects.GET("/:id", handler.GetProject)
+		projects.PUT("/:id/status", handler.UpdateProjectStatus)
+	}
+
+	promotions := rg.Group("/promotions")
+	{
+		promotions.GET("", handler.ListPromotions)
 	}
 }
