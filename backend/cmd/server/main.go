@@ -22,10 +22,14 @@ import (
 	tenantModel "oceanengine-backend/internal/app/tenant/model"
 	tenantRepository "oceanengine-backend/internal/app/tenant/repository"
 	tenantService "oceanengine-backend/internal/app/tenant/service"
+	"github.com/redis/go-redis/v9"
 	"oceanengine-backend/internal/router"
+	"oceanengine-backend/internal/scheduler"
 	"oceanengine-backend/pkg/auth"
 	"oceanengine-backend/pkg/database"
 	"oceanengine-backend/pkg/logger"
+	"oceanengine-backend/pkg/ocean"
+	"oceanengine-backend/pkg/ratelimiter"
 )
 
 func main() {
@@ -73,8 +77,9 @@ func main() {
 	log.Info("数据库迁移完成")
 
 	// 初始化 Redis (可选)
+	var redisClient *redis.Client
 	if cfg.Redis.Addr != "" {
-		_, err := database.InitRedis(&cfg.Redis, log)
+		redisClient, err = database.InitRedis(&cfg.Redis, log)
 		if err != nil {
 			log.Warn(fmt.Sprintf("初始化 Redis 失败: %v", err))
 		} else {
@@ -97,6 +102,14 @@ func main() {
 	oauthClient := tenantService.NewOAuthClient()
 	tokenRefresher := tenantService.NewTokenRefresher(tRepo, oauthClient, log)
 	go tokenRefresher.Start(refreshCtx)
+
+	// 项目同步定时任务
+	if redisClient != nil {
+		rateLimiter := ratelimiter.NewTenantRateLimiter(redisClient, 10)
+		oceanClient := ocean.NewClient()
+		syncer := scheduler.NewProjectSyncer(db, oceanClient, rateLimiter, log)
+		go syncer.Start(refreshCtx)
+	}
 
 	// 创建 HTTP 服务器
 	addr := fmt.Sprintf(":%d", cfg.Server.Port)
