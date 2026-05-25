@@ -19,7 +19,6 @@ const handleSave = async () => {
   // TODO: 调用API保存设置
   setTimeout(() => {
     saving.value = false
-    alert('设置已保存')
   }, 1000)
 }
 </script>

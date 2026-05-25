@@ -26,7 +26,7 @@ const toggleBehavior = (id: string) => {
 }
 
 const handleConfirm = () => {
-  alert(`已选择 ${selectedBehaviors.value.length} 个行为标签`)
+  // TODO: implement
 }
 </script>
 

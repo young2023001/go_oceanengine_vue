@@ -150,10 +150,10 @@ const getStatusText = (status: string) => {
 }
 
 const handleSearch = () => {
-  alert(`搜索: ${filters.value.keyword}`)
+  // TODO: 调用后端 API
 }
 
-const handleStop = (order: typeof orders.value[0]) => {
-  alert(`停止订单: ${order.id}`)
+const handleStop = (_order: typeof orders.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

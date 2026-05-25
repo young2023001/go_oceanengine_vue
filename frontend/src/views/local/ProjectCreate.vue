@@ -83,15 +83,13 @@ import { ref } from 'vue'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 
 const handleCancel = () => {
-  alert('取消创建')
+  // TODO: implement
 }
 
 const handleCreate = () => {
   if (!form.value.name) {
-    alert('请输入项目名称')
     return
   }
-  alert(`创建项目: ${form.value.name}`)
 }
 
 const form = ref({

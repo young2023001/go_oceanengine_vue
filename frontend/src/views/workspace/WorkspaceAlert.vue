@@ -16,11 +16,11 @@ const handlePageChange = (page: number) => {
 }
 
 const handleMarkAllRead = () => {
-  alert('标记全部已读')
+  // TODO: implement
 }
 
-const handleProcessAlert = (alert: any) => {
-  alert(`处理预警: ${alert.title}`)
+const handleProcessAlert = (_alert: any) => {
+  // TODO: implement
 }
 </script>
 

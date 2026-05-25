@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建推广')
+  // TODO: implement
 }
 
-const handleEdit = (promo: typeof promotions.value[0]) => {
-  alert(`编辑推广: ${promo.app}`)
+const handleEdit = (_promo: typeof promotions.value[0]) => {
+  // TODO: implement
 }
 
-const handleData = (promo: typeof promotions.value[0]) => {
-  alert(`查看数据: ${promo.app}`)
+const handleData = (_promo: typeof promotions.value[0]) => {
+  // TODO: implement
 }
 </script>
 

@@ -128,11 +128,11 @@ import { ref } from 'vue'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 
 const handleEdit = () => {
-  alert('编辑项目')
+  // TODO: implement
 }
 
 const handleCreatePromo = () => {
-  alert('新建推广')
+  // TODO: implement
 }
 
 const project = ref({

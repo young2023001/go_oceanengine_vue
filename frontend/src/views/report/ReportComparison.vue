@@ -25,7 +25,7 @@ const formatValue = (value: number, isPercent?: boolean, isCurrency?: boolean) =
 }
 
 const handleCompare = () => {
-  alert(`开始对比: ${period1.value} VS ${period2.value}`)
+  // TODO: implement
 }
 </script>
 

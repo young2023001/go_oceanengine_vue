@@ -103,31 +103,29 @@ const shops = ref([
 ])
 
 const handleAddShop = () => {
-  alert('添加新的店铺授权')
+  // TODO: 调用后端 API
 }
 
 const handleSearch = () => {
-  console.log('搜索:', filters.value)
-  alert('查询完成')
+  // TODO: 调用后端 API
 }
 
 const handleReset = () => {
   filters.value = { keyword: '', status: '', type: '' }
 }
 
-const handleViewDetail = (shop: typeof shops.value[0]) => {
-  alert(`查看店铺详情: ${shop.name}`)
+const handleViewDetail = (_shop: typeof shops.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleRenew = (shop: typeof shops.value[0]) => {
-  alert(`续期授权: ${shop.name}`)
+const handleRenew = (_shop: typeof shops.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handleRevoke = (shop: typeof shops.value[0]) => {
   if (confirm(`确定取消「${shop.name}」的授权吗？`)) {
     const idx = shops.value.findIndex(s => s.id === shop.id)
     if (idx > -1) shops.value.splice(idx, 1)
-    alert('授权已取消')
   }
 }
 </script>

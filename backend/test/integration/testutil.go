@@ -15,14 +15,17 @@ import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"oceanengine-backend/config"
+	accountModel "oceanengine-backend/internal/app/account/model"
 	adModel "oceanengine-backend/internal/app/ad/model"
 	adminModel "oceanengine-backend/internal/app/admin/model"
 	advModel "oceanengine-backend/internal/app/advertiser/model"
 	audienceModel "oceanengine-backend/internal/app/audience/model"
 	campaignModel "oceanengine-backend/internal/app/campaign/model"
 	creativeModel "oceanengine-backend/internal/app/creative/model"
+	groupModel "oceanengine-backend/internal/app/group/model"
 	mediaModel "oceanengine-backend/internal/app/media/model"
 	reportModel "oceanengine-backend/internal/app/report/model"
+	tenantModel "oceanengine-backend/internal/app/tenant/model"
 	"oceanengine-backend/internal/router"
 	"oceanengine-backend/pkg/auth"
 )
@@ -76,6 +79,18 @@ func NewTestServer(t *testing.T) *TestServer {
 	)
 	if err != nil {
 		t.Fatalf("Failed to migrate business tables: %v", err)
+	}
+
+	// 自动迁移测试表 - 租户/账户/分组表
+	err = db.AutoMigrate(
+		&tenantModel.Tenant{},
+		&accountModel.LocalAccount{},
+		&accountModel.Store{},
+		&groupModel.AccountGroup{},
+		&groupModel.AccountGroupMember{},
+	)
+	if err != nil {
+		t.Fatalf("Failed to migrate tenant/account/group tables: %v", err)
 	}
 
 	// 创建测试日志
@@ -154,6 +169,19 @@ func (ts *TestServer) SeedTestData(t *testing.T) {
 func (ts *TestServer) GenerateTestToken(userID uint, username string) (string, error) {
 	claims := &auth.Claims{
 		UserID:    int64(userID),
+		Username:  username,
+		RoleKey:   "admin",
+		RoleID:    1,
+		DataScope: "1",
+	}
+	return ts.JWTManager.GenerateToken(claims)
+}
+
+// GenerateTestTokenWithTenant 生成带租户ID的测试Token
+func (ts *TestServer) GenerateTestTokenWithTenant(userID uint, username string, tenantID uint64) (string, error) {
+	claims := &auth.Claims{
+		UserID:    int64(userID),
+		TenantID:  tenantID,
 		Username:  username,
 		RoleKey:   "admin",
 		RoleID:    1,

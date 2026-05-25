@@ -77,8 +77,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const filters = ref({ keyword: '', status: '', type: '' })
 
@@ -108,22 +111,22 @@ const getStatusText = (status: string) => {
 }
 
 const handlePublish = () => {
-  alert('发布新需求')
+  router.push('/star/demand/create')
 }
 
 const handleSearch = () => {
-  alert('搜索需求')
+  // TODO: implement
 }
 
-const handleViewDetail = (demand: typeof demands.value[0]) => {
-  alert(`查看需求详情: ${demand.title}`)
+const handleViewDetail = (_demand: typeof demands.value[0]) => {
+  // TODO: implement
 }
 
-const handleManageApply = (demand: typeof demands.value[0]) => {
-  alert(`管理申请: ${demand.title}`)
+const handleManageApply = (_demand: typeof demands.value[0]) => {
+  // TODO: implement
 }
 
-const handleEdit = (demand: typeof demands.value[0]) => {
-  alert(`编辑需求: ${demand.title}`)
+const handleEdit = (_demand: typeof demands.value[0]) => {
+  // TODO: implement
 }
 </script>

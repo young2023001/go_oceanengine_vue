@@ -11,11 +11,11 @@ const formData = ref({
 const previewImages = ref<string[]>([])
 
 const handleSelectImages = () => {
-  alert('选择图片')
+  // TODO: implement
 }
 
 const handleStartUpload = () => {
-  alert('开始上传')
+  // TODO: implement
 }
 </script>
 

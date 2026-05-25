@@ -95,11 +95,11 @@ import Pagination from '@/components/common/Pagination.vue'
 const filters = ref({ startDate: '', endDate: '', type: '' })
 
 const handleQuery = () => {
-  alert('查询全域推广报表')
+  // TODO: 调用后端 API
 }
 
 const handleExport = () => {
-  alert('导出全域推广报表')
+  // TODO: 调用后端 API
 }
 
 const summary = ref({

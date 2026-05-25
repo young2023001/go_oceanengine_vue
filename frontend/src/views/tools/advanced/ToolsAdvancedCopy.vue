@@ -21,7 +21,7 @@ const handlePageChange = (page: number) => {
 }
 
 const handleStartCopy = () => {
-  alert('开始复制广告')
+  // TODO: 调用后端 API
 }
 </script>
 

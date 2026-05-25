@@ -129,7 +129,6 @@ const handleSaveUser = async () => {
   try {
     if (userFormMode.value === 'add') {
       if (!userForm.username || !userForm.password || !userForm.role_id) {
-        alert('请填写必填字段')
         return
       }
       await systemApi.createUser({
@@ -142,7 +141,6 @@ const handleSaveUser = async () => {
         status: userForm.status,
         remark: userForm.remark
       })
-      alert('创建成功')
     } else {
       await systemApi.updateUser(userForm.id, {
         id: userForm.id,
@@ -153,13 +151,11 @@ const handleSaveUser = async () => {
         status: userForm.status,
         remark: userForm.remark
       })
-      alert('更新成功')
     }
     showUserDialog.value = false
     fetchUsers()
   } catch (error) {
     console.error('保存失败:', error)
-    alert('保存失败')
   }
 }
 
@@ -178,16 +174,13 @@ const handleResetPassword = (user: User) => {
 
 const confirmResetPassword = async () => {
   if (!newPassword.value || newPassword.value.length < 6) {
-    alert('密码至少6位')
     return
   }
   try {
     await systemApi.resetPassword(resetUserId.value, newPassword.value)
-    alert('密码重置成功')
     showResetDialog.value = false
   } catch (error) {
     console.error('重置密码失败:', error)
-    alert('重置密码失败')
   }
 }
 
@@ -196,11 +189,9 @@ const handleDeleteUser = async (user: User) => {
   if (!confirm(`确定删除用户 ${user.username}?`)) return
   try {
     await systemApi.deleteUser(user.id)
-    alert('删除成功')
     fetchUsers()
   } catch (error) {
     console.error('删除失败:', error)
-    alert('删除失败')
   }
 }
 
@@ -212,7 +203,6 @@ const handleToggleStatus = async (user: User) => {
     user.status = newStatus
   } catch (error) {
     console.error('更新状态失败:', error)
-    alert('更新状态失败')
   }
 }
 

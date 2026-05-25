@@ -19,11 +19,10 @@ const handleApplySuggestion = (bid: typeof bidSuggestions.value[0]) => {
   bid.currentBid = bid.suggestBid
   bid.status = 'optimal'
   bid.change = '0%'
-  alert(`已应用建议出价: ¥${bid.suggestBid.toFixed(2)}`)
 }
 
-const handleDetail = (bid: typeof bidSuggestions.value[0]) => {
-  alert(`查看详情: ${bid.adName}`)
+const handleDetail = (_bid: typeof bidSuggestions.value[0]) => {
+  // TODO: implement
 }
 </script>
 

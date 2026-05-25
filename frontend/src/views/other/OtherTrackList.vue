@@ -18,19 +18,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateTrack = () => {
-  alert('创建追踪链接')
+  // TODO: implement
 }
 
 const handleSearch = () => {
-  alert('搜索链接')
+  // TODO: implement
 }
 
-const handleCopyLink = (link: typeof trackLinks.value[0]) => {
-  alert(`已复制链接: ${link.url}`)
+const handleCopyLink = (_link: typeof trackLinks.value[0]) => {
+  // TODO: implement
 }
 
-const handleViewDetail = (link: typeof trackLinks.value[0]) => {
-  alert(`查看详情: ${link.name}`)
+const handleViewDetail = (_link: typeof trackLinks.value[0]) => {
+  // TODO: implement
 }
 </script>
 

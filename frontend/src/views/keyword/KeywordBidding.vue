@@ -17,11 +17,11 @@ const handlePageChange = (page: number) => {
 }
 
 const handleBatchAdjust = () => {
-  alert('批量调价')
+  // TODO: implement
 }
 
-const handleAdjustBid = (bid: typeof biddings.value[0]) => {
-  alert(`调整出价: ${bid.keyword}`)
+const handleAdjustBid = (_bid: typeof biddings.value[0]) => {
+  // TODO: implement
 }
 </script>
 

@@ -108,10 +108,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
 import { starApi } from '@/api/star'
 import { useAdvertiserStore } from '@/stores/advertiser'
+
+const router = useRouter()
 
 const advertiserStore = useAdvertiserStore()
 
@@ -225,14 +228,14 @@ const getStatusText = (status: string) => {
 }
 
 const handleCreate = () => {
-  alert('创建任务')
+  router.push('/star/task/create')
 }
 
 const handleDetail = (task: TaskItem) => {
-  alert(`查看任务详情: ${task.name}`)
+  router.push(`/star/task/${task.id}`)
 }
 
 const handleEdit = (task: TaskItem) => {
-  alert(`编辑任务: ${task.name}`)
+  router.push(`/star/task/${task.id}`)
 }
 </script>

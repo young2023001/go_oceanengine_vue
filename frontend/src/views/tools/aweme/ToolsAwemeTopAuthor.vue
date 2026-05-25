@@ -24,8 +24,8 @@ const getTrendIcon = (trend: string) => {
   return '➡️'
 }
 
-const handleViewDetail = (author: typeof topAuthors.value[0]) => {
-  alert(`查看详情: ${author.name}`)
+const handleViewDetail = (_author: typeof topAuthors.value[0]) => {
+  // TODO: implement
 }
 </script>
 

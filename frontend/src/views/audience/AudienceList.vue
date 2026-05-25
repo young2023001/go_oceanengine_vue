@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import StatsCard from '@/components/business/StatsCard.vue'
 import StatusBadge from '@/components/business/StatusBadge.vue'
 import DataTable from '@/components/common/DataTable.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const loading = ref(true)
 const searchKeyword = ref('')
@@ -70,20 +73,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateAudience = () => {
-  alert('创建人群')
+  router.push('/audiences/create')
 }
 
 const handleAudienceDetail = (audience: any) => {
-  alert(`人群详情: ${audience.name}`)
+  router.push(`/audiences/${audience.id}/edit`)
 }
 
 const handleAudienceEdit = (audience: any) => {
-  alert(`编辑人群: ${audience.name}`)
+  router.push(`/audiences/${audience.id}/edit`)
 }
 
 const handleAudienceDelete = (audience: any) => {
   if (confirm(`确定删除人群 ${audience.name} 吗？`)) {
-    alert(`已删除: ${audience.name}`)
   }
 }
 

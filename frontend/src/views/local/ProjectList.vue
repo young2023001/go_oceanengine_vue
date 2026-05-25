@@ -181,19 +181,17 @@ watch(() => advertiserStore.currentAdvertiserId, () => {
   fetchProjects()
 })
 
-const handleEdit = (project: ProjectItem) => {
-  alert(`编辑项目: ${project.name}`)
+const handleEdit = (_project: ProjectItem) => {
+  // TODO: implement
 }
 
 const handlePause = async (project: ProjectItem) => {
   if (confirm(`确定暂停项目「${project.name}」吗？`)) {
     project.status = 'pause'
-    alert('项目已暂停')
   }
 }
 
 const handleStart = async (project: ProjectItem) => {
   project.status = 'running'
-  alert(`项目「${project.name}」已启动`)
 }
 </script>

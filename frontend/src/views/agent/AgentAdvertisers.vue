@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const loading = ref(false)
 const searchForm = reactive({
@@ -34,15 +37,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAdvDetail = (adv: typeof advertisers.value[0]) => {
-  alert(`广告主详情: ${adv.name} (ID: ${adv.id})`)
+  router.push(`/advertisers/${adv.id}`)
 }
 
 const handleAdvRecharge = (adv: typeof advertisers.value[0]) => {
-  alert(`为 ${adv.name} 充值`)
+  router.push(`/agent/recharge?advertiser_id=${adv.id}`)
 }
 
 const handleAdvEdit = (adv: typeof advertisers.value[0]) => {
-  alert(`编辑广告主: ${adv.name}`)
+  router.push(`/advertisers/${adv.id}`)
 }
 </script>
 

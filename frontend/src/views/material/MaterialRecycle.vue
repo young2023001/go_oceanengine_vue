@@ -24,23 +24,20 @@ const handlePageChange = (page: number) => {
 }
 
 const handleRestoreSelected = () => {
-  alert(`恢复选中的 ${selectedItems.value.length} 个文件`)
   selectedItems.value = []
 }
 
 const handleClearRecycle = () => {
   if (confirm('确定清空回收站?此操作不可恢复!')) {
-    alert('回收站已清空')
   }
 }
 
-const handleRestoreItem = (item: typeof recycleItems.value[0]) => {
-  alert(`恢复: ${item.name}`)
+const handleRestoreItem = (_item: typeof recycleItems.value[0]) => {
+  // TODO: implement
 }
 
 const handlePermanentDelete = (item: typeof recycleItems.value[0]) => {
   if (confirm(`永久删除 ${item.name}?此操作不可恢复!`)) {
-    alert('删除成功')
   }
 }
 </script>

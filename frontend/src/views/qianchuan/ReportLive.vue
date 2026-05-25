@@ -115,14 +115,14 @@ const liveRooms = ref([
 ])
 
 const handleExport = () => {
-  alert('导出直播间报表')
+  // TODO: 调用后端 API
 }
 
 const handleQuery = () => {
-  alert('查询直播数据')
+  // TODO: 调用后端 API
 }
 
-const handleDetail = (room: typeof liveRooms.value[0]) => {
-  alert(`查看详情: ${room.name}`)
+const handleDetail = (_room: typeof liveRooms.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

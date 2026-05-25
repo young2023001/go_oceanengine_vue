@@ -64,6 +64,7 @@ func (s *AuthService) Login(ctx context.Context, req *dto.LoginReq, clientIP str
 	// 5. 生成 Token
 	claims := &auth.Claims{
 		UserID:    int64(user.ID),
+		TenantID:  user.TenantID,
 		Username:  user.Username,
 		RoleKey:   roleKey,
 		RoleID:    int64(user.RoleID),
@@ -134,6 +135,7 @@ func (s *AuthService) RefreshToken(ctx context.Context, refreshToken string) (*d
 	// 5. 生成新 Token
 	newClaims := &auth.Claims{
 		UserID:    int64(user.ID),
+		TenantID:  user.TenantID,
 		Username:  user.Username,
 		RoleKey:   roleKey,
 		RoleID:    int64(user.RoleID),

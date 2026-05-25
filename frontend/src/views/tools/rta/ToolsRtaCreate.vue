@@ -17,11 +17,11 @@ const strategies = [
 ]
 
 const handleCancel = () => {
-  alert('取消创建')
+  // TODO: implement
 }
 
 const handleCreate = () => {
-  alert(`创建RTA策略: ${formData.value.name}`)
+  // TODO: implement
 }
 </script>
 

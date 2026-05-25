@@ -92,12 +92,10 @@ const formatNumber = (value: number) => value.toLocaleString()
 
 const handlePause = () => {
   ad.status = ad.status === 'active' ? 'paused' : 'active'
-  alert(`广告已${ad.status === 'active' ? '启动' : '暂停'}`)
 }
 
 const handleDelete = () => {
   if (confirm('确定要删除此广告吗？')) {
-    alert('广告已删除')
     router.push('/ads')
   }
 }

@@ -16,7 +16,7 @@ const form = reactive({
 })
 
 const handleForgotPassword = () => {
-  alert('请联系管理员重置密码')
+  // TODO: implement
 }
 
 const handleLogin = async () => {

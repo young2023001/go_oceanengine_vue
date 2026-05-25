@@ -26,15 +26,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateCard = () => {
-  alert('创建新的推广卡片')
+  // TODO: 调用后端 API
 }
 
-const handleEditCard = (card: typeof cards.value[0]) => {
-  alert(`编辑卡片: ${card.name}`)
+const handleEditCard = (_card: typeof cards.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleViewData = (card: typeof cards.value[0]) => {
-  alert(`卡片「${card.name}」数据:\n点击: ${(card.clicks / 1000).toFixed(0)}K\nCTR: ${card.ctr}%`)
+const handleViewData = (_card: typeof cards.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>
 

@@ -31,15 +31,13 @@ const handlePageChange = (page: number) => {
 }
 
 const handleBatchReply = () => {
-  alert(`批量回复 ${selectedComments.value.length} 条评论`)
+  // TODO: implement
 }
 
 const handleSendReply = () => {
   if (!replyTemplate.value.trim()) {
-    alert('请输入回复内容')
     return
   }
-  alert(`发送回复: ${replyTemplate.value}`)
 }
 </script>
 

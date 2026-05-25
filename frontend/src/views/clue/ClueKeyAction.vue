@@ -22,15 +22,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddAction = () => {
-  alert('添加新的关键行为追踪')
+  // TODO: implement
 }
 
-const handleEditAction = (action: typeof actions.value[0]) => {
-  alert(`编辑关键行为: ${action.name}`)
+const handleEditAction = (_action: typeof actions.value[0]) => {
+  // TODO: implement
 }
 
-const handleViewData = (action: typeof actions.value[0]) => {
-  alert(`查看「${action.name}」的详细数据`)
+const handleViewData = (_action: typeof actions.value[0]) => {
+  // TODO: implement
 }
 </script>
 

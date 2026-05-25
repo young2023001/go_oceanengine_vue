@@ -24,12 +24,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleDetail = (app: typeof apps.value[0]) => {
-  alert(`查看详情: ${app.name}`)
+const handleDetail = (_app: typeof apps.value[0]) => {
+  // TODO: implement
 }
 
-const handleData = (app: typeof apps.value[0]) => {
-  alert(`查看数据: ${app.name}`)
+const handleData = (_app: typeof apps.value[0]) => {
+  // TODO: implement
 }
 </script>
 

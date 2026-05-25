@@ -43,7 +43,6 @@ const loadSettings = async () => {
       Object.assign(settings, res)
     }
   } catch (error: any) {
-    alert(error.message || '加载设置失败')
   } finally {
     loading.value = false
   }
@@ -63,9 +62,7 @@ const handleSaveSettings = async () => {
       auto_refresh_enabled: settings.auto_refresh_enabled,
       refresh_interval: settings.refresh_interval
     })
-    alert('设置已保存')
   } catch (error: any) {
-    alert(error.message || '保存设置失败')
   } finally {
     saving.value = false
   }
@@ -82,15 +79,12 @@ const handleChangePassword = () => {
 // 提交修改密码
 const submitChangePassword = async () => {
   if (!passwordForm.old_password || !passwordForm.new_password || !passwordForm.confirm_password) {
-    alert('请填写完整的密码信息')
     return
   }
   if (passwordForm.new_password !== passwordForm.confirm_password) {
-    alert('两次输入的新密码不一致')
     return
   }
   if (passwordForm.new_password.length < 6 || passwordForm.new_password.length > 32) {
-    alert('新密码长度应为6-32位')
     return
   }
 
@@ -100,10 +94,8 @@ const submitChangePassword = async () => {
       old_password: passwordForm.old_password,
       new_password: passwordForm.new_password
     })
-    alert('密码修改成功')
     showPasswordDialog.value = false
   } catch (error: any) {
-    alert(error.message || '修改密码失败')
   } finally {
     changingPassword.value = false
   }
@@ -111,7 +103,7 @@ const submitChangePassword = async () => {
 
 // 启用双因素认证（示例）
 const handleEnable2FA = () => {
-  alert('双因素认证功能正在开发中，敬请期待')
+  // TODO: implement
 }
 
 onMounted(() => {

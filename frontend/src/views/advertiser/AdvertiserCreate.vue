@@ -31,19 +31,15 @@ const industries = [
 
 const handleSubmit = async () => {
   if (!form.name) {
-    alert('请输入广告主名称')
     return
   }
   if (!form.company) {
-    alert('请输入公司名称')
     return
   }
   
   submitting.value = true
   await new Promise(resolve => setTimeout(resolve, 800))
   submitting.value = false
-  
-  alert('创建成功')
   router.push('/advertisers')
 }
 

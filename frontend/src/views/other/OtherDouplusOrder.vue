@@ -22,7 +22,7 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateOrder = () => {
-  alert('创建抖+订单')
+  // TODO: implement
 }
 </script>
 

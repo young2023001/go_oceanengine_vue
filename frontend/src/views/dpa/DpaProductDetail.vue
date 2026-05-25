@@ -37,7 +37,7 @@ const adStats = ref({
 })
 
 const handleCreateAd = () => {
-  alert('创建广告')
+  // TODO: implement
 }
 </script>
 

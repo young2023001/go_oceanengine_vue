@@ -72,9 +72,8 @@ onMounted(() => {
   fetchCampaigns()
 })
 
-const handleToggleStatus = (campaign: any) => {
-  const action = campaign.status === 'active' ? '暂停' : '启用'
-  alert(`${action}广告系列: ${campaign.name}`)
+const handleToggleStatus = (_campaign: any) => {
+  // TODO: 调用后端 API 切换计划状态
 }
 </script>
 

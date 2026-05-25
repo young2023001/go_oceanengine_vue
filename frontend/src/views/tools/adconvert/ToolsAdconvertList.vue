@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 28 })
 
@@ -29,11 +32,11 @@ const handlePageChange = (page: number) => {
 }
 
 const handleEdit = (item: typeof converts.value[0]) => {
-  alert(`编辑转化: ${item.name}`)
+  router.push(`/tools/adconvert/detail/${item.id}`)
 }
 
 const handleDetail = (item: typeof converts.value[0]) => {
-  alert(`查看详情: ${item.name}`)
+  router.push(`/tools/adconvert/detail/${item.id}`)
 }
 </script>
 

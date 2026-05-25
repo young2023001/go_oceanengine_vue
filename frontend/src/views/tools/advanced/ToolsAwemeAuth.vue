@@ -18,15 +18,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleSearch = () => {
-  alert(`搜索: ${searchKeyword.value}`)
+  // TODO: 调用后端 API
 }
 
-const handleDetail = (item: typeof authList.value[0]) => {
-  alert(`查看详情: ${item.nickname}`)
+const handleDetail = (_item: typeof authList.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleUnbind = (item: typeof authList.value[0]) => {
-  alert(`解除授权: ${item.nickname}`)
+const handleUnbind = (_item: typeof authList.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>
 

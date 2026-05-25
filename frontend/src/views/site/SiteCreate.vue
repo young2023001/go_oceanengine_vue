@@ -21,7 +21,6 @@ const templates = ref([
 ])
 
 const handleSubmit = () => {
-  console.log('Create site:', form)
   router.push('/site/list')
 }
 </script>

@@ -21,7 +21,7 @@ const handlePageChange = (page: number) => {
 }
 
 const handleSearch = () => {
-  alert('搜索转账目标')
+  // TODO: implement
 }
 </script>
 

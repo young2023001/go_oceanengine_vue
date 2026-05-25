@@ -147,19 +147,15 @@ const form = ref({
 
 const validateForm = () => {
   if (!form.value.name.trim()) {
-    alert('请输入推广名称')
     return false
   }
   if (!form.value.shopId) {
-    alert('请选择关联店铺')
     return false
   }
   if (form.value.type === 'live' && !form.value.liveRoomId) {
-    alert('请选择直播间')
     return false
   }
   if (!form.value.budget || form.value.budget < 300) {
-    alert('日预算最低300元')
     return false
   }
   return true
@@ -170,7 +166,6 @@ const handleCreate = async () => {
   loading.value = true
   try {
     await new Promise(r => setTimeout(r, 500))
-    alert('全域推广创建成功！')
     router.push('/qianchuan/uni')
   } finally {
     loading.value = false
@@ -178,6 +173,6 @@ const handleCreate = async () => {
 }
 
 const selectFile = () => {
-  alert('文件上传功能开发中...')
+  // TODO: 调用后端 API
 }
 </script>

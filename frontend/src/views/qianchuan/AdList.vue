@@ -91,10 +91,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
 import { qianchuanApi } from '@/api/qianchuan'
 import { useAdvertiserStore } from '@/stores/advertiser'
+
+const router = useRouter()
 
 const advertiserStore = useAdvertiserStore()
 
@@ -209,10 +212,10 @@ const handleSearchAds = () => {
 }
 
 const handleEditAd = (ad: AdItem) => {
-  alert(`编辑广告: ${ad.name}`)
+  router.push(`/qianchuan/ad/${ad.id}`)
 }
 
-const handleCopyAd = (ad: AdItem) => {
-  alert(`复制广告: ${ad.name}`)
+const handleCopyAd = (_ad: AdItem) => {
+  // TODO: 调用后端 API
 }
 </script>

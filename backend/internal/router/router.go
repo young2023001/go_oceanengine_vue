@@ -2,14 +2,24 @@ package router
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 	"oceanengine-backend/config"
+	accountApi "oceanengine-backend/internal/app/account/api"
+	accountRepo "oceanengine-backend/internal/app/account/repository"
+	accountService "oceanengine-backend/internal/app/account/service"
+	analyticsApi "oceanengine-backend/internal/app/analytics/api"
+	analyticsRepo "oceanengine-backend/internal/app/analytics/repository"
+	analyticsService "oceanengine-backend/internal/app/analytics/service"
 	adApi "oceanengine-backend/internal/app/ad/api"
 	adminApi "oceanengine-backend/internal/app/admin/api"
 	"oceanengine-backend/internal/app/admin/service"
+	batchApi "oceanengine-backend/internal/app/batch/api"
+	batchRepo "oceanengine-backend/internal/app/batch/repository"
+	batchService "oceanengine-backend/internal/app/batch/service"
 	advApi "oceanengine-backend/internal/app/advertiser/api"
 	advtoolsApi "oceanengine-backend/internal/app/advtools/api"
 	audienceApi "oceanengine-backend/internal/app/audience/api"
@@ -21,14 +31,29 @@ import (
 	dpaApi "oceanengine-backend/internal/app/dpa/api"
 	enterpriseApi "oceanengine-backend/internal/app/enterprise/api"
 	eventmanagerApi "oceanengine-backend/internal/app/eventmanager/api"
+	groupApi "oceanengine-backend/internal/app/group/api"
+	groupRepo "oceanengine-backend/internal/app/group/repository"
+	groupService "oceanengine-backend/internal/app/group/service"
+	projectApi "oceanengine-backend/internal/app/project/api"
+	projectRepo "oceanengine-backend/internal/app/project/repository"
+	projectService "oceanengine-backend/internal/app/project/service"
 	localApi "oceanengine-backend/internal/app/local/api"
 	mediaApi "oceanengine-backend/internal/app/media/api"
 	mediaService "oceanengine-backend/internal/app/media/service"
 	qianchuanApi "oceanengine-backend/internal/app/qianchuan/api"
 	reportApi "oceanengine-backend/internal/app/report/api"
+	scopeApi "oceanengine-backend/internal/app/scope/api"
+	scopeRepo "oceanengine-backend/internal/app/scope/repository"
+	scopeService "oceanengine-backend/internal/app/scope/service"
 	serveMarketApi "oceanengine-backend/internal/app/servemarket/api"
 	siteApi "oceanengine-backend/internal/app/site/api"
 	starApi "oceanengine-backend/internal/app/star/api"
+	templateApi "oceanengine-backend/internal/app/template/api"
+	templateRepo "oceanengine-backend/internal/app/template/repository"
+	templateService "oceanengine-backend/internal/app/template/service"
+	tenantApi "oceanengine-backend/internal/app/tenant/api"
+	tenantRepo "oceanengine-backend/internal/app/tenant/repository"
+	tenantService "oceanengine-backend/internal/app/tenant/service"
 	v3Api "oceanengine-backend/internal/app/v3/api"
 	"oceanengine-backend/internal/middleware"
 	"oceanengine-backend/pkg/auth"
@@ -107,9 +132,16 @@ func (r *Router) Setup(mode string) *gin.Engine {
 
 // healthCheck 健康检查
 func (r *Router) healthCheck(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"status": "ok",
-	})
+	sqlDB, err := r.db.DB()
+	if err != nil {
+		c.JSON(http.StatusServiceUnavailable, gin.H{"status": "unhealthy", "mysql": "error", "detail": err.Error()})
+		return
+	}
+	if err := sqlDB.Ping(); err != nil {
+		c.JSON(http.StatusServiceUnavailable, gin.H{"status": "unhealthy", "mysql": "down", "detail": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "mysql": "up"})
 }
 
 // registerPublicRoutes 注册公开路由
@@ -136,6 +168,20 @@ func (r *Router) registerPublicRoutes(rg *gin.RouterGroup) {
 	{
 		oauthGroup.GET("/callback", advHandler.OAuthCallback)
 	}
+
+	// 租户 OAuth 回调（公开）
+	tenantOAuthRepo := tenantRepo.NewTenantRepository(r.db)
+	tenantOAuthSvc := tenantService.NewTenantService(tenantOAuthRepo)
+	tenantOAuthClient := tenantService.NewOAuthClient()
+	stateSecret := os.Getenv("OAUTH_STATE_SECRET")
+	if stateSecret == "" {
+		stateSecret = "default-oauth-state-secret-change-in-production"
+		if r.logger != nil {
+			r.logger.Warn("OAUTH_STATE_SECRET not set, using default value - CHANGE IN PRODUCTION")
+		}
+	}
+	tenantOAuthHandler := tenantApi.NewTenantHandler(tenantOAuthSvc, tenantOAuthClient, stateSecret)
+	rg.GET("/tenants/oauth/callback", tenantOAuthHandler.OAuthCallback)
 
 	// 千川 OAuth 路由（公开）
 	if r.qianchuanCfg != nil {
@@ -221,6 +267,23 @@ func (r *Router) registerProtectedRoutes(rg *gin.RouterGroup) {
 
 	// DPA商品广告模块
 	r.registerDPARoutes(rg)
+
+	// 批量操作模块
+	r.registerBatchRoutes(rg)
+
+	// 模板管理
+	r.registerTemplateRoutes(rg)
+
+	// 租户管理
+	r.registerTenantRoutes(rg)
+
+	// 需要数据权限隔离的路由
+	scoped := rg.Group("")
+	scoped.Use(middleware.DataScope(r.db))
+	r.registerAccountRoutes(scoped)
+	r.registerGroupRoutes(scoped)
+	r.registerProjectRoutes(scoped)
+	r.registerAnalyticsRoutes(scoped)
 }
 
 // registerSystemRoutes 注册系统管理路由
@@ -255,6 +318,12 @@ func (r *Router) registerSystemRoutes(rg *gin.RouterGroup) {
 			users.DELETE("/:id", userAPI.Delete)
 			users.POST("/:id/reset-password", userAPI.ResetPassword)
 			users.POST("/change-password", userAPI.ChangePassword)
+
+			scopeRepository := scopeRepo.NewScopeRepository(r.db)
+			scopeSvc := scopeService.NewScopeService(scopeRepository)
+			scopeHandler := scopeApi.NewScopeHandler(scopeSvc)
+			users.POST("/:id/scope", scopeHandler.SetScope)
+			users.GET("/:id/scope", scopeHandler.GetScope)
 		}
 
 		// 角色管理
@@ -935,5 +1004,144 @@ func (r *Router) registerDPARoutes(rg *gin.RouterGroup) {
 			sets.PUT("/:set_id", handler.UpdateProductSet)
 			sets.DELETE("/:set_id", handler.DeleteProductSet)
 		}
+	}
+}
+
+// registerTemplateRoutes 注册模板管理路由
+func (r *Router) registerTemplateRoutes(rg *gin.RouterGroup) {
+	repo := templateRepo.NewTemplateRepository(r.db)
+	svc := templateService.NewTemplateService(repo)
+	handler := templateApi.NewTemplateHandler(svc)
+
+	tpl := rg.Group("/templates")
+	{
+		projects := tpl.Group("/projects")
+		{
+			projects.POST("", handler.CreateProject)
+			projects.GET("", handler.ListProjects)
+			projects.GET("/:id", handler.GetProject)
+			projects.PUT("/:id", handler.UpdateProject)
+			projects.DELETE("/:id", handler.DeleteProject)
+		}
+		promotions := tpl.Group("/promotions")
+		{
+			promotions.POST("", handler.CreatePromotion)
+			promotions.GET("", handler.ListPromotions)
+			promotions.DELETE("/:id", handler.DeletePromotion)
+		}
+	}
+}
+
+// registerTenantRoutes 注册租户管理路由
+func (r *Router) registerTenantRoutes(rg *gin.RouterGroup) {
+	repo := tenantRepo.NewTenantRepository(r.db)
+	svc := tenantService.NewTenantService(repo)
+	oauth := tenantService.NewOAuthClient()
+	tenantStateSecret := os.Getenv("OAUTH_STATE_SECRET")
+	if tenantStateSecret == "" {
+		tenantStateSecret = "default-oauth-state-secret-change-in-production"
+		if r.logger != nil {
+			r.logger.Warn("OAUTH_STATE_SECRET not set, using default value - CHANGE IN PRODUCTION")
+		}
+	}
+	handler := tenantApi.NewTenantHandler(svc, oauth, tenantStateSecret)
+
+	tenants := rg.Group("/tenants")
+	{
+		tenants.POST("", handler.Create)
+		tenants.GET("", handler.List)
+		tenants.GET("/:id", handler.GetByID)
+		tenants.GET("/:id/oauth/url", handler.GetOAuthURL)
+	}
+}
+
+// registerAccountRoutes 注册账户管理路由
+func (r *Router) registerAccountRoutes(rg *gin.RouterGroup) {
+	repo := accountRepo.NewAccountRepository(r.db)
+	svc := accountService.NewAccountService(repo)
+	handler := accountApi.NewAccountHandler(svc)
+
+	accounts := rg.Group("/accounts")
+	{
+		accounts.POST("/import", handler.Import)
+		accounts.GET("", handler.List)
+		accounts.GET("/:id", handler.GetByID)
+	}
+}
+
+// registerGroupRoutes 注册分组管理路由
+func (r *Router) registerGroupRoutes(rg *gin.RouterGroup) {
+	repo := groupRepo.NewGroupRepository(r.db)
+	svc := groupService.NewGroupService(repo)
+	handler := groupApi.NewGroupHandler(svc)
+
+	groups := rg.Group("/groups")
+	{
+		groups.POST("", handler.Create)
+		groups.GET("", handler.List)
+		groups.PUT("/:id", handler.Update)
+		groups.DELETE("/:id", handler.Delete)
+		groups.POST("/:id/members", handler.AddMembers)
+		groups.DELETE("/:id/members", handler.RemoveMembers)
+	}
+}
+
+// registerProjectRoutes 注册项目管理路由
+func (r *Router) registerProjectRoutes(rg *gin.RouterGroup) {
+	repo := projectRepo.NewProjectRepository(r.db)
+	svc := projectService.NewProjectService(repo)
+	handler := projectApi.NewProjectHandler(svc)
+
+	projects := rg.Group("/projects")
+	{
+		projects.GET("", handler.ListProjects)
+		projects.GET("/:id", handler.GetProject)
+		projects.PUT("/:id/status", handler.UpdateProjectStatus)
+	}
+
+	promotions := rg.Group("/promotions")
+	{
+		promotions.GET("", handler.ListPromotions)
+	}
+}
+
+// registerBatchRoutes 注册批量操作路由
+func (r *Router) registerBatchRoutes(rg *gin.RouterGroup) {
+	repo := batchRepo.NewBatchRepository(r.db)
+	svc := batchService.NewBatchService(repo)
+	handler := batchApi.NewBatchHandler(svc, r.db)
+
+	batch := rg.Group("/batch")
+	{
+		batch.POST("/projects", handler.CreateTask)
+		batch.POST("/promotions", handler.CreateTask)
+		batch.POST("/budget", handler.CreateTask)
+		batch.POST("/bid", handler.CreateTask)
+		batch.POST("/status", handler.CreateTask)
+		batch.GET("/tasks", handler.ListTasks)
+		batch.GET("/tasks/:id", handler.GetTask)
+		batch.POST("/tasks/:id/cancel", handler.CancelTask)
+		batch.POST("/tasks/:id/retry", handler.RetryTask)
+	}
+}
+
+// registerAnalyticsRoutes 注册数据分析路由
+func (r *Router) registerAnalyticsRoutes(rg *gin.RouterGroup) {
+	reportRepo := analyticsRepo.NewReportRepository(r.db)
+	exportRepo := analyticsRepo.NewExportRepository(r.db)
+	svc := analyticsService.NewAnalyticsService(reportRepo)
+	exportSvc := analyticsService.NewExportService(exportRepo, reportRepo)
+	handler := analyticsApi.NewAnalyticsHandler(svc, exportSvc)
+
+	analytics := rg.Group("/analytics")
+	{
+		analytics.GET("/overview", handler.GetOverview)
+		analytics.GET("/trend", handler.GetTrend)
+		analytics.GET("/rank", handler.GetRank)
+		analytics.GET("/compare", handler.GetCompare)
+		analytics.GET("/detail", handler.GetDetail)
+		analytics.POST("/export", handler.CreateExport)
+		analytics.GET("/exports", handler.ListExports)
+		analytics.GET("/exports/:id/download", handler.DownloadExport)
 	}
 }

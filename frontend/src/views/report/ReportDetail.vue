@@ -99,11 +99,10 @@ const goBack = () => {
 }
 
 const exportReport = () => {
-  alert(`导出报表: ${report.value?.name}`)
+  // TODO: implement
 }
 
 const handleRefresh = () => {
-  alert('刷新报表数据')
   fetchReport()
 }
 

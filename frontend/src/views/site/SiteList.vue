@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 48 })
 const searchKeyword = ref('')
@@ -21,19 +24,18 @@ const handlePageChange = (page: number) => {
 
 const handleSearch = () => {
   pagination.page = 1
-  alert('搜索站点')
 }
 
 const handleEditSite = (site: typeof sites.value[0]) => {
-  alert(`编辑站点: ${site.name}`)
+  router.push(`/site/edit/${site.id}`)
 }
 
 const handlePreviewSite = (site: typeof sites.value[0]) => {
-  alert(`预览站点: ${site.name}`)
+  router.push(`/site/preview/${site.id}`)
 }
 
-const handleMoreActions = (site: typeof sites.value[0]) => {
-  alert(`更多操作: ${site.name}`)
+const handleMoreActions = (_site: typeof sites.value[0]) => {
+  // TODO: implement
 }
 </script>
 

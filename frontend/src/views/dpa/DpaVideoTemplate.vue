@@ -22,15 +22,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleUploadTemplate = () => {
-  alert('上传模板')
+  // TODO: implement
 }
 
-const handleUseTemplate = (tpl: typeof templates.value[0]) => {
-  alert(`使用模板: ${tpl.name}`)
+const handleUseTemplate = (_tpl: typeof templates.value[0]) => {
+  // TODO: implement
 }
 
-const handlePreviewTemplate = (tpl: typeof templates.value[0]) => {
-  alert(`预览模板: ${tpl.name}`)
+const handlePreviewTemplate = (_tpl: typeof templates.value[0]) => {
+  // TODO: implement
 }
 </script>
 

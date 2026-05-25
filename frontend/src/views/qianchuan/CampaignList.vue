@@ -127,8 +127,7 @@ const getStatusText = (status: string) => {
 }
 
 const handleSearch = () => {
-  console.log('搜索:', filters.value)
-  alert('查询完成')
+  // TODO: 调用后端 API
 }
 
 const handleReset = () => {
@@ -136,34 +135,32 @@ const handleReset = () => {
 }
 
 const handleBatchEnable = () => {
-  alert('批量启用已选计划')
+  // TODO: 调用后端 API
 }
 
 const handleBatchPause = () => {
-  alert('批量暂停已选计划')
+  // TODO: 调用后端 API
 }
 
 const handleBatchDelete = () => {
   if (confirm('确定批量删除已选计划吗？')) {
-    alert('删除成功')
+    // TODO: 调用后端 API
   }
 }
 
-const handleEdit = (campaign: typeof campaigns.value[0]) => {
-  alert(`编辑计划: ${campaign.name}`)
+const handleEdit = (_campaign: typeof campaigns.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleViewData = (campaign: typeof campaigns.value[0]) => {
-  alert(`查看数据: ${campaign.name}\n消耗: ¥${campaign.cost.toLocaleString()}\n转化: ${campaign.conversions}`)
+const handleViewData = (_campaign: typeof campaigns.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handlePause = (campaign: typeof campaigns.value[0]) => {
   campaign.status = 'disable'
-  alert(`计划「${campaign.name}」已暂停`)
 }
 
 const handleEnable = (campaign: typeof campaigns.value[0]) => {
   campaign.status = 'enable'
-  alert(`计划「${campaign.name}」已启用`)
 }
 </script>

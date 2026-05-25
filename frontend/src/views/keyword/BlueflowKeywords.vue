@@ -36,12 +36,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleAdd = (kw: typeof keywords.value[0]) => {
-  alert(`添加蓝海词: ${kw.keyword}`)
+const handleAdd = (_kw: typeof keywords.value[0]) => {
+  // TODO: implement
 }
 
-const handleDetail = (kw: typeof keywords.value[0]) => {
-  alert(`查看详情: ${kw.keyword}`)
+const handleDetail = (_kw: typeof keywords.value[0]) => {
+  // TODO: implement
 }
 </script>
 

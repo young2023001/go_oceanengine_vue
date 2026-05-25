@@ -26,15 +26,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateTrack = () => {
-  alert('创建转化追踪')
+  // TODO: implement
 }
 
-const handleConfigTrack = (track: any) => {
-  alert(`配置追踪: ${track.name}`)
+const handleConfigTrack = (_track: any) => {
+  // TODO: implement
 }
 
-const handleViewTrackData = (track: any) => {
-  alert(`查看数据: ${track.name}`)
+const handleViewTrackData = (_track: any) => {
+  // TODO: implement
 }
 </script>
 

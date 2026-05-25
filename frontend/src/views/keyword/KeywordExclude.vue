@@ -17,15 +17,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddExclude = () => {
-  alert('添加否定词')
+  // TODO: implement
 }
 
-const handleEdit = (kw: typeof excludeKeywords.value[0]) => {
-  alert(`编辑否定词: ${kw.keyword}`)
+const handleEdit = (_kw: typeof excludeKeywords.value[0]) => {
+  // TODO: implement
 }
 
-const handleDelete = (kw: typeof excludeKeywords.value[0]) => {
-  alert(`删除否定词: ${kw.keyword}`)
+const handleDelete = (_kw: typeof excludeKeywords.value[0]) => {
+  // TODO: implement
 }
 </script>
 

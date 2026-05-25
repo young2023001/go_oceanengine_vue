@@ -16,23 +16,23 @@ const site = ref({
 })
 
 const handlePublish = () => {
-  alert('发布页面')
+  // TODO: implement
 }
 
 const handleCopyLink = () => {
-  alert(`已复制链接: ${site.value.url}`)
+  // TODO: implement
 }
 
 const handleViewData = () => {
-  alert('查看数据')
+  // TODO: implement
 }
 
 const handleGenerateQR = () => {
-  alert('生成二维码')
+  // TODO: implement
 }
 
 const handleExportPage = () => {
-  alert('导出页面')
+  // TODO: implement
 }
 </script>
 

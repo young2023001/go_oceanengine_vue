@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 156 })
 const searchKeyword = ref('')
@@ -21,20 +24,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleBatchImport = () => {
-  alert('批量导入')
+  // TODO: implement
 }
 
 const handleSearch = () => {
   pagination.page = 1
-  alert('搜索商品')
 }
 
 const handleEditProduct = (product: typeof products.value[0]) => {
-  alert(`编辑: ${product.name}`)
+  router.push(`/dpa/product/edit/${product.id}`)
 }
 
 const handleViewDetail = (product: typeof products.value[0]) => {
-  alert(`查看详情: ${product.name}`)
+  router.push(`/dpa/product/${product.id}`)
 }
 </script>
 

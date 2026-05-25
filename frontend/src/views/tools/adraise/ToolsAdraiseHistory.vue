@@ -15,12 +15,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleDetail = (history: typeof histories.value[0]) => {
-  alert(`查看详情: ${history.adName}`)
+const handleDetail = (_history: typeof histories.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleReuse = (history: typeof histories.value[0]) => {
-  alert(`复用策略: ${history.adName}`)
+const handleReuse = (_history: typeof histories.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>
 

@@ -88,10 +88,10 @@ const recentRecords = ref([
 ])
 
 const handleRecharge = () => {
-  alert('账户充值')
+  // TODO: 调用后端 API
 }
 
 const handleWithdraw = () => {
-  alert('账户提现')
+  // TODO: 调用后端 API
 }
 </script>

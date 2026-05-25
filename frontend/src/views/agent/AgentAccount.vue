@@ -16,20 +16,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddAccount = () => {
-  alert('添加账号')
+  // TODO: implement
 }
 
-const handleEditAccount = (account: typeof accounts.value[0]) => {
-  alert(`编辑账号: ${account.name}`)
+const handleEditAccount = (_account: typeof accounts.value[0]) => {
+  // TODO: implement
 }
 
-const handleAccountPermission = (account: typeof accounts.value[0]) => {
-  alert(`权限管理: ${account.name}`)
+const handleAccountPermission = (_account: typeof accounts.value[0]) => {
+  // TODO: implement
 }
 
 const handleDisableAccount = (account: typeof accounts.value[0]) => {
   if (confirm(`确定禁用账号 ${account.name} 吗？`)) {
-    alert(`已禁用: ${account.name}`)
   }
 }
 </script>

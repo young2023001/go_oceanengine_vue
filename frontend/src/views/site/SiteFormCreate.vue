@@ -38,11 +38,11 @@ const removeField = (fieldId: number) => {
 }
 
 const handleCancel = () => {
-  alert('取消')
+  // TODO: implement
 }
 
 const handleCreateForm = () => {
-  alert('创建表单')
+  // TODO: implement
 }
 </script>
 

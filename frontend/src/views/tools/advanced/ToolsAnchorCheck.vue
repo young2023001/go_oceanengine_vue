@@ -20,15 +20,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleStartCheck = () => {
-  alert('开始检测')
+  // TODO: 调用后端 API
 }
 
-const handleDetail = (item: typeof checkResults.value[0]) => {
-  alert(`查看详情: ${item.url}`)
+const handleDetail = (_item: typeof checkResults.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleRecheck = (item: typeof checkResults.value[0]) => {
-  alert(`重新检测: ${item.url}`)
+const handleRecheck = (_item: typeof checkResults.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>
 

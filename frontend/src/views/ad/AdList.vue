@@ -80,8 +80,8 @@ onMounted(() => {
   fetchAds()
 })
 
-const handleCopyAd = (ad: any) => {
-  alert(`复制广告: ${ad.name}`)
+const handleCopyAd = (_ad: any) => {
+  // TODO: implement
 }
 </script>
 

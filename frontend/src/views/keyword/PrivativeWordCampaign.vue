@@ -14,7 +14,7 @@ const existingWords = ref([
 ])
 
 const handleSubmit = () => {
-  console.log('Submit negative words:', form)
+  // TODO: implement
 }
 
 const handleDelete = (id: number) => {

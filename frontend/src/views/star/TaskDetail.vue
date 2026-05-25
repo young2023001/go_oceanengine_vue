@@ -154,7 +154,7 @@ const getStatusText = (status: string) => {
   return texts[status] || status
 }
 
-const handleViewContent = (influencer: typeof task.value.influencers[0]) => {
-  alert(`查看达人内容: ${influencer.name}`)
+const handleViewContent = (_influencer: typeof task.value.influencers[0]) => {
+  // TODO: implement
 }
 </script>

@@ -20,13 +20,13 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcEleme
 
 // 产品线入口数据
 const productLines = [
-  {
-    title: '巨量千川',
-    description: '电商广告投放平台，为电商商家提供精准流量运营服务',
-    icon: 'shop',
-    color: 'orange' as const,
-    to: '/qianchuan'
-  },
+  // {
+  //   title: '巨量千川',
+  //   description: '电商广告投放平台，为电商商家提供精准流量运营服务',
+  //   icon: 'shop',
+  //   color: 'orange' as const,
+  //   to: '/qianchuan'
+  // },
   {
     title: '本地推',
     description: '本地生活服务推广平台，助力门店获取更多到店客流',
@@ -41,13 +41,13 @@ const productLines = [
     color: 'purple' as const,
     to: '/enterprise'
   },
-  {
-    title: '巨量星图',
-    description: '达人营销平台，连接品牌与达人，实现内容合作',
-    icon: 'star',
-    color: 'yellow' as const,
-    to: '/star'
-  },
+  // {
+  //   title: '巨量星图',
+  //   description: '达人营销平台，连接品牌与达人，实现内容合作',
+  //   icon: 'star',
+  //   color: 'yellow' as const,
+  //   to: '/star'
+  // },
   {
     title: '代理商管理',
     description: '代理商广告主管理、财务充值、数据报表综合服务',
@@ -130,9 +130,9 @@ onMounted(() => {
     <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
       <div class="max-w-3xl">
         <h1 class="text-3xl font-bold">欢迎使用巨量引擎管理平台</h1>
-        <p class="mt-3 text-blue-100 text-lg">一站式广告投放管理，涵盖千川、本地推、企业号、星图等产品线</p>
+        <p class="mt-3 text-blue-100 text-lg">一站式广告投放管理，涵盖本地推、企业号、代理商等产品线</p>
         <div class="mt-6 flex items-center gap-4">
-          <router-link to="/qianchuan/campaign/create" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-colors">
+          <router-link to="/local/promotion/create" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>

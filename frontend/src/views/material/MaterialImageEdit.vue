@@ -19,30 +19,29 @@ const editOptions = ref({
 const cropRatios = ['自由', '1:1', '4:3', '16:9', '9:16']
 
 const handleCancel = () => {
-  alert('取消编辑')
+  // TODO: implement
 }
 
 const handleSave = () => {
-  alert('保存编辑')
+  // TODO: implement
 }
 
 const handleRotate = () => {
-  alert('旋转 90°')
+  // TODO: implement
 }
 
 const handleFlipHorizontal = () => {
-  alert('水平翻转')
+  // TODO: implement
 }
 
 const handleFlipVertical = () => {
-  alert('垂直翻转')
+  // TODO: implement
 }
 
 const handleReset = () => {
   editOptions.value.brightness = 50
   editOptions.value.contrast = 50
   editOptions.value.saturation = 50
-  alert('已重置')
 }
 </script>
 

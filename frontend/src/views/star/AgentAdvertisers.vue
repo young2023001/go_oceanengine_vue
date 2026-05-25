@@ -100,18 +100,18 @@ const advertisers = ref([
 ])
 
 const handleAdd = () => {
-  alert('添加广告主')
+  // TODO: implement
 }
 
 const handleQuery = () => {
-  alert('查询广告主')
+  // TODO: implement
 }
 
-const handleDetail = (adv: typeof advertisers.value[0]) => {
-  alert(`查看广告主详情: ${adv.name}`)
+const handleDetail = (_adv: typeof advertisers.value[0]) => {
+  // TODO: implement
 }
 
-const handleRecharge = (adv: typeof advertisers.value[0]) => {
-  alert(`充值: ${adv.name}`)
+const handleRecharge = (_adv: typeof advertisers.value[0]) => {
+  // TODO: implement
 }
 </script>

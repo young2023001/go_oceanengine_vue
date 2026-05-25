@@ -64,14 +64,13 @@ const handleSearch = async () => {
   loading.value = true
   try {
     await new Promise(r => setTimeout(r, 500))
-    alert('数据已刷新')
   } finally {
     loading.value = false
   }
 }
 
 const handleExport = () => {
-  alert('导出功能开发中...')
+  // TODO: 调用后端 API
 }
 
 const creatives = ref([

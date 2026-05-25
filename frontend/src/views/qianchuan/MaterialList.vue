@@ -119,18 +119,18 @@ const materials = ref([
 ])
 
 const handleUpload = () => {
-  alert('上传素材')
+  // TODO: 调用后端 API
 }
 
 const handleSearch = () => {
-  alert(`搜索: ${filters.value.keyword}`)
+  // TODO: 调用后端 API
 }
 
-const handlePreview = (material: typeof materials.value[0]) => {
-  alert(`预览素材: ${material.name}`)
+const handlePreview = (_material: typeof materials.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleUse = (material: typeof materials.value[0]) => {
-  alert(`使用素材: ${material.name}`)
+const handleUse = (_material: typeof materials.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

@@ -55,7 +55,6 @@ const toggleExpand = (id: string) => {
 
 const handleCopyId = (id: string) => {
   navigator.clipboard.writeText(id)
-  alert(`已复制ID: ${id}`)
 }
 </script>
 

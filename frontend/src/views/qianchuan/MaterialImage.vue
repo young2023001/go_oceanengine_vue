@@ -75,18 +75,18 @@ const images = ref([
 ])
 
 const handleUpload = () => {
-  alert('上传图片')
+  // TODO: 调用后端 API
 }
 
 const handleSearch = () => {
-  alert('搜索图片')
+  // TODO: 调用后端 API
 }
 
-const handlePreview = (image: typeof images.value[0]) => {
-  alert(`预览图片: ${image.name}`)
+const handlePreview = (_image: typeof images.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleUse = (image: typeof images.value[0]) => {
-  alert(`使用图片: ${image.name}`)
+const handleUse = (_image: typeof images.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

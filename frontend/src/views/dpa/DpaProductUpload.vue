@@ -14,11 +14,11 @@ const uploadHistory = ref([
 ])
 
 const handleSelectFile = () => {
-  alert('选择文件')
+  // TODO: implement
 }
 
 const handleDownloadTemplate = () => {
-  alert('下载模板')
+  // TODO: implement
 }
 </script>
 

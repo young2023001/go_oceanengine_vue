@@ -33,16 +33,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateOrder = () => {
-  alert('创建Dou+投放')
+  // TODO: implement
 }
 
-const handleViewDetail = (order: typeof orders.value[0]) => {
-  alert(`查看详情: ${order.videoTitle}`)
+const handleViewDetail = (_order: typeof orders.value[0]) => {
+  // TODO: implement
 }
 
 const handleStopOrder = (order: typeof orders.value[0]) => {
   if (confirm(`确定停止投放 ${order.videoTitle}?`)) {
-    alert('已停止投放')
   }
 }
 </script>

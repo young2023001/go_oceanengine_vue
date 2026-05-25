@@ -178,18 +178,18 @@ const getStatusText = (status: string) => {
 }
 
 const handleUpload = () => {
-  alert('上传创意')
+  // TODO: 调用后端 API
 }
 
-const handlePreview = (creative: CreativeItem) => {
-  alert(`预览创意: ${creative.name}`)
+const handlePreview = (_creative: CreativeItem) => {
+  // TODO: 调用后端 API
 }
 
-const handleEditCreative = (creative: CreativeItem) => {
-  alert(`编辑创意: ${creative.name}`)
+const handleEditCreative = (_creative: CreativeItem) => {
+  // TODO: 调用后端 API
 }
 
-const handleDelete = (creative: CreativeItem) => {
-  alert(`删除创意: ${creative.name}`)
+const handleDelete = (_creative: CreativeItem) => {
+  // TODO: 调用后端 API
 }
 </script>

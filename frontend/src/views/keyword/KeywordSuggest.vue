@@ -29,8 +29,7 @@ const handleQuery = () => {
 const selectedCount = () => suggestions.value.filter(s => s.selected).length
 
 const handleAddToPlan = () => {
-  const selected = suggestions.value.filter(s => s.selected)
-  alert(`添加 ${selected.length} 个关键词到计划`)
+  // TODO: 调用后端 API 添加关键词到计划
 }
 </script>
 

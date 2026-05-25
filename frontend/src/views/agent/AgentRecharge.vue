@@ -18,11 +18,9 @@ const loading = ref(false)
 
 const validateForm = () => {
   if (!form.advertiserId) {
-    alert('请选择广告主')
     return false
   }
   if (!form.amount || parseFloat(form.amount) < 1000) {
-    alert('充值金额不能小于1000元')
     return false
   }
   return true
@@ -33,7 +31,6 @@ const handleSubmit = async () => {
   loading.value = true
   try {
     await new Promise(r => setTimeout(r, 500))
-    alert(`充值成功！金额: ¥${parseFloat(form.amount).toLocaleString()}`)
     form.advertiserId = ''
     form.amount = ''
     form.remark = ''

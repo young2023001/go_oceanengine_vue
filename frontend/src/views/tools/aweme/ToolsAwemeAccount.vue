@@ -16,20 +16,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleBind = () => {
-  alert('绑定新账号')
+  // TODO: implement
 }
 
-const handleDetail = (account: typeof accounts.value[0]) => {
-  alert(`查看详情: ${account.nickname}`)
+const handleDetail = (_account: typeof accounts.value[0]) => {
+  // TODO: implement
 }
 
-const handleReauth = (account: typeof accounts.value[0]) => {
-  alert(`重新授权: ${account.nickname}`)
+const handleReauth = (_account: typeof accounts.value[0]) => {
+  // TODO: implement
 }
 
 const handleUnbind = (account: typeof accounts.value[0]) => {
   if (confirm(`确定解绑「${account.nickname}」吗？`)) {
-    alert('解绑成功')
   }
 }
 </script>

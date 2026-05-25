@@ -29,17 +29,14 @@ const handleCancel = () => {
 
 const handleCreate = async () => {
   if (!formData.value.name.trim()) {
-    alert('请输入优惠券名称')
     return
   }
   if (!formData.value.value) {
-    alert('请输入优惠金额或折扣')
     return
   }
   loading.value = true
   try {
     await new Promise(r => setTimeout(r, 500))
-    alert('优惠券创建成功！')
     router.back()
   } finally {
     loading.value = false

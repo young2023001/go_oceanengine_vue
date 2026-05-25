@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleApplyAuth = () => {
-  alert('申请授权')
+  // TODO: implement
 }
 
-const handleAuthDetail = (auth: typeof auths.value[0]) => {
-  alert(`授权详情: ${auth.advertiser}`)
+const handleAuthDetail = (_auth: typeof auths.value[0]) => {
+  // TODO: implement
 }
 
-const handleRenewAuth = (auth: typeof auths.value[0]) => {
-  alert(`续期授权: ${auth.advertiser}`)
+const handleRenewAuth = (_auth: typeof auths.value[0]) => {
+  // TODO: implement
 }
 </script>
 

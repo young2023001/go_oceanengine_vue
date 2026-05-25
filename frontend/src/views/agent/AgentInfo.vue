@@ -3,11 +3,11 @@ import { reactive } from 'vue'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 
 const handleEditInfo = () => {
-  alert('编辑代理商信息')
+  // TODO: implement
 }
 
 const handleViewQualification = () => {
-  alert('查看资质文件')
+  // TODO: implement
 }
 
 const agentInfo = reactive({

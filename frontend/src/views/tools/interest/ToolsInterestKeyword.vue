@@ -20,11 +20,11 @@ const formatNumber = (num: number) => {
 }
 
 const handleSearch = () => {
-  alert(`搜索: ${searchKeyword.value}`)
+  // TODO: implement
 }
 
-const handleSelect = (item: typeof keywords.value[0]) => {
-  alert(`选择关键词: ${item.keyword}`)
+const handleSelect = (_item: typeof keywords.value[0]) => {
+  // TODO: implement
 }
 </script>
 

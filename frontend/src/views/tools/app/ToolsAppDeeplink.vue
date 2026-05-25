@@ -17,27 +17,26 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddDeeplink = () => {
-  alert('添加新的Deeplink配置')
+  // TODO: 调用后端 API
 }
 
-const handleEdit = (link: typeof deeplinks.value[0]) => {
-  alert(`编辑Deeplink: ${link.name}`)
+const handleEdit = (_link: typeof deeplinks.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleTest = (link: typeof deeplinks.value[0]) => {
-  alert(`测试Deeplink: ${link.scheme}`)
+const handleTest = (_link: typeof deeplinks.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handleDelete = (link: typeof deeplinks.value[0]) => {
   if (confirm(`确定删除Deeplink「${link.name}」吗？`)) {
     const idx = deeplinks.value.findIndex(l => l.id === link.id)
     if (idx > -1) deeplinks.value.splice(idx, 1)
-    alert('删除成功')
   }
 }
 
 const handleValidate = () => {
-  alert('正在验证链接...')
+  // TODO: 调用后端 API
 }
 </script>
 

@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddConfig = () => {
-  alert('添加配置功能开发中...')
+  // TODO: implement
 }
 
-const handleTest = (config: any) => {
-  alert(`正在测试配置: ${config.name}`)
+const handleTest = (_config: any) => {
+  // TODO: implement
 }
 
-const handleEdit = (config: any) => {
-  alert(`编辑配置: ${config.name}`)
+const handleEdit = (_config: any) => {
+  // TODO: implement
 }
 
 const handleDelete = (config: any) => {
@@ -32,7 +32,6 @@ const handleDelete = (config: any) => {
     const index = configs.value.findIndex(c => c.id === config.id)
     if (index > -1) {
       configs.value.splice(index, 1)
-      alert('删除成功')
     }
   }
 }

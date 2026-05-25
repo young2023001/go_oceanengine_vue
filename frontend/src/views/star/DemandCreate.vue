@@ -142,17 +142,15 @@ const form = ref({
 const handleSubmit = () => {
   // 表单验证
   if (!form.value.title || !form.value.description || !form.value.type || !form.value.budget || !form.value.targetCount || !form.value.deadline) {
-    alert('请填写必填项')
     return
   }
   
   // 提交逻辑
-  alert('需求发布成功')
   router.push('/star/demand')
 }
 
 const handleSaveDraft = () => {
-  alert('草稿已保存')
+  // TODO: implement
 }
 
 const handleCancel = () => {

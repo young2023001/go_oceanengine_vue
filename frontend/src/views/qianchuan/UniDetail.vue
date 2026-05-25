@@ -152,14 +152,14 @@ const topMaterials = ref([
 ])
 
 const handleEdit = () => {
-  alert(`编辑推广: ${detail.value.name}`)
+  // TODO: 调用后端 API
 }
 
 const handlePause = () => {
-  alert(`暂停推广: ${detail.value.name}`)
+  // TODO: 调用后端 API
 }
 
 const handleStart = () => {
-  alert(`启动推广: ${detail.value.name}`)
+  // TODO: 调用后端 API
 }
 </script>

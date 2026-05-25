@@ -154,12 +154,12 @@ const handlePageChange = (page: number) => {
   fetchVideos()
 }
 
-const handleVideoDetail = (video: VideoItem) => {
-  alert(`视频详情: ${video.title}`)
+const handleVideoDetail = (_video: VideoItem) => {
+  // TODO: implement
 }
 
-const handleVideoData = (video: VideoItem) => {
-  alert(`视频数据: ${video.title}`)
+const handleVideoData = (_video: VideoItem) => {
+  // TODO: implement
 }
 
 onMounted(() => {

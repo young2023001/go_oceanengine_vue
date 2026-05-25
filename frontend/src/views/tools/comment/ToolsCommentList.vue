@@ -32,13 +32,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleReply = (comment: typeof comments.value[0]) => {
-  alert(`回复评论: ${comment.content}`)
+const handleReply = (_comment: typeof comments.value[0]) => {
+  // TODO: implement
 }
 
 const handleHide = (comment: typeof comments.value[0]) => {
   comment.status = 'hidden'
-  alert(`已隐藏评论: ${comment.content}`)
 }
 </script>
 

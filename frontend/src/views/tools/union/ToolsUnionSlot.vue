@@ -17,15 +17,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建广告位')
+  // TODO: implement
 }
 
-const handleEdit = (slot: typeof slots.value[0]) => {
-  alert(`编辑广告位: ${slot.name}`)
+const handleEdit = (_slot: typeof slots.value[0]) => {
+  // TODO: implement
 }
 
-const handleData = (slot: typeof slots.value[0]) => {
-  alert(`查看数据: ${slot.name}`)
+const handleData = (_slot: typeof slots.value[0]) => {
+  // TODO: implement
 }
 </script>
 

@@ -45,6 +45,7 @@ func JWTAuth(jwtManager *auth.JWTManager) gin.HandlerFunc {
 
 		// 4. 设置用户信息到上下文
 		c.Set("user_id", claims.UserID)
+		c.Set("tenant_id", claims.TenantID)
 		c.Set("username", claims.Username)
 		c.Set("role_key", claims.RoleKey)
 		c.Set("role_id", claims.RoleID)

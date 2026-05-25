@@ -15,12 +15,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleViewKeywords = (pkg: typeof packages.value[0]) => {
-  alert(`查看流量包关键词: ${pkg.name}`)
+const handleViewKeywords = (_pkg: typeof packages.value[0]) => {
+  // TODO: implement
 }
 
-const handleSettings = (pkg: typeof packages.value[0]) => {
-  alert(`设置流量包: ${pkg.name}`)
+const handleSettings = (_pkg: typeof packages.value[0]) => {
+  // TODO: implement
 }
 </script>
 

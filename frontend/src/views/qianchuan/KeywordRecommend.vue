@@ -79,14 +79,14 @@ const keywords = ref([
 ])
 
 const handleGetRecommend = () => {
-  alert(`获取推荐: ${seedWord.value}`)
+  // TODO: 调用后端 API
 }
 
 const handleBatchAdd = () => {
-  alert('批量添加关键词')
+  // TODO: 调用后端 API
 }
 
-const handleAddKeyword = (kw: typeof keywords.value[0]) => {
-  alert(`添加关键词: ${kw.word}`)
+const handleAddKeyword = (_kw: typeof keywords.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 18 })
 
@@ -24,17 +27,16 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateStrategy = () => {
-  alert('创建新的提价策略')
+  router.push('/tools/adraise/create')
 }
 
-const handleAdjust = (record: typeof raiseRecords.value[0]) => {
-  alert(`调整提价策略: ${record.adName}\n当前出价: ¥${record.raisedBid}`)
+const handleAdjust = (_record: typeof raiseRecords.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handleCancel = (record: typeof raiseRecords.value[0]) => {
   if (confirm(`确定取消「${record.adName}」的提价吗？`)) {
     record.status = 'paused'
-    alert('已取消提价')
   }
 }
 </script>

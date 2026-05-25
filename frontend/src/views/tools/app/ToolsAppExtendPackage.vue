@@ -23,15 +23,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建拓展包')
+  // TODO: implement
 }
 
-const handleUse = (pkg: typeof packages.value[0]) => {
-  alert(`使用拓展包: ${pkg.name}`)
+const handleUse = (_pkg: typeof packages.value[0]) => {
+  // TODO: implement
 }
 
-const handleDetail = (pkg: typeof packages.value[0]) => {
-  alert(`查看详情: ${pkg.name}`)
+const handleDetail = (_pkg: typeof packages.value[0]) => {
+  // TODO: implement
 }
 </script>
 

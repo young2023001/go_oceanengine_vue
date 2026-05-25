@@ -16,20 +16,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreate = () => {
-  alert('创建自动化规则')
+  // TODO: 调用后端 API
 }
 
-const handleEdit = (rule: typeof rules.value[0]) => {
-  alert(`编辑规则: ${rule.name}`)
+const handleEdit = (_rule: typeof rules.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleLogs = (rule: typeof rules.value[0]) => {
-  alert(`查看日志: ${rule.name}`)
+const handleLogs = (_rule: typeof rules.value[0]) => {
+  // TODO: 调用后端 API
 }
 
 const handleToggle = (rule: typeof rules.value[0]) => {
   rule.status = rule.status === 'active' ? 'inactive' : 'active'
-  alert(`规则已${rule.status === 'active' ? '启用' : '禁用'}: ${rule.name}`)
 }
 </script>
 

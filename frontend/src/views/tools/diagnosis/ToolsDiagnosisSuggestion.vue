@@ -33,8 +33,8 @@ const getSeverityClass = (severity: string) => {
   }
 }
 
-const handleAccept = (issue: { type: string; suggestion: string }) => {
-  alert(`采纳建议: ${issue.type} - ${issue.suggestion}`)
+const handleAccept = (_issue: { type: string; suggestion: string }) => {
+  // TODO: implement
 }
 </script>
 

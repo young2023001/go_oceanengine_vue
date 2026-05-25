@@ -13,10 +13,27 @@ import (
 	"time"
 
 	"oceanengine-backend/config"
+	accountModel "oceanengine-backend/internal/app/account/model"
+	batchModel "oceanengine-backend/internal/app/batch/model"
+	groupModel "oceanengine-backend/internal/app/group/model"
+	projectModel "oceanengine-backend/internal/app/project/model"
+	scopeModel "oceanengine-backend/internal/app/scope/model"
+	analyticsModel "oceanengine-backend/internal/app/analytics/model"
+	templateModel "oceanengine-backend/internal/app/template/model"
+	tenantModel "oceanengine-backend/internal/app/tenant/model"
+	batchService "oceanengine-backend/internal/app/batch/service"
+	batchRepository "oceanengine-backend/internal/app/batch/repository"
+	tenantRepository "oceanengine-backend/internal/app/tenant/repository"
+	tenantService "oceanengine-backend/internal/app/tenant/service"
+	"github.com/redis/go-redis/v9"
 	"oceanengine-backend/internal/router"
+	"oceanengine-backend/internal/scheduler"
 	"oceanengine-backend/pkg/auth"
 	"oceanengine-backend/pkg/database"
 	"oceanengine-backend/pkg/logger"
+	"oceanengine-backend/pkg/ocean"
+	"oceanengine-backend/pkg/oceanengine"
+	"oceanengine-backend/pkg/ratelimiter"
 )
 
 func main() {
@@ -44,9 +61,31 @@ func main() {
 	}
 	log.Info("数据库连接成功")
 
+	// 自动迁移 Phase 1 & Phase 2 表
+	if err := db.AutoMigrate(
+		&tenantModel.Tenant{},
+		&accountModel.LocalAccount{},
+		&accountModel.Store{},
+		&groupModel.AccountGroup{},
+		&groupModel.AccountGroupMember{},
+		&scopeModel.UserAccountScope{},
+		&projectModel.LocalProject{},
+		&projectModel.LocalPromotion{},
+		&batchModel.BatchTask{},
+		&batchModel.BatchTaskItem{},
+		&templateModel.ProjectTemplate{},
+		&templateModel.PromotionTemplate{},
+		&analyticsModel.ReportDaily{},
+		&analyticsModel.ExportTask{},
+	); err != nil {
+		log.Fatal(fmt.Sprintf("auto migrate failed: %v", err))
+	}
+	log.Info("数据库迁移完成")
+
 	// 初始化 Redis (可选)
+	var redisClient *redis.Client
 	if cfg.Redis.Addr != "" {
-		_, err := database.InitRedis(&cfg.Redis, log)
+		redisClient, err = database.InitRedis(&cfg.Redis, log)
 		if err != nil {
 			log.Warn(fmt.Sprintf("初始化 Redis 失败: %v", err))
 		} else {
@@ -60,6 +99,37 @@ func main() {
 	// 设置路由
 	r := router.NewRouter(db, log, jwtManager, &cfg.Ocean)
 	engine := r.Setup(cfg.Server.Mode)
+
+	// Token 自动续期
+	refreshCtx, refreshCancel := context.WithCancel(context.Background())
+	defer refreshCancel()
+
+	tRepo := tenantRepository.NewTenantRepository(db)
+	oauthClient := tenantService.NewOAuthClient()
+	tokenRefresher := tenantService.NewTokenRefresher(tRepo, oauthClient, log)
+	go tokenRefresher.Start(refreshCtx)
+
+	// 批量任务断点续传
+	recovery := batchService.NewTaskRecovery(db, log)
+	recovery.RecoverOnStartup(refreshCtx)
+
+	// 启动批量任务 Worker
+	batchRepo := batchRepository.NewBatchRepository(db)
+	oceanEngineClient := oceanengine.NewClient(cfg.Ocean.AppID, cfg.Ocean.Secret)
+	tokenStore := tenantService.NewDBTokenStore(db)
+	if redisClient != nil {
+		workerLimiter := ratelimiter.NewTenantRateLimiter(redisClient, 10)
+		worker := batchService.NewWorker(batchRepo, oceanEngineClient, workerLimiter, tokenStore, log)
+		go worker.Start(refreshCtx)
+	}
+
+	// 项目同步定时任务
+	if redisClient != nil {
+		rateLimiter := ratelimiter.NewTenantRateLimiter(redisClient, 10)
+		oceanClient := ocean.NewClient()
+		syncer := scheduler.NewProjectSyncer(db, oceanClient, rateLimiter, log)
+		go syncer.Start(refreshCtx)
+	}
 
 	// 创建 HTTP 服务器
 	addr := fmt.Sprintf(":%d", cfg.Server.Port)

@@ -28,13 +28,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handlePreviewVideo = (video: typeof videos.value[0]) => {
-  alert(`预览视频: ${video.name}`)
+const handlePreviewVideo = (_video: typeof videos.value[0]) => {
+  // TODO: implement
 }
 
 const handleDeleteVideo = (video: typeof videos.value[0]) => {
   if (confirm(`确定删除视频 ${video.name}?`)) {
-    alert('删除成功')
   }
 }
 </script>

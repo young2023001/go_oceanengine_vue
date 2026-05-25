@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
+
+const router = useRouter()
 
 const filterCategory = ref('')
 const sortBy = ref('')
@@ -21,11 +24,11 @@ const services = ref([
 ])
 
 const handleConsult = (service: typeof services.value[0]) => {
-  alert(`咨询服务: ${service.name}`)
+  router.push(`/other/servemarket/detail/${service.id}`)
 }
 
-const handleViewCategory = (cat: typeof categories.value[0]) => {
-  alert(`查看分类: ${cat.name}`)
+const handleViewCategory = (_cat: typeof categories.value[0]) => {
+  // TODO: implement
 }
 </script>
 

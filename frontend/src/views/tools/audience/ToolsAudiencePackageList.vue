@@ -22,13 +22,12 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleDetail = (item: typeof packages.value[0]) => {
-  alert(`查看详情: ${item.name}`)
+const handleDetail = (_item: typeof packages.value[0]) => {
+  // TODO: implement
 }
 
 const handleDelete = (item: typeof packages.value[0]) => {
   if (confirm(`确定删除「${item.name}」吗？`)) {
-    alert('删除成功')
   }
 }
 </script>

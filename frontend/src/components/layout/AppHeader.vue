@@ -27,10 +27,10 @@ const handleLogout = () => {
 
 // 产品线快捷导航
 const productNavItems = [
-  { name: '千川', path: '/qianchuan', color: 'orange' },
+  // { name: '千川', path: '/qianchuan', color: 'orange' },
   { name: '本地推', path: '/local', color: 'green' },
   { name: '企业号', path: '/enterprise', color: 'purple' },
-  { name: '星图', path: '/star', color: 'yellow' },
+  // { name: '星图', path: '/star', color: 'yellow' },
   { name: '代理商', path: '/agent', color: 'blue' }
 ]
 

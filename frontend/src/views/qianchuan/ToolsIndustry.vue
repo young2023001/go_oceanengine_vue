@@ -101,7 +101,7 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 const filters = ref({ industry: '', period: '7d' })
 
 const handleQuery = () => {
-  alert('查询行业数据')
+  // TODO: 调用后端 API
 }
 
 const industryData = ref({

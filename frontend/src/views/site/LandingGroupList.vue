@@ -22,15 +22,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateGroup = () => {
-  alert('创建分组')
+  // TODO: implement
 }
 
-const handleManageGroup = (group: typeof groups.value[0]) => {
-  alert(`管理分组: ${group.name}`)
+const handleManageGroup = (_group: typeof groups.value[0]) => {
+  // TODO: implement
 }
 
-const handleEditGroup = (group: typeof groups.value[0]) => {
-  alert(`编辑分组: ${group.name}`)
+const handleEditGroup = (_group: typeof groups.value[0]) => {
+  // TODO: implement
 }
 </script>
 

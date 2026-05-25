@@ -16,20 +16,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreatePixel = () => {
-  alert('创建像素')
+  // TODO: implement
 }
 
-const handleViewCode = (pixel: typeof pixels.value[0]) => {
-  alert(`查看像素代码: ${pixel.name}`)
+const handleViewCode = (_pixel: typeof pixels.value[0]) => {
+  // TODO: implement
 }
 
-const handleEditPixel = (pixel: typeof pixels.value[0]) => {
-  alert(`编辑像素: ${pixel.name}`)
+const handleEditPixel = (_pixel: typeof pixels.value[0]) => {
+  // TODO: implement
 }
 
 const handleDeletePixel = (pixel: typeof pixels.value[0]) => {
   if (confirm(`确定删除像素 ${pixel.name}?`)) {
-    alert('删除成功')
   }
 }
 </script>

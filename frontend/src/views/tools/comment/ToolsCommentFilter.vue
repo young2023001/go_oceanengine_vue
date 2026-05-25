@@ -20,12 +20,11 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddRule = () => {
-  alert('创建新的过滤规则')
+  // TODO: implement
 }
 
 const handleQuickAdd = () => {
   if (!newKeyword.value.trim()) {
-    alert('请输入关键词')
     return
   }
   filterRules.value.unshift({
@@ -37,18 +36,16 @@ const handleQuickAdd = () => {
     status: 'active'
   })
   newKeyword.value = ''
-  alert('规则添加成功')
 }
 
-const handleEditRule = (rule: typeof filterRules.value[0]) => {
-  alert(`编辑规则: ${rule.keyword}`)
+const handleEditRule = (_rule: typeof filterRules.value[0]) => {
+  // TODO: implement
 }
 
 const handleDeleteRule = (rule: typeof filterRules.value[0]) => {
   if (confirm(`确定删除规则「${rule.keyword}」吗？`)) {
     const idx = filterRules.value.findIndex(r => r.id === rule.id)
     if (idx > -1) filterRules.value.splice(idx, 1)
-    alert('删除成功')
   }
 }
 </script>

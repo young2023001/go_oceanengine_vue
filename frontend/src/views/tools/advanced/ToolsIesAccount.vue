@@ -17,19 +17,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleBind = () => {
-  alert('绑定新账号')
+  // TODO: 调用后端 API
 }
 
-const handleSync = (account: typeof accounts.value[0]) => {
-  alert(`同步账号: ${account.name}`)
+const handleSync = (_account: typeof accounts.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleBindAccount = (account: typeof accounts.value[0]) => {
-  alert(`绑定账号: ${account.name}`)
+const handleBindAccount = (_account: typeof accounts.value[0]) => {
+  // TODO: 调用后端 API
 }
 
-const handleSettings = (account: typeof accounts.value[0]) => {
-  alert(`账号设置: ${account.name}`)
+const handleSettings = (_account: typeof accounts.value[0]) => {
+  // TODO: 调用后端 API
 }
 </script>
 

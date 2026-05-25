@@ -41,7 +41,6 @@ const loadNotifications = async () => {
       pagination.total = res.total || 0
     }
   } catch (error: any) {
-    alert(error.message || '加载通知失败')
   } finally {
     loading.value = false
   }
@@ -75,11 +74,9 @@ watch(activeTab, () => {
 const markAllRead = async () => {
   try {
     await systemApi.markAllNotificationsAsRead()
-    alert('已全部标记为已读')
     loadNotifications()
     loadStats()
   } catch (error: any) {
-    alert(error.message || '操作失败')
   }
 }
 
@@ -107,11 +104,9 @@ const handleDismissNotification = async (notification: NotificationItem) => {
   }
   try {
     await systemApi.deleteNotifications([notification.id])
-    alert('删除成功')
     loadNotifications()
     loadStats()
   } catch (error: any) {
-    alert(error.message || '删除失败')
   }
 }
 

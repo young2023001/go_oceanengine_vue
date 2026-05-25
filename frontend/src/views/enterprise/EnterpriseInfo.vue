@@ -110,20 +110,19 @@ import { ref } from 'vue'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 
 const handleChangeAvatar = () => {
-  alert('修改头像')
+  // TODO: implement
 }
 
 const handleChangeBio = () => {
-  alert('修改简介')
+  // TODO: implement
 }
 
 const handleBindManage = () => {
-  alert('绑定管理')
+  // TODO: implement
 }
 
 const handleUnbindAccount = () => {
   if (confirm('确定解绑账号吗？')) {
-    alert('已解绑账号')
   }
 }
 

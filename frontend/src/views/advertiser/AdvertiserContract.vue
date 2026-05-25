@@ -16,19 +16,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateContract = () => {
-  alert('创建合同')
+  // TODO: implement
 }
 
-const handleViewContract = (contract: typeof contracts.value[0]) => {
-  alert(`查看合同: ${contract.name}`)
+const handleViewContract = (_contract: typeof contracts.value[0]) => {
+  // TODO: implement
 }
 
-const handleDownloadContract = (contract: typeof contracts.value[0]) => {
-  alert(`下载合同: ${contract.name}`)
+const handleDownloadContract = (_contract: typeof contracts.value[0]) => {
+  // TODO: implement
 }
 
-const handleRenewContract = (contract: typeof contracts.value[0]) => {
-  alert(`续约合同: ${contract.name}`)
+const handleRenewContract = (_contract: typeof contracts.value[0]) => {
+  // TODO: implement
 }
 </script>
 

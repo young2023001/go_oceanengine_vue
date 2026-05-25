@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddSyncConfig = () => {
-  alert('添加同步配置')
+  // TODO: implement
 }
 
-const handleSyncNow = (config: typeof syncConfigs.value[0]) => {
-  alert(`立即同步: ${config.name}`)
+const handleSyncNow = (_config: typeof syncConfigs.value[0]) => {
+  // TODO: implement
 }
 
-const handleEditSyncConfig = (config: typeof syncConfigs.value[0]) => {
-  alert(`编辑配置: ${config.name}`)
+const handleEditSyncConfig = (_config: typeof syncConfigs.value[0]) => {
+  // TODO: implement
 }
 </script>
 

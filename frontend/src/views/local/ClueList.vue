@@ -103,8 +103,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
 import Pagination from '@/components/common/Pagination.vue'
+
+const router = useRouter()
 
 const stats = ref({
   todayLeads: 68,
@@ -148,26 +151,24 @@ const getStatusText = (status: string) => {
 }
 
 const handleSearch = () => {
-  console.log('搜索线索:', filters.value)
-  alert('查询完成')
+  // TODO: 调用后端 API 搜索线索
 }
 
 const handleExport = () => {
-  alert('线索导出中...')
+  // TODO: 调用后端 API 导出线索
 }
 
 const handleFollow = (clue: typeof clues.value[0]) => {
-  alert(`开始跟进线索: ${clue.name}`)
+  router.push(`/local/clue/${clue.id}`)
 }
 
 const handleDetail = (clue: typeof clues.value[0]) => {
-  alert(`查看线索详情: ${clue.name}\n电话: ${clue.phone}\n来源: ${clue.source}`)
+  router.push(`/local/clue/${clue.id}`)
 }
 
 const handleInvalid = (clue: typeof clues.value[0]) => {
   if (confirm(`确定将线索「${clue.name}」标记为无效吗？`)) {
     clue.status = 'invalid'
-    alert('已标记为无效')
   }
 }
 </script>

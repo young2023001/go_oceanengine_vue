@@ -91,8 +91,8 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 
 const stats = ref({ subscribed: 5, orders: 3, points: 12500, spent: 25680 })
 
-const handleSubscribe = (service: typeof hotServices.value[0]) => {
-  alert(`订阅服务: ${service.name}`)
+const handleSubscribe = (_service: typeof hotServices.value[0]) => {
+  // TODO: implement
 }
 
 const subscribedServices = ref([

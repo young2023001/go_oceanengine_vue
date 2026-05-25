@@ -82,7 +82,6 @@ const handleEditRole = (role: Role) => {
 const handleSaveRole = async () => {
   try {
     if (!roleForm.name || !roleForm.code) {
-      alert('请填写必填字段')
       return
     }
     if (roleFormMode.value === 'add') {
@@ -93,7 +92,6 @@ const handleSaveRole = async () => {
         status: roleForm.status,
         remark: roleForm.remark
       })
-      alert('创建成功')
     } else {
       await systemApi.updateRole(roleForm.id, {
         id: roleForm.id,
@@ -103,13 +101,11 @@ const handleSaveRole = async () => {
         status: roleForm.status,
         remark: roleForm.remark
       })
-      alert('更新成功')
     }
     showRoleDialog.value = false
     fetchRoles()
   } catch (error) {
     console.error('保存失败:', error)
-    alert('保存失败')
   }
 }
 
@@ -118,11 +114,9 @@ const handleDeleteRole = async (role: Role) => {
   if (!confirm(`确定删除角色 ${role.name}?`)) return
   try {
     await systemApi.deleteRole(role.id)
-    alert('删除成功')
     fetchRoles()
   } catch (error) {
     console.error('删除失败:', error)
-    alert('删除失败')
   }
 }
 
@@ -156,11 +150,9 @@ const toggleMenuSelect = (menuId: number) => {
 const handleSavePermission = async () => {
   try {
     await systemApi.updateRoleMenus(permRoleId.value, selectedMenuIds.value)
-    alert('权限保存成功')
     showPermDialog.value = false
   } catch (error) {
     console.error('保存权限失败:', error)
-    alert('保存权限失败')
   }
 }
 

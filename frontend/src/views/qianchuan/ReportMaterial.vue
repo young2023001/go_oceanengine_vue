@@ -73,11 +73,11 @@ import Pagination from '@/components/common/Pagination.vue'
 const filters = ref({ startDate: '', endDate: '', type: '' })
 
 const handleQuery = () => {
-  alert('查询素材报表')
+  // TODO: 调用后端 API
 }
 
 const handleExport = () => {
-  alert('导出素材报表')
+  // TODO: 调用后端 API
 }
 
 const materials = ref([

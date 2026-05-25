@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleCreateTask = () => {
-  alert('创建任务')
+  // TODO: implement
 }
 
-const handleEditTask = (task: any) => {
-  alert(`编辑任务: ${task.name}`)
+const handleEditTask = (_task: any) => {
+  // TODO: implement
 }
 
-const handleViewTask = (task: any) => {
-  alert(`查看任务详情: ${task.name}`)
+const handleViewTask = (_task: any) => {
+  // TODO: implement
 }
 </script>
 

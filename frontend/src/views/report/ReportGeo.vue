@@ -5,7 +5,7 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
 const dateRange = ref('7d')
 
 const handleExport = () => {
-  alert('导出地域报表')
+  // TODO: implement
 }
 
 const geoData = ref([

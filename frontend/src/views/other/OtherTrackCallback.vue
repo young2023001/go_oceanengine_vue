@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddCallback = () => {
-  alert('添加回调')
+  // TODO: implement
 }
 
-const handleEditCallback = (cb: typeof callbacks.value[0]) => {
-  alert(`编辑回调: ${cb.name}`)
+const handleEditCallback = (_cb: typeof callbacks.value[0]) => {
+  // TODO: implement
 }
 
-const handleTestCallback = (cb: typeof callbacks.value[0]) => {
-  alert(`测试回调: ${cb.name}`)
+const handleTestCallback = (_cb: typeof callbacks.value[0]) => {
+  // TODO: implement
 }
 </script>
 

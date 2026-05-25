@@ -15,19 +15,17 @@ const handlePageChange = (page: number) => {
   pagination.page = page
 }
 
-const handleViewAudit = (audit: typeof audits.value[0]) => {
-  alert(`查看审核: ${audit.name}`)
+const handleViewAudit = (_audit: typeof audits.value[0]) => {
+  // TODO: implement
 }
 
 const handleApproveAudit = (audit: typeof audits.value[0]) => {
   if (confirm(`确定通过 ${audit.name} 的审核吗？`)) {
-    alert(`已通过: ${audit.name}`)
   }
 }
 
 const handleRejectAudit = (audit: typeof audits.value[0]) => {
   if (confirm(`确定拒绝 ${audit.name} 的审核吗？`)) {
-    alert(`已拒绝: ${audit.name}`)
   }
 }
 </script>

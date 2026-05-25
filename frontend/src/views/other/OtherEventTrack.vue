@@ -17,20 +17,19 @@ const handlePageChange = (page: number) => {
 }
 
 const handleAddEvent = () => {
-  alert('添加事件')
+  // TODO: implement
 }
 
-const handleViewEvent = (event: typeof events.value[0]) => {
-  alert(`查看详情: ${event.name}`)
+const handleViewEvent = (_event: typeof events.value[0]) => {
+  // TODO: implement
 }
 
-const handleEditEvent = (event: typeof events.value[0]) => {
-  alert(`编辑事件: ${event.name}`)
+const handleEditEvent = (_event: typeof events.value[0]) => {
+  // TODO: implement
 }
 
 const handleDeleteEvent = (event: typeof events.value[0]) => {
   if (confirm(`确定删除事件 ${event.name}?`)) {
-    alert('删除成功')
   }
 }
 </script>

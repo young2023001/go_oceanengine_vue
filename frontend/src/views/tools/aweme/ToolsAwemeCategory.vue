@@ -24,8 +24,8 @@ const toggleExpand = (id: string) => {
   }
 }
 
-const handleSelectTag = (tag: string) => {
-  alert(`选择标签: ${tag}`)
+const handleSelectTag = (_tag: string) => {
+  // TODO: implement
 }
 </script>
 

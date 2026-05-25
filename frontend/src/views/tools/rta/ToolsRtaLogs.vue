@@ -20,15 +20,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleExport = () => {
-  alert('导出日志')
+  // TODO: implement
 }
 
 const handleSearch = () => {
-  alert('搜索日志')
+  // TODO: implement
 }
 
-const handleLogDetail = (log: typeof logs.value[0]) => {
-  alert(`查看详情: ${log.requestId}`)
+const handleLogDetail = (_log: typeof logs.value[0]) => {
+  // TODO: implement
 }
 </script>
 

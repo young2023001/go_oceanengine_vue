@@ -15,12 +15,12 @@ const mockExpand = () => {
   ]
 }
 
-const handleAddToLibrary = (item: typeof expandedWords.value[0]) => {
-  alert(`添加到词库: ${item.word}`)
+const handleAddToLibrary = (_item: typeof expandedWords.value[0]) => {
+  // TODO: implement
 }
 
-const handleUse = (item: typeof expandedWords.value[0]) => {
-  alert(`使用词汇: ${item.word}`)
+const handleUse = (_item: typeof expandedWords.value[0]) => {
+  // TODO: implement
 }
 </script>
 

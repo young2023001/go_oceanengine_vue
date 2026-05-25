@@ -16,15 +16,15 @@ const handlePageChange = (page: number) => {
 }
 
 const handleBatchAdjust = () => {
-  alert('批量调整预算')
+  // TODO: implement
 }
 
-const handleAdjust = (item: typeof budgetItems.value[0]) => {
-  alert(`调整预算: ${item.name}`)
+const handleAdjust = (_item: typeof budgetItems.value[0]) => {
+  // TODO: implement
 }
 
-const handleDetail = (item: typeof budgetItems.value[0]) => {
-  alert(`查看详情: ${item.name}`)
+const handleDetail = (_item: typeof budgetItems.value[0]) => {
+  // TODO: implement
 }
 </script>
 

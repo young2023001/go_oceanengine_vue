@@ -22,7 +22,7 @@ const handlePageChange = (page: number) => {
 }
 
 const handleExport = () => {
-  alert('导出创意报表')
+  // TODO: implement
 }
 </script>
 
