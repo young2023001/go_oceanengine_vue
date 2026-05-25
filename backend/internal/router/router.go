@@ -283,6 +283,12 @@ func (r *Router) registerSystemRoutes(rg *gin.RouterGroup) {
 			users.DELETE("/:id", userAPI.Delete)
 			users.POST("/:id/reset-password", userAPI.ResetPassword)
 			users.POST("/change-password", userAPI.ChangePassword)
+
+			scopeRepository := scopeRepo.NewScopeRepository(r.db)
+			scopeSvc := scopeService.NewScopeService(scopeRepository)
+			scopeHandler := scopeApi.NewScopeHandler(scopeSvc)
+			users.POST("/:id/scope", scopeHandler.SetScope)
+			users.GET("/:id/scope", scopeHandler.GetScope)
 		}
 
 		// 角色管理
