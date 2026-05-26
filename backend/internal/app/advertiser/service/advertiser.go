@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"errors"
-	"fmt"
 	"time"
 
 	"gorm.io/gorm"
@@ -310,9 +309,7 @@ func (s *AdvertiserService) HandleOAuthCallback(ctx context.Context, authCode st
 		var name, company, status, role string
 
 		infos, err := advService.GetInfo(ctx, []int64{advertiserID})
-		if err != nil {
-			fmt.Printf("[OAuth] GetInfo failed for advertiser %d: %v\n", advertiserID, err)
-		} else if len(infos) > 0 {
+		if err == nil && len(infos) > 0 {
 			name = infos[0].Name
 			company = infos[0].Company
 			status = infos[0].Status
@@ -334,9 +331,7 @@ func (s *AdvertiserService) HandleOAuthCallback(ctx context.Context, authCode st
 					adv.Status = status
 					adv.Role = role
 				}
-				if err := s.repo.Update(ctx, adv); err != nil {
-					fmt.Printf("[OAuth] Update advertiser %d failed: %v\n", advertiserID, err)
-				}
+				_ = s.repo.Update(ctx, adv)
 			}
 		} else {
 			expireAt := time.Now().Add(time.Duration(tokenResp.ExpiresIn) * time.Second)
@@ -350,11 +345,7 @@ func (s *AdvertiserService) HandleOAuthCallback(ctx context.Context, authCode st
 				RefreshToken:  tokenResp.RefreshToken,
 				TokenExpireAt: &expireAt,
 			}
-			if err := s.repo.Create(ctx, adv); err != nil {
-				fmt.Printf("[OAuth] Create advertiser %d failed: %v\n", advertiserID, err)
-			} else {
-				fmt.Printf("[OAuth] Created advertiser %d successfully\n", advertiserID)
-			}
+			_ = s.repo.Create(ctx, adv)
 		}
 	}
 

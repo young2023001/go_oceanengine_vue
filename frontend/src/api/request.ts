@@ -78,8 +78,14 @@ instance.interceptors.response.use(
     return Promise.reject(new Error(res.message || '请求失败'))
   },
   (error) => {
+    const status = error.response?.status
     const message = error.response?.data?.message || error.message || '请求失败'
-    console.error('API Error:', message)
+    if (status === 401) {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
+      window.location.href = '/login'
+      return Promise.reject(new Error('登录已过期，请重新登录'))
+    }
     return Promise.reject(new Error(message))
   }
 )
