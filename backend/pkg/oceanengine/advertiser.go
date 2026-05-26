@@ -36,16 +36,19 @@ type AdvertiserInfoResponse struct {
 
 // GetInfo 获取广告主信息
 func (s *AdvertiserService) GetInfo(ctx context.Context, advertiserIDs []int64) ([]AdvertiserInfo, error) {
-	idsStr := make([]string, len(advertiserIDs))
+	ids := ""
 	for i, id := range advertiserIDs {
-		idsStr[i] = strconv.FormatInt(id, 10)
+		if i > 0 {
+			ids += ","
+		}
+		ids += strconv.FormatInt(id, 10)
 	}
 
-	body := map[string]interface{}{
-		"advertiser_ids": advertiserIDs,
+	params := map[string]interface{}{
+		"advertiser_ids": "[" + ids + "]",
 	}
 
-	resp, err := s.client.Post(ctx, "/2/advertiser/info/", body)
+	resp, err := s.client.Get(ctx, "/2/advertiser/info/", params)
 	if err != nil {
 		return nil, err
 	}

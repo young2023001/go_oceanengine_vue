@@ -307,51 +307,53 @@ func (s *AdvertiserService) HandleOAuthCallback(ctx context.Context, authCode st
 	// 获取广告主信息
 	advService := oceanengine.NewAdvertiserService(client)
 	for _, advertiserID := range tokenResp.AdvertiserIDs {
+		var name, company, status, role string
+
 		infos, err := advService.GetInfo(ctx, []int64{advertiserID})
 		if err != nil {
 			fmt.Printf("[OAuth] GetInfo failed for advertiser %d: %v\n", advertiserID, err)
-			continue
+		} else if len(infos) > 0 {
+			name = infos[0].Name
+			company = infos[0].Company
+			status = infos[0].Status
+			role = infos[0].Role
 		}
-		if len(infos) == 0 {
-			fmt.Printf("[OAuth] GetInfo returned empty for advertiser %d\n", advertiserID)
-			continue
-		}
-
-		info := infos[0]
 
 		// 检查是否已存在
 		exists, _ := s.repo.ExistsByAdvertiserID(ctx, uint64(advertiserID))
 		if exists {
-			// 更新现有广告主
 			adv, _ := s.repo.GetByAdvertiserID(ctx, uint64(advertiserID))
 			if adv != nil {
 				adv.AccessToken = tokenResp.AccessToken
 				adv.RefreshToken = tokenResp.RefreshToken
 				expireAt := time.Now().Add(time.Duration(tokenResp.ExpiresIn) * time.Second)
 				adv.TokenExpireAt = &expireAt
-				adv.Name = info.Name
-				adv.Company = info.Company
-				adv.Status = info.Status
-				adv.Role = info.Role
+				if name != "" {
+					adv.Name = name
+					adv.Company = company
+					adv.Status = status
+					adv.Role = role
+				}
 				if err := s.repo.Update(ctx, adv); err != nil {
 					fmt.Printf("[OAuth] Update advertiser %d failed: %v\n", advertiserID, err)
 				}
 			}
 		} else {
-			// 创建新广告主
 			expireAt := time.Now().Add(time.Duration(tokenResp.ExpiresIn) * time.Second)
 			adv := &model.Advertiser{
 				AdvertiserID:  uint64(advertiserID),
-				Name:          info.Name,
-				Company:       info.Company,
-				Status:        info.Status,
-				Role:          info.Role,
+				Name:          name,
+				Company:       company,
+				Status:        status,
+				Role:          role,
 				AccessToken:   tokenResp.AccessToken,
 				RefreshToken:  tokenResp.RefreshToken,
 				TokenExpireAt: &expireAt,
 			}
 			if err := s.repo.Create(ctx, adv); err != nil {
 				fmt.Printf("[OAuth] Create advertiser %d failed: %v\n", advertiserID, err)
+			} else {
+				fmt.Printf("[OAuth] Created advertiser %d successfully\n", advertiserID)
 			}
 		}
 	}

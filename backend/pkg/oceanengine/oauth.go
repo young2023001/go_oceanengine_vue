@@ -51,10 +51,14 @@ func (s *OAuthService) GetAccessToken(ctx context.Context, authCode string) (*Ac
 		return nil, fmt.Errorf("api error: code=%d, message=%s", resp.Code, resp.Message)
 	}
 
+	fmt.Printf("[OAuth] raw data: %s\n", string(resp.Data))
+
 	var result AccessTokenResponse
 	if err := json.Unmarshal(resp.Data, &result); err != nil {
 		return nil, fmt.Errorf("unmarshal data failed: %w", err)
 	}
+
+	fmt.Printf("[OAuth] parsed: token=%s..., advertiser_ids=%v\n", result.AccessToken[:20], result.AdvertiserIDs)
 
 	return &result, nil
 }

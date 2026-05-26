@@ -117,9 +117,9 @@ const productLines: ProductLine[] = [
         { name: '投手权限', path: '/system/scope', icon: 'audience' },
       ]},
       { title: '系统管理', items: [
-        { name: '用户管理', path: '/system/user', icon: 'audience' },
-        { name: '角色管理', path: '/system/role', icon: 'list' },
-        { name: '操作日志', path: '/system/log', icon: 'list' },
+        { name: '用户管理', path: '/system/users', icon: 'audience' },
+        { name: '角色管理', path: '/system/roles', icon: 'list' },
+        { name: '操作日志', path: '/system/logs', icon: 'list' },
       ]},
     ]
   }
