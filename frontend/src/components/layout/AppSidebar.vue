@@ -145,7 +145,7 @@ const isActive = (path: string) => {
 </script>
 
 <template>
-  <aside class="w-64 bg-white border-r border-gray-200 min-h-[calc(100vh-64px)] sticky top-16 overflow-y-auto">
+  <aside class="w-64 bg-white border-r border-gray-200 overflow-y-auto flex-shrink-0">
     <nav class="py-3">
       <!-- 产品线循环 -->
       <div v-for="product in productLines" :key="product.id" class="mb-1">
