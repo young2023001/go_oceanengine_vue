@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 	"time"
 
 	"gorm.io/gorm"
@@ -296,6 +297,10 @@ func (s *AdvertiserService) HandleOAuthCallback(ctx context.Context, authCode st
 		return errcode.WrapWithMessage(errcode.ErrAdvertiserAuthFailed, "获取Token失败", err)
 	}
 
+	if len(tokenResp.AdvertiserIDs) == 0 {
+		return errcode.WrapWithMessage(errcode.ErrAdvertiserAuthFailed, "授权返回的广告主ID列表为空", nil)
+	}
+
 	// 设置 Token
 	client.SetAccessToken(tokenResp.AccessToken)
 
@@ -304,9 +309,11 @@ func (s *AdvertiserService) HandleOAuthCallback(ctx context.Context, authCode st
 	for _, advertiserID := range tokenResp.AdvertiserIDs {
 		infos, err := advService.GetInfo(ctx, []int64{advertiserID})
 		if err != nil {
+			fmt.Printf("[OAuth] GetInfo failed for advertiser %d: %v\n", advertiserID, err)
 			continue
 		}
 		if len(infos) == 0 {
+			fmt.Printf("[OAuth] GetInfo returned empty for advertiser %d\n", advertiserID)
 			continue
 		}
 
@@ -326,7 +333,9 @@ func (s *AdvertiserService) HandleOAuthCallback(ctx context.Context, authCode st
 				adv.Company = info.Company
 				adv.Status = info.Status
 				adv.Role = info.Role
-				_ = s.repo.Update(ctx, adv)
+				if err := s.repo.Update(ctx, adv); err != nil {
+					fmt.Printf("[OAuth] Update advertiser %d failed: %v\n", advertiserID, err)
+				}
 			}
 		} else {
 			// 创建新广告主
@@ -341,7 +350,9 @@ func (s *AdvertiserService) HandleOAuthCallback(ctx context.Context, authCode st
 				RefreshToken:  tokenResp.RefreshToken,
 				TokenExpireAt: &expireAt,
 			}
-			_ = s.repo.Create(ctx, adv)
+			if err := s.repo.Create(ctx, adv); err != nil {
+				fmt.Printf("[OAuth] Create advertiser %d failed: %v\n", advertiserID, err)
+			}
 		}
 	}
 

@@ -64,3 +64,4 @@ coverage/
 *.p12
 *.pfx
 backend/server
+backend/server-linux
