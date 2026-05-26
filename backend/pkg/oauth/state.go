@@ -13,8 +13,8 @@ import (
 const (
 	// StateKeyPrefix Redis key 前缀
 	StateKeyPrefix = "oauth:state:"
-	// StateExpiration State 过期时间 (10分钟)
-	StateExpiration = 10 * time.Minute
+	// StateExpiration State 过期时间 (30分钟)
+	StateExpiration = 30 * time.Minute
 )
 
 // StateManager OAuth State 管理器
