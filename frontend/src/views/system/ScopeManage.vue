@@ -25,7 +25,7 @@ const fetchUsers = async () => {
 
 const fetchAccounts = async () => {
   const res = await accountApi.getList({ page: 1, page_size: 1000 })
-  accounts.value = res.data?.list ?? Array.isArray(res) ? res : []
+  accounts.value = Array.isArray(res) ? res : (res as any)?.list ?? []
 }
 
 const selectUser = async (user: User) => {

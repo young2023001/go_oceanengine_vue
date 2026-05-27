@@ -1,4 +1,4 @@
-import request, { PageResponse } from './request'
+import request from './request'
 
 export interface Group {
   id: number

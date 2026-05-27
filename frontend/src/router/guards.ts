@@ -60,11 +60,6 @@ export function setupRouterGuards(router: Router) {
     
     // 白名单路由直接放行
     if (whiteList.includes(to.path)) {
-      // 已登录用户访问登录页，重定向到首页
-      if (to.path === '/login' && token) {
-        next('/')
-        return
-      }
       next()
       return
     }
