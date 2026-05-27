@@ -41,7 +41,7 @@ export const authApi = {
   },
 
   getUserInfo() {
-    return request.get<{ user: UserInfo; permissions: string[] }>('/auth/info')
+    return request.get<{ user: UserInfo; permissions: string[] }>('/auth/userinfo')
   },
 
   getCaptcha() {

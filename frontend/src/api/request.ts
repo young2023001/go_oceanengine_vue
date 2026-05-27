@@ -33,7 +33,7 @@ const handleMockRequest = (config: InternalAxiosRequestConfig): ApiResponse | nu
   }
   
   // Mock 获取用户信息
-  if (url === '/auth/info' && method === 'get') {
+  if (url === '/auth/userinfo' && method === 'get') {
     const token = localStorage.getItem('access_token') || ''
     return mockUserInfo(token)
   }
